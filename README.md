@@ -34,3 +34,6 @@ Finally, the **load phase** writes the normalized datasets into a local **SQLite
 - **SQLite3** 
 
 ✅ This project uses only publicly available data for educational purposes.
+
+## Planned update
+I am planing to containerize this ETL pipeline using Docker to ensure easy deployment and consistent environments across different systems. This will include packaging all dependencies and the pipeline itself into a Docker container.
