@@ -32,7 +32,5 @@ Finally, the **load phase** writes the normalized datasets into a local **SQLite
 - **Requests**
 - **BeautifulSoup4**
 - **SQLite3** 
-- **Draw.io**
-- **CSV**
 
 ✅ This project uses only publicly available data for educational purposes.
