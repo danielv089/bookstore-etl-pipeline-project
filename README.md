@@ -20,7 +20,7 @@ Once the raw data is collected, the **transformation stage** cleans it by:
 
 Finally, the **load phase** writes the normalized datasets into a local **SQLite database**.
 
-- `books`: primary metadata  
+- `books`: primary book data
 - `genres`: genre reference table  
 - `in_stock`: current stock status
 
