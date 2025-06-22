@@ -4,9 +4,9 @@ V1.0 Python and SQLite
 
 ## 📌 Summary
 
-This project is a complete ETL (Extract, Transform, Load) data pipeline using Python. The purpose of this script to scrape book-related data from the web, clean, transform and normalize that data, and store it into a SQL database.
+This project is a complete ETL (Extract, Transform, Load) data pipeline using Python. The purpose of this script to scrape book-related data from the web, clean, transform, normalize that data, and store it into a SQL database.
 
-The motivation behind this project is to demonstrate a practical, end-to-end data engineering workflow that covers data ingestion, cleaning, transformation, normalization, and storage of the data by widely tools and technologies.
+The motivation behind this project is to demonstrate a practical, end-to-end data engineering workflow that covers data ingestion, cleaning, transformation, normalization, and storage of the data by widely used tools and technologies.
 
 The project begins by **extracting** the data from HTML format through web scraping from [Books to Scrape](http://books.toscrape.com), a publicly available site designed for practicing scraping techniques. The scraped data includes attributes such as book title, price, availability, and genre.
 
