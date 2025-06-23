@@ -196,7 +196,7 @@ def normalize(books_clean_df):
     in_stock_df = books_clean_df[['upc', 'in_stock']].copy()
 
     os.makedirs('3_normalized_data', exist_ok=True)
-    books_df.to_csv('3_normalize_data/books.csv', index=False)
+    books_df.to_csv('3_normalized_data/books.csv', index=False)
     genre_df.to_csv('3_normalized_data/genres.csv', index=False)
     in_stock_df.to_csv('3_normalized_data/in_stock.csv', index=False)
 
