@@ -1,6 +1,6 @@
 # Python ETL Project: Scraping, Transforming, and Loading Book Data
 
-V1.0 Python and SQLite
+V1.1 Python and SQLite
 
 ## 📌 Summary
 
