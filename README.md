@@ -24,7 +24,7 @@ Finally, the **load phase** writes the normalized datasets into a local **SQLite
 - `genres`: genre reference table  
 - `in_stock`: current stock status
 
-  ![ETL Pipeline Diagram](v1_sqlite/docs/etl_figure.png)
+  ![ETL Pipeline Diagram](docs/etl_figure.png)
 
 ## 🧰 Tech Stack
 - **Python**
