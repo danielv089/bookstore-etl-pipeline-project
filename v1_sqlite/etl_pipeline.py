@@ -5,7 +5,7 @@
 # Author:             Dániel Varga
 # Created:            2025-06-21
 # Last Modified:      2025-06-23
-# Version:            1.0
+# Version:            1.1
 # Description:        ETL pipeline that scrapes book data from the website
 #                     Books to Scrape.
 #                     Then transforms and normalizes it, then loads it into SQLite.
