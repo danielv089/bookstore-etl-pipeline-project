@@ -4,7 +4,7 @@
 # Script Name:        etl_pipeline.py
 # Author:             Dániel Varga
 # Created:            2025-06-21
-# Last Modified:      2025-06-21
+# Last Modified:      2025-06-23
 # Version:            1.0
 # Description:        ETL pipeline that scrapes book data from the website
 #                     Books to Scrape.
@@ -12,13 +12,13 @@
 # Website:            https://books.toscrape.com/
 # -----------------------------------------------------------------------------
 
+import csv
 import pandas as pd 
 import requests
+import sqlite3
+import os
 from bs4 import BeautifulSoup
 from datetime import datetime
-import csv
-import sqlite3
-
 
 def logger(message):
     """
@@ -42,20 +42,28 @@ def extract():
     """
     Extracts book data from the 'Books to Scrape' website.
 
-    Scrapes the first catalog page and retrieves metadata for each book,
+    Scrapes **all catalog pages** and retrieves metadata for each book,
     including title, genre, rating, price, stock info, UPC, and number of reviews.
-    The data is returned as a pandas DataFrame and also saved to 'books_raw_data.csv'.
+    The data is returned as a pandas DataFrame and also saved to 'extract_raw_data/books_raw_data.csv'.
 
     Returns:
         pd.DataFrame: A DataFrame containing raw book data.
     """
     book_dict={'titles':[], 'genre':[], 'ratings':[], 'upc':[], 'product_type':[], 'price_excl_tax_gbp':[], 'price_incl_tax_gbp':[], 'tax':[], 'in_stock':[], 'num_reviews':[]}
 
-    for page_num in range(1,51):
+    page_num=1
+
+    while True:
         try:
             url=f'https://books.toscrape.com/catalogue/page-{page_num}.html'
-            soup=BeautifulSoup(requests.get(url).text, 'html.parser')
+            response=requests.get(url)
+            
+            if response.status_code!=200:
+                break 
+                
+            soup=BeautifulSoup(response.text, 'html.parser')
             books=soup.find_all('h3')
+            logger(f'Scraping page {page_num}')
 
         except Exception as e:
             print(f"Failed to load page {page_num}: {e}")
@@ -68,7 +76,7 @@ def extract():
                 full_link='https://books.toscrape.com/catalogue/' + relative_link
 
                 soup_2=BeautifulSoup(requests.get(full_link).text, 'html.parser')
-                title=soup_2.find('li', class_='active').text
+                title=soup_2.find('li', class_='active').text.strip()
                 breadcrumb=soup_2.find('ul', class_='breadcrumb')
                 genre_li=breadcrumb.find_all('li')[2].text.strip()
                 rating=soup_2.find('p', class_='star-rating')['class'][1]
@@ -94,9 +102,12 @@ def extract():
             except Exception as e:
                 print(f"Error processing book: {e}")
                 continue
-
+                
+        page_num+=1
+            
+    os.makedirs('1_extract_raw_data', exist_ok=True)
     books_raw_df=pd.DataFrame(book_dict)
-    books_raw_df.to_csv('books_raw_data.csv')        
+    books_raw_df.to_csv('1_extract_raw_data/books_raw_data.csv', index=False)        
     
     return books_raw_df
 
@@ -142,7 +153,9 @@ def transform(books_raw_df):
     books_raw_df['in_stock']=books_raw_df['in_stock'].str.extract(r'(\d+)').astype(int)
     books_raw_df['num_reviews']=books_raw_df['num_reviews'].astype(int)
 
-    books_raw_df.to_csv('books_cleaned_data.csv')
+
+    os.makedirs('2_transform_data', exist_ok=True)
+    books_raw_df.to_csv('2_transform_data/books_cleaned_data.csv')
     
     return books_raw_df
 
@@ -182,9 +195,10 @@ def normalize(books_clean_df):
 
     in_stock_df = books_clean_df[['upc', 'in_stock']].copy()
 
-    books_df.to_csv('books.csv', index=False)
-    genre_df.to_csv('genres.csv', index=False)
-    in_stock_df.to_csv('in_stock.csv', index=False)
+    os.makedirs('3_normalized_data', exist_ok=True)
+    books_df.to_csv('3_normalize_data/books.csv', index=False)
+    genre_df.to_csv('3_normalized_data/genres.csv', index=False)
+    in_stock_df.to_csv('3_normalized_data/in_stock.csv', index=False)
 
     return books_df, genre_df, in_stock_df
 
@@ -204,7 +218,8 @@ def load(books_df, genre_df, in_stock_df):
         in_stock_df (pd.DataFrame): DataFrame containing book stock counts.
     """
     try:
-        conn = sqlite3.connect('books.db')
+        os.makedirs('4_database', exist_ok=True)
+        conn = sqlite3.connect('4_database/books.db')
         books_df.to_sql('books', conn, if_exists='replace', index=False)
         genre_df.to_sql('genres', conn, if_exists='replace', index=False)
         in_stock_df.to_sql('in_stock', conn, if_exists='replace', index=False)
