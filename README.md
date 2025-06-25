@@ -53,29 +53,29 @@ python etl_pipeline.py
 - **Logging** 
 
 ✅ This project uses only publicly available data for educational purposes.
-
+---
 🔗 References
 
-Books to Scrape
+- Books to Scrape
 Sandbox site used for scraping book data.
 https://books.toscrape.com/
 
-Pandas Documentation
+- Pandas Documentation
 Powerful data manipulation and analysis library.
 https://pandas.pydata.org/docs/
 
-BeautifulSoup Documentation
+- BeautifulSoup Documentation
 For parsing and navigating HTML/XML documents.
 https://www.crummy.com/software/BeautifulSoup/bs4/doc/
 
-Requests Library
+- Requests Library
 For making HTTP requests in Python.
 https://docs.python-requests.org/
 
-SQLite3 (Python Standard Library)
+- SQLite3 (Python Standard Library)
 Lightweight embedded SQL database.
 https://docs.python.org/3/library/sqlite3.html
 
-Python Logging Module
+- Python Logging Module
 For structured application logging.
 https://docs.python.org/3/library/logging.html
