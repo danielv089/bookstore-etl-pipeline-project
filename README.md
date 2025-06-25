@@ -34,15 +34,6 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
 
   ![ETL Pipeline Diagram](docs/etl_figure.png)
 ---
-
-## How to run
-
-Before running, make sure you have Python 3 installed along with the required Python packages. Once your environment is set up, simply run the pipeline script from a bash terminal by executing:
-
-```bash
-python etl_pipeline.py
-```
-
 ## 🧰 Tech Stack
 - **Python**
 - **Pandas** 
