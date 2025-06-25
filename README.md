@@ -1,30 +1,40 @@
 # Python ETL Project: Scraping, Transforming, and Loading Book Data
 
-V1.1 Python and SQLite
-
 ## 📌 Summary
 
-This project is a complete ETL (Extract, Transform, Load) data pipeline using Python. The purpose of this script to scrape book-related data from the web, clean, transform, normalize that data, and store it into a SQL database.
+This project is a complete ETL (Extract, Transform, Load) data pipeline using Python. The purpose of this script to scrape book-related data from the web, clean, transform, normalize that data, and store it into a SQL database. The motivation behind this project is to demonstrate a practical, end-to-end data engineering workflow by widely used tools and technologies.
 
-The motivation behind this project is to demonstrate a practical, end-to-end data engineering workflow by widely used tools and technologies.
+---
+V1.2 Python and SQLite
 
-The project begins by **extracting** the data from HTML format through web scraping from [Books to Scrape](http://books.toscrape.com), a publicly available site designed for practicing scraping techniques. The scraped data includes attributes such as book title, price, availability, and genre etc..
+1️⃣ Extract
+Scrapes all catalog pages from Books to Scrape
+Retrieves metadata including title, genre, rating, price, stock, UPC, and number of reviews
+Stores raw results as a CSV (1_extract_raw_data/books_raw_data.csv)
 
-Once the raw data is collected, the **transformation stage** cleans it by:
+2️⃣ Transform
+Removes duplicates and null values
+Standardizes data types and formats
+Reclassifies Default and Add a comment gnere into Uncategorized
+Maps rating strings to numerical values
+Cleans currency symbols and parses stock quantities
+Saves cleaned data to 2_transform_data/books_cleaned_data.csv
 
-- Checking and removing duplicates and null values  
-- Trimming whitespace and standardizing formats and data types along the table 
-- Extracting and normalizing genres into a separate lookup table  
-- Splitting book in stock information into it's own table 
-- Generating cleaned datasets stored as CSV files and Pandas DataFrames
+3️⃣ Normalize
+Extracts a genre lookup table
+Replaces genre strings with foreign key IDs
+Splits in_stock data into its own table
+Saves normalized CSV files to 3_normalized_data/
 
-Finally, the **load phase** writes the normalized datasets into a local **SQLite database**.
-
-- `books`: primary book data
-- `genres`: genre reference table  
-- `in_stock`: current stock status
+4️⃣ Load
+Loads normalized tables into a local SQLite database: 4_database/books.db
+Tables created:
+books: main book data
+genres: genre reference table
+in_stock: availability data
 
   ![ETL Pipeline Diagram](docs/etl_figure.png)
+---
 
 ## How to run
 
@@ -40,5 +50,32 @@ python etl_pipeline.py
 - **Requests**
 - **BeautifulSoup4**
 - **SQLite3** 
+- **Logging** 
 
 ✅ This project uses only publicly available data for educational purposes.
+
+🔗 References
+
+Books to Scrape
+Sandbox site used for scraping book data.
+https://books.toscrape.com/
+
+Pandas Documentation
+Powerful data manipulation and analysis library.
+https://pandas.pydata.org/docs/
+
+BeautifulSoup Documentation
+For parsing and navigating HTML/XML documents.
+https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
+Requests Library
+For making HTTP requests in Python.
+https://docs.python-requests.org/
+
+SQLite3 (Python Standard Library)
+Lightweight embedded SQL database.
+https://docs.python.org/3/library/sqlite3.html
+
+Python Logging Module
+For structured application logging.
+https://docs.python.org/3/library/logging.html
