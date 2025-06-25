@@ -30,10 +30,10 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
 
 ## 🔄 Version History
 - **1.2 Python and SQLite**
--- Uses local SQLite database
--- Changed the logger function for Python logging module for better logging and monitoring
+ - Uses local SQLite database
+ - Changed the logger function for Python logging module for better logging and monitoring
 - **1.1 Python and SQLite**
--- Changed the for loop for while loop
+ - Changed the for loop for while loop
 
 ## 🧰 Tech Stack
 - **Python**
