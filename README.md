@@ -31,7 +31,7 @@ V1.2 Python and SQLite
 - Tables created:
 - books: main book data
 - genres: genre reference table
-- in_stock: availability data
+- in_stock: stock information
 
   ![ETL Pipeline Diagram](docs/etl_figure.png)
 ---
