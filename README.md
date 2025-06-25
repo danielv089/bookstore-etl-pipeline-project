@@ -40,9 +40,8 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
 - **Requests**
 - **BeautifulSoup4**
 - **SQLite3** 
-- **Logging** 
-
-✅ This project uses only publicly available data for educational purposes.
+- **Logging**
+- 
 ---
 🔗 References
 
@@ -63,3 +62,5 @@ https://docs.python.org/3/library/sqlite3.html
 
 - Python Logging Module
 https://docs.python.org/3/library/logging.html
+
+✅ This project uses only publicly available data for educational purposes.
