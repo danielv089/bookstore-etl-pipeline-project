@@ -33,7 +33,7 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
 - in_stock: stock information
 
   ![ETL Pipeline Diagram](docs/etl_figure.png)
----
+  
 ## 🧰 Tech Stack
 - **Python**
 - **Pandas** 
