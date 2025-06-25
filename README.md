@@ -41,9 +41,8 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
 - **BeautifulSoup4**
 - **SQLite3** 
 - **Logging**
-  
----
-🔗 References
+
+## 🔗 References
 
 - Books to Scrape
 https://books.toscrape.com/
