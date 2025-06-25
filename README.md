@@ -57,25 +57,19 @@ python etl_pipeline.py
 🔗 References
 
 - Books to Scrape
-Sandbox site used for scraping book data.
 https://books.toscrape.com/
 
 - Pandas Documentation
-Powerful data manipulation and analysis library.
 https://pandas.pydata.org/docs/
 
 - BeautifulSoup Documentation
-For parsing and navigating HTML/XML documents.
 https://www.crummy.com/software/BeautifulSoup/bs4/doc/
 
 - Requests Library
-For making HTTP requests in Python.
 https://docs.python-requests.org/
 
-- SQLite3 (Python Standard Library)
-Lightweight embedded SQL database.
+- SQLite3
 https://docs.python.org/3/library/sqlite3.html
 
 - Python Logging Module
-For structured application logging.
 https://docs.python.org/3/library/logging.html
