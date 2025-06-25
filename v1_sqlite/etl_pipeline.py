@@ -4,8 +4,8 @@
 # Script Name:        etl_pipeline.py
 # Author:             Dániel Varga
 # Created:            2025-06-21
-# Last Modified:      2025-06-23
-# Version:            1.1
+# Last Modified:      2025-06-25
+# Version:            1.2
 # Description:        ETL pipeline that scrapes book data from the website
 #                     Books to Scrape.
 #                     Then transforms and normalizes it, then loads it into SQLite.
@@ -13,29 +13,27 @@
 # -----------------------------------------------------------------------------
 
 import csv
+import os
+import logging
 import pandas as pd 
 import requests
 import sqlite3
-import os
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-def logger(message):
-    """
-    Logs a message to the console and appends it with a timestamp to a log file.
+logger=logging.getLogger()
+logger.setLevel(logging.INFO)
 
-    The log is saved in 'pipeline_log.text' with the format:
-    'YYYY-Mon-DD-HH:MM:SS : message'.
+file_handler=logging.FileHandler('pipeline_log.txt', mode='a')
+console_handler=logging.StreamHandler()
 
-    Args:
-        message (str): The log message to record.
-    """
-    print(message)
-    timestamp_format = "%Y-%h-%d-%H:%M:%S" 
-    now = datetime.now()
-    timestamp = now.strftime(timestamp_format)
-    with open('pipeline_log.text',"a") as f:
-        f.write(timestamp + " : " + message + "\n")
+formatter=logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+console_handler.setFormatter(formatter)
+
+if not logger.handlers:
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
 
 
 def extract():
@@ -63,7 +61,7 @@ def extract():
                 
             soup=BeautifulSoup(response.text, 'html.parser')
             books=soup.find_all('h3')
-            logger(f'Scraping page {page_num}')
+            logger.info(f'Scraping page {page_num}')
 
         except Exception as e:
             print(f"Failed to load page {page_num}: {e}")
@@ -140,11 +138,10 @@ def transform(books_raw_df):
 
     books_raw_df['titles']=books_raw_df['titles'].astype(str)
     books_raw_df['genre']=books_raw_df['genre'].astype(str)
-
+    books_raw_df['genre']= books_raw_df['genre'].replace(['Default', 'Add a comment'], 'Uncategorized')
     books_raw_df['ratings']=books_raw_df['ratings'].astype(str)
     rating_map = {'One': 1,'Two': 2,'Three': 3,'Four': 4,'Five': 5}
     books_raw_df['ratings']=books_raw_df['ratings'].map(rating_map)
-
     books_raw_df['upc']=books_raw_df['upc'].astype(str)
     books_raw_df['product_type']=books_raw_df['product_type'].astype(str)
     books_raw_df['price_excl_tax_gbp'] = books_raw_df['price_excl_tax_gbp'].astype(str).str[2:].astype(float)
@@ -152,7 +149,6 @@ def transform(books_raw_df):
     books_raw_df['tax'] = books_raw_df['tax'].str[2:].astype(float)
     books_raw_df['in_stock']=books_raw_df['in_stock'].str.extract(r'(\d+)').astype(int)
     books_raw_df['num_reviews']=books_raw_df['num_reviews'].astype(int)
-
 
     os.makedirs('2_transform_data', exist_ok=True)
     books_raw_df.to_csv('2_transform_data/books_cleaned_data.csv')
@@ -187,12 +183,9 @@ def normalize(books_clean_df):
     unique_genres=sorted(unique_genres)
     genre_to_id = {genre: idx for idx, genre in enumerate(unique_genres, start=1)}
     genre_df = pd.DataFrame({'id': list(genre_to_id.values()),'genre': list(genre_to_id.keys())})
-
     books_clean_df['genre']=books_clean_df['genre'].map(genre_to_id)
     books_clean_df=books_clean_df.rename(columns={'genre':'genre_id'})
-
     books_df=books_clean_df[['upc', 'titles', 'genre_id', 'ratings', 'product_type','price_excl_tax_gbp', 'price_incl_tax_gbp', 'tax', 'num_reviews']].copy()
-
     in_stock_df = books_clean_df[['upc', 'in_stock']].copy()
 
     os.makedirs('3_normalized_data', exist_ok=True)
@@ -229,17 +222,17 @@ def load(books_df, genre_df, in_stock_df):
         conn.close()
 
 
-logger('Starting the ETL pipeline...')
-logger('Extracting data from source...')
+logger.info('Starting the ETL pipeline...')
+logger.info('Extracting data from source...')
 raw_data = extract()  
-logger('Data extracted successfully.')    
+logger.info('Data extracted successfully.')    
 
-logger('Cleaning and transforming the data...')
+logger.info('Cleaning and transforming the data...')
 transforming_data = transform(raw_data)  
-logger('Splitting data into normalized tables: books, genres, in_stock') 
+logger.info('Splitting data into normalized tables: books, genres, in_stock') 
 books_df, genre_df, in_stock_df = normalize(transforming_data)
-logger('Data cleaned and transformed successfully.') 
+logger.info('Data cleaned and transformed successfully.') 
 
-logger('Loading data into SQLite database...')
+logger.info('Loading data into SQLite database...')
 load(books_df,genre_df,in_stock_df)
-logger('All data successfully loaded into the database.')
+logger.info('All data successfully loaded into the database.')
