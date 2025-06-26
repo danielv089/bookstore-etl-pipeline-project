@@ -28,14 +28,10 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
 
   ![ETL Pipeline Diagram](docs/etl_figure.png)
 
-## 🔄 Version History
+## 🔄 Versions
 - **v1.2 – Python and SQLite**
-  - Replaced custom logger with Python's logging module
-  - Corrected genre classification
 
-- **v1.1 – Python and SQLite**
-  - Changed `for` loop to `while` loop  
-  - Minor code refactoring
+[Changelog]()
 
 ## 🧰 Tech Stack
 - **Python**
