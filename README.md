@@ -31,7 +31,7 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
 ## 🔄 Versions
 - **v1.2 – Python and SQLite**
 
-  [Changelog](CHANGELOG.MD)
+  [Changelog](CHANGELOG.md)
 
 ## 🧰 Tech Stack
 - **Python**
