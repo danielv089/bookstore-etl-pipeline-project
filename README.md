@@ -26,7 +26,7 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
 4️⃣ Load
 - Loads normalized tables into a SQL database
 
-  ![ETL Pipeline Diagram](docs/etl_figure.png)
+  ![ETL Pipeline Diagram](docs/etl_project.drawio)
 
 ## 🔄 Versions
 - **v1.2 – Python and SQLite**
