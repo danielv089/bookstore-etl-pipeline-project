@@ -7,3 +7,5 @@
 - **v1.1 – Python and SQLite**
   - Changed `for` loop to `while` loop  
   - Minor code refactoring
+
+- **v1.0 – Python and SQLite**
