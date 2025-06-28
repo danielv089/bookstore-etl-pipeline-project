@@ -29,7 +29,7 @@ This project is a complete ETL (Extract, Transform, Load) data pipeline using Py
   ![ETL Pipeline Diagram](docs/etl_project.jpg)
 
 ## 🔄 Versions
-- **v1.2 – Python and SQLite**
+- **v1.4 – Python and SQLite**
 
   [Changelog](CHANGELOG.md)
 
