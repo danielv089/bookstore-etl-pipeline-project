@@ -39,8 +39,9 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 This ETL pipeline is containerized for easier deployment.
 
 **Build the Docker image:**
+
 ```bash
-docker build -t books-etl . ```
+docker build -t books-etl .
 
 
 
