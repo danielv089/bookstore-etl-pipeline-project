@@ -61,6 +61,7 @@ docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlit
 - **SQLite3** 
 - **Logging**
 - **Docker**
+- **Pytest**
 
 ## 🔗 References
 
