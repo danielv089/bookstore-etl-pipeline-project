@@ -5,8 +5,6 @@ This project is a complete **ETL (Extract, Transform, Load) pipeline** built in 
 It scrapes book data from the web, cleans and normalizes it, and loads it into a SQL database.  
 The goal is to demonstrate a practical, end-to-end data engineering workflow using Python and containerization with Docker.
 
----
-
 ## ⚙️ ETL Pipeline Steps
 
 ### 1️⃣ Extract
