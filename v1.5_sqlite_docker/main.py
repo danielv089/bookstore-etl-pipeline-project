@@ -3,7 +3,7 @@
 # Author:             Dániel Varga
 # Created:            2025-06-21
 # Last Modified:      2025-06-28
-# Version:            1.4
+# Version:            1.5
 # Description:        Main entry point for the ETL pipeline that scrapes book data
 #                     from 'Books to Scrape', transforms and normalizes it, and
 #                     loads it into a SQLite database.
