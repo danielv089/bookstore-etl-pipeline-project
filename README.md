@@ -40,11 +40,11 @@ This ETL pipeline is containerized for easier deployment.
 
 **Build the Docker image:**
 
-docker build -t books-etl 
+docker build -t  v1.5_sqlite
 
-**Run the Docker containe with volumes, so folders are mapped to the folders of the host machine:**
+**Run the Docker container with volumes to map folders inside the container to folders on the host machine:**
 
-
+docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlite
 
 
 ## 🔄 Versions
@@ -62,6 +62,7 @@ docker build -t books-etl
 - **BeautifulSoup4**
 - **SQLite3** 
 - **Logging**
+- **Docker**
 
 ## 🔗 References
 
