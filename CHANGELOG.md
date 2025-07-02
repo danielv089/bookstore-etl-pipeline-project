@@ -1,8 +1,8 @@
 ## Changelog
 
 - **v1.5 – Python, SQLite and Docker**
-   - Pytest added 
-   - Dockerbuild image added
+   - Pytest added to enable testing
+   - Added Docker suppor to containerize the ETL pipeline for easier deployment
 
 - **v1.4 – Python and SQLite**
    - Refactored the ETL pipeline to be fully modularized with separate modules for extract, transform, normalize, and load functions 
