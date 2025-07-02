@@ -40,7 +40,7 @@ This ETL pipeline is containerized for easier deployment.
 
 **Build the Docker image:**
 ```bash
-docker build -t books-etl .
+docker build -t books-etl . '''
 
 
 
