@@ -40,8 +40,9 @@ This ETL pipeline is containerized for easier deployment.
 
 **Build the Docker image:**
 
-```bash
-docker build -t books-etl .
+docker build -t books-etl 
+
+**Run the Docker containe with volumes, so folders are mapped to the folders of the host machine:**
 
 
 
