@@ -73,7 +73,8 @@ Data inside the PostgreSQL container:
     docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlite
      ```
 
-  [Changelog](CHANGELOG.md)
+
+[**Changelog**](CHANGELOG.md)
 
 ## 🧰 Tech Stack
 - **Python**
