@@ -58,7 +58,7 @@ Data inside the PostgreSQL container:
 
 ![count](docs/item_count.png)
 
-    [Exported pg_dump file after the the pipeline run with Docker Compose](v2.0_postgres_docker_compose/data/postgres_dump_data_sql/books.sql)
+  [Exported pg_dump file after the the pipeline run with Docker Compose](v2.0_postgres_docker_compose/data/postgres_dump_data_sql/books.sql)
 
 
 - **v1.5 – Python, SQLite and Docker**
