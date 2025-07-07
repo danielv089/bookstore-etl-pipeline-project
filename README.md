@@ -118,7 +118,7 @@ https://docs.docker.com/
 - PostgreSQL Documentation
 https://www.postgresql.org/docs/
 
--Psycopg Documentation
+- Psycopg Documentation
 https://www.psycopg.org/
 
 ✅ This project uses only publicly available data for educational purposes.
