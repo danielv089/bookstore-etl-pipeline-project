@@ -50,13 +50,13 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
 Data inside the PostgreSQL container:
 
-![DB](docs/books_db.jpg)
+![DB](docs/books_db.png)
 
-![tables](docs/tables.jpg)
+![tables](docs/tables.png)
 
-![books_table](docs/books_table.jpg)
+![books_table](docs/books_table.png)
 
-![count](docs/item_count.jpg)
+![count](docs/item_count.png)
 
 - **v1.5 – Python, SQLite and Docker**
   
