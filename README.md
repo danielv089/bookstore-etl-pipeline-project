@@ -38,7 +38,9 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 - **v2.0 – Python, PostgreSQL  & Docker Compose Integration**
    
     The ETL pipeline is containerized with     Docker Compose for multi-container deployment, including:
+
     PostgreSQL database as backend
+
     Python ETL container
 
     Build and start containers:
