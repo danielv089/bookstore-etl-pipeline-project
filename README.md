@@ -90,6 +90,7 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 - **Docker**
 - **Pytest**
 - **PostgreSQL**
+- **Psycopg**
 
 ## 🔗 References
 
@@ -116,5 +117,8 @@ https://docs.docker.com/
 
 - PostgreSQL Documentation
 https://www.postgresql.org/docs/
+
+-Psycopg Documentation
+https://www.psycopg.org/
 
 ✅ This project uses only publicly available data for educational purposes.
