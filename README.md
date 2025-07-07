@@ -43,7 +43,7 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
     Python ETL container
 
-    Build and start containers:
+    Build and start the containers:
     ```bash
     docker compose up --build
     ```
