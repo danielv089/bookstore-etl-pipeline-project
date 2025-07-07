@@ -34,22 +34,35 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
 
 ## 🐳 Docker Support
-This ETL pipeline is containerized for easier deployment.
 
-**Build the Docker image:**
+- **v2.0 – Python, PostgreSQL  & Docker Compose Integration**
+    The ETL pipeline is containerized with Docker Compose for multi-container deployment, including:
+    PostgreSQL database as backend
+    Python ETL container
 
-docker build -t  v1.5_sqlite
+    Build and start containers:
 
-**Run the Docker container with volumes to map folders inside the container to folders on the host machine:**
+    docker compose up --build
 
-docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlite
+    PostgreSQL connection is configured via environment variables in docker-compose.yml
+    PostgreSQL data is stored in the pgdata named perstistent volume.
 
 
-## 🔄 Versions
+
+
 
 - **v1.5 – Python, SQLite and Docker**
+  
+    This ETL pipeline is containerized for easier deployment.
 
-- **v1.4 – Python and SQLite**
+    Build the Docker image:
+
+    ```bash
+    docker build -t  v1.5_sqlite
+
+    Run the Docker container with volumes to map folders inside the container to folders on the host machine:
+
+    docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlite
 
   [Changelog](CHANGELOG.md)
 
@@ -62,6 +75,7 @@ docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlit
 - **Logging**
 - **Docker**
 - **Pytest**
+- **PostgreSQL**
 
 ## 🔗 References
 
