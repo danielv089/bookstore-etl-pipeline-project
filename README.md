@@ -74,7 +74,8 @@ Data inside the PostgreSQL container:
      ```
 
 
-[**Changelog**](CHANGELOG.md)
+[![changelog](https://img.shields.io/badge/changelog-blue?style=for-the-badge)
+](CHANGELOG.md)
 
 ## 🧰 Tech Stack
 - **Python**
