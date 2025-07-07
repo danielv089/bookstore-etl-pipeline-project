@@ -37,14 +37,14 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
 - **v2.0 – Python, PostgreSQL  & Docker Compose Integration**
    
-The ETL pipeline is containerized with Docker Compose for multi-container deployment, including:
+    The ETL pipeline is containerized with     Docker Compose for multi-container deployment, including:
     PostgreSQL database as backend
     Python ETL container
 
     Build and start containers:
     ```bash
     docker compose up --build
-     ```
+    ```
     PostgreSQL connection is configured via environment variables in docker-compose.yml
     PostgreSQL data is stored in the pgdata named perstistent volume.
 
