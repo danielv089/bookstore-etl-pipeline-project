@@ -1,0 +1,2166 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 15.13 (Debian 15.13-1.pgdg120+1)
+-- Dumped by pg_dump version 15.13 (Debian 15.13-1.pgdg120+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: books; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.books (
+    upc character(25) NOT NULL,
+    titles character varying(300),
+    genre_id smallint,
+    ratings smallint,
+    product_type character varying(15),
+    price_excl_tax_gbp numeric(5,2),
+    price_incl_tax_gbp numeric(5,2),
+    tax numeric(5,2),
+    num_reviews integer
+);
+
+
+ALTER TABLE public.books OWNER TO postgres;
+
+--
+-- Name: genres; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.genres (
+    genre_id integer NOT NULL,
+    genre character varying(50)
+);
+
+
+ALTER TABLE public.genres OWNER TO postgres;
+
+--
+-- Name: in_stock; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.in_stock (
+    upc character(25) NOT NULL,
+    in_stock integer
+);
+
+
+ALTER TABLE public.in_stock OWNER TO postgres;
+
+--
+-- Data for Name: books; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.books (upc, titles, genre_id, ratings, product_type, price_excl_tax_gbp, price_incl_tax_gbp, tax, num_reviews) FROM stdin;
+a897fe39b1053632         	A Light in the Attic	32	3	Books	51.77	51.77	0.00	0
+90fa61229261140a         	Tipping the Velvet	20	1	Books	53.74	53.74	0.00	0
+6957f44c3847a760         	Soumission	16	1	Books	50.10	50.10	0.00	0
+e00eb4fd7b871a48         	Sharp Objects	25	4	Books	47.82	47.82	0.00	0
+4165285e1663650f         	Sapiens: A Brief History of Humankind	21	5	Books	54.23	54.23	0.00	0
+f77dbf2323deb740         	The Requiem Red	49	1	Books	22.65	22.65	0.00	0
+2597b5a345f45e1b         	The Dirty Little Secrets of Getting Your Dream Job	6	4	Books	33.34	33.34	0.00	0
+e72a5dfc7e9267b2         	The Coming Woman: A Novel Based on the Life of the Infamous Feminist, Victoria Woodhull	47	3	Books	17.93	17.93	0.00	0
+e10e1e165dc8be4a         	The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics	47	4	Books	22.60	22.60	0.00	0
+1dfe412b8ac00530         	The Black Maria	32	1	Books	52.15	52.15	0.00	0
+0312262ecafa5a40         	Starving Hearts (Triangular Trade Trilogy, #1)	47	2	Books	13.99	13.99	0.00	0
+30a7f60cd76ca58c         	Shakespeare's Sonnets	32	4	Books	20.66	20.66	0.00	0
+ce6396b0f23f6ecc         	Set Me Free	49	5	Books	17.46	17.46	0.00	0
+3b1c02bac2a429e6         	Scott Pilgrim's Precious Little Life (Scott Pilgrim #1)	40	5	Books	52.29	52.29	0.00	0
+a34ba96d4081e6a4         	Rip it Up and Start Again	24	5	Books	35.02	35.02	0.00	0
+deda3e61b9514b83         	Our Band Could Be Your Life: Scenes from the American Indie Underground, 1981-1991	24	3	Books	57.25	57.25	0.00	0
+feb7cc7701ecf901         	Olio	32	1	Books	23.88	23.88	0.00	0
+e30f54cea9b38190         	Mesaerion: The Best Science Fiction Stories 1800-1849	38	1	Books	37.59	37.59	0.00	0
+a18a4f574854aced         	Libertarianism for Beginners	33	2	Books	51.33	51.33	0.00	0
+a22124811bfa8350         	It's Only the Himalayas	46	2	Books	45.17	45.17	0.00	0
+23356462d1320d61         	In Her Wake	45	1	Books	12.84	12.84	0.00	0
+327f68a59745c102         	How Music Works	24	2	Books	37.32	37.32	0.00	0
+5674a18a29a43ced         	Foolproof Preserving: A Guide to Small Batch Jams, Jellies, Pickles, Condiments, and More: A Foolproof Guide to Making Small Batch Jams, Jellies, Pickles, Condiments, and More	17	3	Books	30.52	30.52	0.00	0
+c2e46a2ee3b4a322         	Chase Me (Paris Nights #2)	36	5	Books	25.27	25.27	0.00	0
+00bfed9e18bb36f3         	Black Dust	36	5	Books	34.53	34.53	0.00	0
+9528d0948525bf5f         	Birdsong: A Story in Pictures	7	3	Books	54.64	54.64	0.00	0
+c7d160c2c0de586f         	America's Cradle of Quarterbacks: Western Pennsylvania's Football Factory from Johnny Unitas to Joe Montana	47	3	Books	22.50	22.50	0.00	0
+904208d6aa64b655         	Aladdin and His Wonderful Lamp	47	3	Books	53.13	53.13	0.00	0
+4c28def39d850cdf         	Worlds Elsewhere: Journeys Around Shakespeareâs Globe	27	5	Books	40.30	40.30	0.00	0
+ccd9ffa25efabdea         	Wall and Piece	3	4	Books	44.18	44.18	0.00	0
+6258a1f6a6dcfe50         	The Four Agreements: A Practical Guide to Personal Freedom	42	5	Books	17.66	17.66	0.00	0
+3c039985229453bf         	The Five Love Languages: How to Express Heartfelt Commitment to Your Mate	27	3	Books	31.05	31.05	0.00	0
+5dada2b7be26bd03         	The Elephant Tree	45	5	Books	23.82	23.82	0.00	0
+9f6568e9c95f60b0         	The Bear and the Piano	7	1	Books	36.89	36.89	0.00	0
+6be3beb0793a53e7         	Sophie's World	31	5	Books	15.94	15.94	0.00	0
+668fe56b17cfcd4f         	Penny Maybe	47	3	Books	33.29	33.29	0.00	0
+094b269567e1c300         	Maude (1883-1993):She Grew Up with the country	47	2	Books	18.02	18.02	0.00	0
+19ed25f4641d5efd         	In a Dark, Dark Wood	25	1	Books	19.63	19.63	0.00	0
+be5cc846f45496fb         	Behind Closed Doors	45	4	Books	52.22	52.22	0.00	0
+55f9da0c5eea2e10         	You can't bury them all: Poems	32	2	Books	33.63	33.63	0.00	0
+b4fd5943413e089a         	Slow States of Collapse: Poems	32	3	Books	57.31	57.31	0.00	0
+c8f7f0cb1abb9cac         	Reasons to Stay Alive	27	2	Books	26.41	26.41	0.00	0
+b12b89017878a60d         	Private Paris (Private #10)	16	5	Books	47.61	47.61	0.00	0
+c27f6e1f185b0383         	#HigherSelfie: Wake Up Your Life. Free Your Soul. Find Your Tribe.	27	5	Books	23.11	23.11	0.00	0
+acddfeab2a407640         	Without Borders (Wanderlove #1)	26	2	Books	45.07	45.07	0.00	0
+3ecb690d1542c568         	When We Collided	11	1	Books	31.77	31.77	0.00	0
+8d455c7539795d2a         	We Love You, Charlie Freeman	16	5	Books	50.27	50.27	0.00	0
+657fe5ead67a7767         	Untitled Collection: Sabbath Poems 2014	32	4	Books	14.27	14.27	0.00	0
+d170b5a0da46380e         	Unseen City: The Majesty of Pigeons, the Discreet Charm of Snails & Other Wonders of the Urban Wilderness	27	4	Books	44.18	44.18	0.00	0
+7ae099f3898e0209         	Unicorn Tracks	15	3	Books	18.78	18.78	0.00	0
+9a9d6e9bc555731e         	Unbound: How Eight Technologies Made Us Human, Transformed Society, and Brought Our World to the Brink	21	1	Books	25.52	25.52	0.00	0
+09555be379ad9253         	Tsubasa: WoRLD CHRoNiCLE 2 (Tsubasa WoRLD CHRoNiCLE #2)	40	1	Books	16.28	16.28	0.00	0
+7858914fad68493c         	Throwing Rocks at the Google Bus: How Growth Became the Enemy of Prosperity	27	3	Books	31.12	31.12	0.00	0
+51653ef291ab7ddc         	This One Summer	40	4	Books	19.49	19.49	0.00	0
+709822d0b5bcb7f4         	Thirst	16	5	Books	17.27	17.27	0.00	0
+4eed62cf5f8d8edf         	The Torch Is Passed: A Harding Family Story	47	1	Books	19.09	19.09	0.00	0
+b5ea0b5dabed25a8         	The Secret of Dreadwillow Carse	7	1	Books	56.13	56.13	0.00	0
+142d767a56a9254d         	The Pioneer Woman Cooks: Dinnertime: Comfort Classics, Freezer Food, 16-Minute Meals, and Other Delicious Ways to Solve Supper!	17	1	Books	56.41	56.41	0.00	0
+5ee94540d0749ea0         	The Past Never Ends	25	4	Books	56.50	56.50	0.00	0
+cedf82b5086e4691         	The Natural History of Us (The Fine Art of Pretending #2)	49	3	Books	45.22	45.22	0.00	0
+7d385d34d12e60ff         	The Nameless City (The Nameless City #1)	40	4	Books	38.16	38.16	0.00	0
+d01ac97e2b8947c2         	The Murder That Never Was (Forensic Instincts #5)	16	3	Books	54.11	54.11	0.00	0
+aadee1c326d286e3         	The Most Perfect Thing: Inside (and Outside) a Bird's Egg	37	4	Books	42.96	42.96	0.00	0
+31075275518532d7         	The Mindfulness and Acceptance Workbook for Anxiety: A Guide to Breaking Free from Anxiety, Phobias, and Worry Using Acceptance and Commitment Therapy	47	4	Books	23.89	23.89	0.00	0
+0da9aa9d24677fc0         	The Life-Changing Magic of Tidying Up: The Japanese Art of Decluttering and Organizing	27	3	Books	16.77	16.77	0.00	0
+8c9e6bf2467d740d         	The Inefficiency Assassin: Time Management Tactics for Working Smarter, Not Longer	47	5	Books	20.59	20.59	0.00	0
+acd86a5426e21ca0         	The Gutsy Girl: Escapades for Your Life of Epic Adventure	27	1	Books	37.13	37.13	0.00	0
+a30b270e25489e5c         	The Electric Pencil: Drawings from Inside State Hospital No. 3	27	1	Books	56.06	56.06	0.00	0
+bd261725b99f5983         	The Death of Humanity: and the Case for Life	31	4	Books	58.11	58.11	0.00	0
+43c6a960757cf559         	The Bulletproof Diet: Lose up to a Pound a Day, Reclaim Energy and Focus, Upgrade Your Life	18	3	Books	49.05	49.05	0.00	0
+80cfab6bcff3a244         	The Art Forger	47	3	Books	40.76	40.76	0.00	0
+a3d2a4250807f1e9         	The Age of Genius: The Seventeenth Century and the Birth of the Modern Mind	21	1	Books	19.73	19.73	0.00	0
+7d6d2a6c0276f81b         	The Activist's Tao Te Ching: Ancient Advice for a Modern Revolution	42	5	Books	32.24	32.24	0.00	0
+87b0615b6e1f4d7b         	Spark Joy: An Illustrated Master Class on the Art of Organizing and Tidying Up	27	4	Books	41.83	41.83	0.00	0
+e6af5bf1163c1151         	Soul Reader	47	2	Books	39.58	39.58	0.00	0
+6f78a0d744c35456         	Security	22	2	Books	39.25	39.25	0.00	0
+c849f0b2f5d6a742         	Saga, Volume 6 (Saga (Collected Editions) #6)	15	3	Books	25.02	25.02	0.00	0
+53a3d11bb568cc8b         	Saga, Volume 5 (Saga (Collected Editions) #5)	40	2	Books	51.04	51.04	0.00	0
+d7310206583a54b6         	Reskilling America: Learning to Labor in the Twenty-First Century	27	2	Books	19.83	19.83	0.00	0
+c82a3e358c773c73         	Rat Queens, Vol. 3: Demons (Rat Queens (Collected Editions) #11-15)	40	3	Books	50.40	50.40	0.00	0
+0fa6dceead7ce47a         	Princess Jellyfish 2-in-1 Omnibus, Vol. 01 (Princess Jellyfish 2-in-1 Omnibus #1)	40	5	Books	13.61	13.61	0.00	0
+0e691eda369f4e09         	Princess Between Worlds (Wide-Awake Princess #5)	15	5	Books	13.34	13.34	0.00	0
+e80f8e518b300dfe         	Pop Gun War, Volume 1: Gift	40	1	Books	18.97	18.97	0.00	0
+7392c0032f92d816         	Political Suicide: Missteps, Peccadilloes, Bad Calls, Backroom Hijinx, Sordid Pasts, Rotten Breaks, and Just Plain Dumb Mistakes in the Annals of American Politics	21	2	Books	36.28	36.28	0.00	0
+9429b4d59c537af5         	Patience	40	3	Books	10.16	10.16	0.00	0
+889139b8e9c4cb36         	Outcast, Vol. 1: A Darkness Surrounds Him (Outcast #1)	40	4	Books	15.44	15.44	0.00	0
+11809b1d323b3057         	orange: The Complete Collection 1 (orange: The Complete Collection #1)	40	1	Books	48.41	48.41	0.00	0
+9ffa38d3b832433a         	Online Marketing for Busy Authors: A Step-By-Step Guide	39	1	Books	46.35	46.35	0.00	0
+b757c0c361e689ce         	On a Midnight Clear	47	3	Books	14.07	14.07	0.00	0
+3c346ab1e76ae1f6         	Obsidian (Lux #1)	49	2	Books	14.86	14.86	0.00	0
+784bc2279baa878d         	My Paris Kitchen: Recipes and Stories	17	2	Books	33.37	33.37	0.00	0
+fa9610a50a1bf149         	Masks and Shadows	15	2	Books	56.40	56.40	0.00	0
+72f9d5be3472d34e         	Mama Tried: Traditional Italian Cooking for the Screwed, Crude, Vegan, and Tattooed	17	4	Books	14.02	14.02	0.00	0
+460089f796fb3f82         	Lumberjanes, Vol. 2: Friendship to the Max (Lumberjanes #5-8)	40	2	Books	46.91	46.91	0.00	0
+b6ee99bcf06fc91f         	Lumberjanes, Vol. 1: Beware the Kitten Holy (Lumberjanes #1-4)	40	3	Books	45.61	45.61	0.00	0
+57e5a4d515c8ce44         	Lumberjanes Vol. 3: A Terrible Plan (Lumberjanes #9-12)	40	2	Books	19.92	19.92	0.00	0
+7b75cc7f223791f4         	Layered: Baking, Building, and Styling Spectacular Cakes	17	1	Books	40.11	40.11	0.00	0
+228f74b74f3a08ae         	Judo: Seven Steps to Black Belt (an Introductory Guide for Beginners)	47	2	Books	53.90	53.90	0.00	0
+18ad3ed896c7ce05         	Join	38	5	Books	35.67	35.67	0.00	0
+b136b1b180ca753a         	In the Country We Love: My Family Divided	27	4	Books	22.00	22.00	0.00	0
+e4f74c16de34d440         	Immunity: How Elie Metchnikoff Changed the Course of Modern Medicine	37	5	Books	57.36	57.36	0.00	0
+8d4eefad7a2b3915         	I Hate Fairyland, Vol. 1: Madly Ever After (I Hate Fairyland (Compilations) #1-5)	40	2	Books	29.17	29.17	0.00	0
+1c89ae5bb804e4de         	I am a Hero Omnibus Volume 1	40	3	Books	54.63	54.63	0.00	0
+a6f99b9e687f9d46         	How to Be Miserable: 40 Strategies You Already Use	39	1	Books	46.03	46.03	0.00	0
+2a97cffe61c3c4c7         	Her Backup Boyfriend (The Sorensen Family #1)	36	1	Books	33.97	33.97	0.00	0
+f2df3bb043a8abb0         	Giant Days, Vol. 2 (Giant Days #5-8)	40	2	Books	22.11	22.11	0.00	0
+9beb96a2300109d7         	Forever and Forever: The Courtship of Henry Longfellow and Fanny Appleton	20	3	Books	29.69	29.69	0.00	0
+9e28048cea8d41f7         	First and First (Five Boroughs #3)	36	4	Books	15.97	15.97	0.00	0
+7add3f8e49ec0826         	Fifty Shades Darker (Fifty Shades #2)	36	1	Books	21.96	21.96	0.00	0
+311c0dd0e354a33e         	Everydata: The Misinformation Hidden in the Little Data You Consume Every Day	27	2	Books	54.35	54.35	0.00	0
+fce19f9b4a943f22         	Don't Be a Jerk: And Other Practical Advice from Dogen, Japan's Greatest Zen Master	35	2	Books	37.97	37.97	0.00	0
+09b6cc87e62c2c58         	Danganronpa Volume 1	40	4	Books	51.99	51.99	0.00	0
+7267864328ae8b9d         	Crown of Midnight (Throne of Glass #2)	15	3	Books	43.29	43.29	0.00	0
+8754c83ab2a7ae71         	Codename Baboushka, Volume 1: The Conclave of Death	40	4	Books	36.72	36.72	0.00	0
+7b599c8bfcdd8d30         	Camp Midnight	40	4	Books	17.08	17.08	0.00	0
+bee3672891cca906         	Call the Nurse: True Stories of a Country Nurse on a Scottish Isle	27	5	Books	29.14	29.14	0.00	0
+5ceb951f629700a2         	Burning	49	3	Books	28.81	28.81	0.00	0
+74baabfc8fd84b38         	Bossypants	47	2	Books	49.46	49.46	0.00	0
+a40723994f715420         	Mrs. Houdini	20	5	Books	30.25	30.25	0.00	0
+bdf415fd484ea8a7         	Bitch Planet, Vol. 1: Extraordinary Machine (Bitch Planet (Collected Editions))	40	2	Books	37.92	37.92	0.00	0
+6d5300b2d8f37e07         	Avatar: The Last Airbender: Smoke and Shadow, Part 3 (Smoke and Shadow #3)	15	2	Books	28.09	28.09	0.00	0
+38d45839cb1c83c1         	Algorithms to Live By: The Computer Science of Human Decisions	27	1	Books	30.81	30.81	0.00	0
+70ed59f194b3c556         	A World of Flavor: Your Gluten Free Passport	47	1	Books	42.95	42.95	0.00	0
+8a380641491d43ed         	A Piece of Sky, a Grain of Rice: A Memoir in Four Meditations	47	5	Books	56.76	56.76	0.00	0
+f733e8c19d40ec2e         	A Murder in Time	25	1	Books	16.64	16.64	0.00	0
+3a6fb983e2554023         	A Flight of Arrows (The Pathfinders #2)	20	5	Books	55.53	55.53	0.00	0
+842790dfaa937484         	A Fierce and Subtle Poison	49	4	Books	28.13	28.13	0.00	0
+01d2001ac1e6f8a3         	A Court of Thorns and Roses (A Court of Thorns and Roses #1)	15	1	Books	52.37	52.37	0.00	0
+e4ac92d89b946781         	(Un)Qualified: How God Uses Broken People to Do Big Things	8	5	Books	54.00	54.00	0.00	0
+796c87ddbbaaf8c5         	You Are What You Love: The Spiritual Power of Habit	35	4	Books	21.87	21.87	0.00	0
+9270575728a13a61         	William Shakespeare's Star Wars: Verily, A New Hope (William Shakespeare's Star Wars #4)	38	4	Books	43.30	43.30	0.00	0
+b8736690cf263a3c         	Tuesday Nights in 1980	16	2	Books	21.04	21.04	0.00	0
+d7d6d50c1e3d0b81         	Tracing Numbers on a Train	47	3	Books	41.60	41.60	0.00	0
+590a9cccf7db9f7d         	Throne of Glass (Throne of Glass #1)	15	3	Books	35.07	35.07	0.00	0
+de3f25248ba0789f         	Thomas Jefferson and the Tripoli Pirates: The Forgotten War That Changed American History	21	1	Books	59.64	59.64	0.00	0
+bc2a85fd35fdc7bd         	Thirteen Reasons Why	47	1	Books	52.72	52.72	0.00	0
+37c0cb19713d8dda         	The White Cat and the Monk: A Retelling of the Poem âPangur BÃ¡nâ	7	4	Books	58.08	58.08	0.00	0
+623e1a180426039b         	The Wedding Dress	36	1	Books	24.12	24.12	0.00	0
+fd3a622648667296         	The Vacationers	16	4	Books	42.15	42.15	0.00	0
+3bebf34ee9330cbd         	The Third Wave: An Entrepreneurâs Vision of the Future	6	5	Books	12.61	12.61	0.00	0
+f5a92cff83897d48         	The Stranger	31	4	Books	17.44	17.44	0.00	0
+d6361d16212664ed         	The Shadow Hero (The Shadow Hero)	40	1	Books	33.14	33.14	0.00	0
+961f18db4f138211         	The Secret (The Secret #1)	47	4	Books	27.37	27.37	0.00	0
+0651062381f0636a         	The Regional Office Is Under Attack!	16	5	Books	51.36	51.36	0.00	0
+e98a4efa85070c2f         	The Psychopath Test: A Journey Through the Madness Industry	47	2	Books	36.00	36.00	0.00	0
+790ef197c8f236f5         	The Project	38	1	Books	10.65	10.65	0.00	0
+8ec14b1576cb7cb5         	The Power of Now: A Guide to Spiritual Enlightenment	27	2	Books	43.54	43.54	0.00	0
+209adad1015af86f         	The Omnivore's Dilemma: A Natural History of Four Meals	27	2	Books	38.21	38.21	0.00	0
+e4c7f3487d17fd42         	The Nerdy Nummies Cookbook: Sweet Treats for the Geek in All of Us	17	5	Books	37.34	37.34	0.00	0
+c7b5183f4d1d4efe         	The Murder of Roger Ackroyd (Hercule Poirot #4)	25	4	Books	44.10	44.10	0.00	0
+99ff4cc6491e8f5c         	The Mistake (Off-Campus #2)	26	3	Books	43.29	43.29	0.00	0
+08db62f24627e71f         	The Matchmaker's Playbook (Wingmen Inc. #1)	26	1	Books	55.85	55.85	0.00	0
+e28e330cbdf01126         	The Love and Lemons Cookbook: An Apple-to-Zucchini Celebration of Impromptu Cooking	17	2	Books	37.60	37.60	0.00	0
+abeafe151a587d3b         	The Long Shadow of Small Ghosts: Murder and Memory in an American City	12	1	Books	10.97	10.97	0.00	0
+eac1a180047ad54e         	The Kite Runner	47	4	Books	41.82	41.82	0.00	0
+9287e238d7c3b06e         	The House by the Lake	20	1	Books	36.95	36.95	0.00	0
+2dbb7ec08cdd7f3c         	The Glittering Court (The Glittering Court #1)	15	1	Books	44.28	44.28	0.00	0
+e956d67c9bcc5809         	The Girl on the Train	47	2	Books	55.02	55.02	0.00	0
+42d0d7c92b75fc1c         	The Genius of Birds	27	1	Books	17.24	17.24	0.00	0
+d6670dfe3e7b42bd         	The Emerald Mystery	47	2	Books	23.15	23.15	0.00	0
+96a38e7c813d8f1d         	The Cookies & Cups Cookbook: 125+ sweet & savory recipes reminding you to Always Eat Dessert First	17	1	Books	41.25	41.25	0.00	0
+efc3768127714ec3         	The Bridge to Consciousness: I'm Writing the Bridge Between Science and Our Old and New Beliefs.	47	3	Books	32.00	32.00	0.00	0
+dd047728de72ad62         	The Artist's Way: A Spiritual Path to Higher Creativity	27	5	Books	38.49	38.49	0.00	0
+e7469e22b5bfb3e7         	The Art of War	47	5	Books	33.34	33.34	0.00	0
+c99761a700ade23f         	The Argonauts	4	2	Books	10.93	10.93	0.00	0
+56e4f9eab2e8e674         	The 10% Entrepreneur: Live Your Startup Dream Without Quitting Your Day Job	6	3	Books	27.55	27.55	0.00	0
+203b7f94b7d6115f         	Suddenly in Love (Lake Haven #1)	36	2	Books	55.99	55.99	0.00	0
+ca71e72655bece85         	Something More Than This	36	4	Books	16.24	16.24	0.00	0
+2a70769cdc6eb8b8         	Soft Apocalypse	38	2	Books	26.12	26.12	0.00	0
+1b33663ad7b95fd8         	So You've Been Publicly Shamed	27	2	Books	12.23	12.23	0.00	0
+0e0dcc3339602b28         	Shoe Dog: A Memoir by the Creator of NIKE	6	2	Books	23.99	23.99	0.00	0
+0c27e6c3744fc14b         	Shobu Samurai, Project Aryoku (#3)	47	3	Books	29.06	29.06	0.00	0
+ad04ad9fc179fc5d         	Secrets and Lace (Fatal Hearts #1)	47	1	Books	20.27	20.27	0.00	0
+1c929cfd16b71907         	Scarlett Epstein Hates It Here	49	5	Books	43.55	43.55	0.00	0
+e656e280bc8edd56         	Romero and Juliet: A Tragic Tale of Love and Zombies	47	1	Books	36.94	36.94	0.00	0
+b53db2271c9624f7         	Redeeming Love	9	5	Books	20.47	20.47	0.00	0
+d9c643fa1fc57bdb         	Poses for Artists Volume 1 - Dynamic and Sitting Poses: An Essential Reference for Figure Drawing and the Human Form	47	1	Books	41.06	41.06	0.00	0
+31001a1210623bd4         	Poems That Make Grown Women Cry	32	4	Books	14.19	14.19	0.00	0
+50b8f80311b31ede         	Nightingale, Sing	49	1	Books	38.28	38.28	0.00	0
+cfeb1e1e0e695b58         	Night Sky with Exit Wounds	32	1	Books	41.05	41.05	0.00	0
+caf4fe9311f1dc59         	Modern Romance	47	5	Books	28.26	28.26	0.00	0
+af96613fdd793a3c         	Miss Peregrineâs Home for Peculiar Children (Miss Peregrineâs Peculiar Children #1)	47	1	Books	10.76	10.76	0.00	0
+d69dd8dac66f9f84         	Louisa: The Extraordinary Life of Mrs. Adams	5	2	Books	16.85	16.85	0.00	0
+4aa03792b50f0b22         	Little Red	7	3	Books	13.47	13.47	0.00	0
+ba54932df84e8cea         	Library of Souls (Miss Peregrineâs Peculiar Children #3)	49	5	Books	48.56	48.56	0.00	0
+c1afd71fc86bf682         	Large Print Heart of the Pride	47	2	Books	19.15	19.15	0.00	0
+fd8585283fc7d2d7         	I Had a Nice Time And Other Lies...: How to find love & sh*t like that	48	4	Books	57.36	57.36	0.00	0
+4ce91d31c1e57c33         	Hollow City (Miss Peregrineâs Peculiar Children #2)	15	1	Books	42.98	42.98	0.00	0
+d163dd6c352fbcd2         	Grumbles	47	2	Books	22.16	22.16	0.00	0
+ce60436f52c5ee68         	Full Moon over Noahâs Ark: An Odyssey to Mount Ararat and Beyond	46	4	Books	49.43	49.43	0.00	0
+116a2fdc9a45bab0         	Frostbite (Vampire Academy #2)	49	5	Books	29.99	29.99	0.00	0
+8585760646e3aa2a         	Follow You Home	22	1	Books	21.36	21.36	0.00	0
+2f88b08bf0a0e367         	First Steps for New Christians (Print Edition)	47	1	Books	29.00	29.00	0.00	0
+edb3097e71330040         	Finders Keepers (Bill Hodges Trilogy #2)	16	5	Books	53.53	53.53	0.00	0
+65d034adf80834b7         	Fables, Vol. 1: Legends in Exile (Fables #1)	40	4	Books	41.62	41.62	0.00	0
+29c0025455f8c585         	Eureka Trivia 6.0	47	4	Books	54.59	54.59	0.00	0
+6ffb36aaeff1c81e         	Drive: The Surprising Truth About What Motivates Us	47	4	Books	34.95	34.95	0.00	0
+f6d967cdadc6fbd9         	Done Rubbed Out (Reightman & Bailey #1)	47	5	Books	37.72	37.72	0.00	0
+3a11bb962ff45b78         	Doing It Over (Most Likely To #1)	36	3	Books	35.61	35.61	0.00	0
+46c1530d7546ea6d         	Deliciously Ella Every Day: Quick and Easy Recipes for Gluten-Free Snacks, Packed Lunches, and Simple Meals	17	3	Books	42.16	42.16	0.00	0
+88c21fcd38e2486e         	Dark Notes	14	5	Books	19.19	19.19	0.00	0
+3b9a3b4624b7fd6d         	Daring Greatly: How the Courage to Be Vulnerable Transforms the Way We Live, Love, Parent, and Lead	27	3	Books	19.43	19.43	0.00	0
+a57b1dcbd6849222         	Close to You	9	4	Books	49.46	49.46	0.00	0
+513271dadc1322ae         	Chasing Heaven: What Dying Taught Me About Living	42	2	Books	37.80	37.80	0.00	0
+1f329c2e7d7de8bd         	Big Magic: Creative Living Beyond Fear	27	3	Books	30.80	30.80	0.00	0
+919e7cb2269a25d2         	Becoming Wise: An Inquiry into the Mystery and Art of Living	27	2	Books	27.43	27.43	0.00	0
+3f69e667a67e54d9         	Beauty Restored (Riley Family Legacy Novellas #3)	47	2	Books	11.11	11.11	0.00	0
+7edc0527cf782e19         	Batman: The Long Halloween (Batman)	40	2	Books	36.50	36.50	0.00	0
+47271d8e08b5d31c         	Batman: The Dark Knight Returns (Batman)	40	5	Books	15.38	15.38	0.00	0
+05f7c6d9a4e582d3         	Ayumi's Violin	47	2	Books	15.48	15.48	0.00	0
+d24b829be2ca81c4         	Anonymous	47	4	Books	46.82	46.82	0.00	0
+7ebfa6c1bee69e1e         	Amy Meets the Saints and Sages	47	3	Books	18.46	18.46	0.00	0
+bb8245f52c7cce8f         	Amid the Chaos	13	1	Books	36.58	36.58	0.00	0
+ffd54178acc9a6a5         	Amatus	47	5	Books	50.54	50.54	0.00	0
+d195e7f4ed697350         	Agnostic: A Spirited Manifesto	27	5	Books	12.51	12.51	0.00	0
+dd5bfa6cc2c0ecc3         	Zealot: The Life and Times of Jesus of Nazareth	21	3	Books	24.70	24.70	0.00	0
+024387ca4cafd5cc         	You (You #1)	45	5	Books	43.61	43.61	0.00	0
+047097293bb4d1c0         	Wonder Woman: Earth One, Volume One (Wonder Woman: Earth One #1)	40	4	Books	37.34	37.34	0.00	0
+3fb15ace50d6142b         	Wild Swans	49	2	Books	14.36	14.36	0.00	0
+2b5054a4192e9b06         	Why the Right Went Wrong: Conservatism--From Goldwater to the Tea Party and Beyond	33	4	Books	52.65	52.65	0.00	0
+44a10f1ac8ce822e         	Whole Lotta Creativity Going On: 60 Fun and Unusual Exercises to Awaken and Strengthen Your Creativity	27	4	Books	38.20	38.20	0.00	0
+6fd646a334e6e133         	What's It Like in Space?: Stories from Astronauts Who've Been There	27	2	Books	19.60	19.60	0.00	0
+92275cedf6d8ee15         	We Are Robin, Vol. 1: The Vigilante Business (We Are Robin #1)	40	1	Books	53.90	53.90	0.00	0
+6a31307a81e8f3a8         	Walt Disney's Alice in Wonderland	7	5	Books	12.96	12.96	0.00	0
+4a1debca3135ff37         	V for Vendetta (V for Vendetta Complete)	47	4	Books	37.10	37.10	0.00	0
+aba2db9afb1469c7         	Until Friday Night (The Field Party #1)	49	2	Books	46.31	46.31	0.00	0
+76c84daa539426e2         	Unbroken: A World War II Story of Survival, Resilience, and Redemption	47	2	Books	45.95	45.95	0.00	0
+1d6443ffba9dfd80         	Twenty Yawns	7	2	Books	22.08	22.08	0.00	0
+6e44bcbeac7f4360         	Through the Woods	40	2	Books	25.38	25.38	0.00	0
+f0f38174a7e689a3         	This Is Where It Ends	49	2	Books	27.12	27.12	0.00	0
+34c0d7c4ee5650af         	The Year of Magical Thinking	27	2	Books	43.04	43.04	0.00	0
+08b2f71d93836313         	The Wright Brothers	47	4	Books	56.80	56.80	0.00	0
+6875c5657661b2fb         	The White Queen (The Cousins' War #1)	47	5	Books	25.91	25.91	0.00	0
+c5cb9f885d8b3621         	The Wedding Pact (The O'Malleys #2)	36	3	Books	32.61	32.61	0.00	0
+e9906e2f0d189745         	The Time Keeper	16	5	Books	27.88	27.88	0.00	0
+081305e6df719dff         	The Testament of Mary	16	4	Books	52.67	52.67	0.00	0
+1528279aec1f3dce         	The Star-Touched Queen	15	5	Books	46.02	46.02	0.00	0
+00c4543ec6bd25b4         	The Songs of the Gods	47	5	Books	44.48	44.48	0.00	0
+e88fb1c9397cfb27         	The Song of Achilles	47	5	Books	37.40	37.40	0.00	0
+012094e90a4b908d         	The Rosie Project (Don Tillman #1)	47	1	Books	54.04	54.04	0.00	0
+6bdd909329435e80         	The Power of Habit: Why We Do What We Do in Life and Business	47	3	Books	16.88	16.88	0.00	0
+52cf2a5933ec5d8f         	The Marriage of Opposites	20	4	Books	28.08	28.08	0.00	0
+4e812d32d64e2431         	The Lucifer Effect: Understanding How Good People Turn Evil	34	1	Books	10.40	10.40	0.00	0
+f21effc079a2b38a         	The Long Haul (Diary of a Wimpy Kid #9)	23	1	Books	44.07	44.07	0.00	0
+2d88a31f325dfd3b         	The Loney	22	1	Books	23.40	23.40	0.00	0
+4881cc53f6c8892f         	The Literature Book (Big Ideas Simply Explained)	27	3	Books	17.43	17.43	0.00	0
+3bc89353f7e3a3cc         	The Last Mile (Amos Decker #2)	25	2	Books	54.21	54.21	0.00	0
+f72f61ad6a5f12ed         	The Immortal Life of Henrietta Lacks	47	2	Books	40.67	40.67	0.00	0
+992974ba6a0536ea         	The Hidden Oracle (The Trials of Apollo #1)	15	2	Books	52.26	52.26	0.00	0
+ddc8340dabc8641b         	The Help Yourself Cookbook for Kids: 60 Easy Plant-Based Recipes Kids Can Make to Stay Healthy and Save the Earth	17	3	Books	28.77	28.77	0.00	0
+847935fc68707426         	The Guilty (Will Robie #4)	45	2	Books	13.82	13.82	0.00	0
+a86972014275e072         	The First Hostage (J.B. Collins #2)	16	3	Books	25.85	25.85	0.00	0
+3d76bc83c6b644c9         	The Dovekeepers	47	1	Books	48.78	48.78	0.00	0
+6edacfd1f8ebb9eb         	The Darkest Lie	49	5	Books	35.35	35.35	0.00	0
+dc6f688b82e42a5b         	The Bane Chronicles (The Bane Chronicles #1-11)	15	4	Books	44.73	44.73	0.00	0
+923831a05c9f91f7         	The Bad-Ass Librarians of Timbuktu: And Their Race to Save the Worldâs Most Precious Manuscripts	27	1	Books	15.77	15.77	0.00	0
+1b8187fa4bf6ab05         	The 14th Colony (Cotton Malone #11)	45	1	Books	39.24	39.24	0.00	0
+0c7b9cf2b7662b65         	That Darkness (Gardiner and Renner #1)	25	1	Books	13.92	13.92	0.00	0
+2d1e337aaf341858         	Tastes Like Fear (DI Marnie Rome #3)	25	1	Books	10.69	10.69	0.00	0
+2c04320e110a14a3         	Take Me with You	16	3	Books	45.21	45.21	0.00	0
+4c8b7540409da4ac         	Swell: A Year of Waves	27	1	Books	45.58	45.58	0.00	0
+ac8e3949d284e9a9         	Superman Vol. 1: Before Truth (Superman by Gene Luen Yang #1)	40	5	Books	11.89	11.89	0.00	0
+fe44cc816576c652         	Still Life with Bread Crumbs	16	3	Books	26.41	26.41	0.00	0
+95019eac1c0a052f         	Steve Jobs	47	5	Books	39.50	39.50	0.00	0
+3edcccc4f341fb1a         	Sorting the Beef from the Bull: The Science of Food Fraud Forensics	37	4	Books	44.74	44.74	0.00	0
+a278db6b2b09cf9f         	Someone Like You (The Harrisons #2)	11	5	Books	52.79	52.79	0.00	0
+394f6d30cafc3edb         	So Cute It Hurts!!, Vol. 6 (So Cute It Hurts!! #6)	40	4	Books	35.43	35.43	0.00	0
+830fb3967c74866d         	Shtum	16	4	Books	55.84	55.84	0.00	0
+f9705c362f070608         	See America: A Celebration of Our National Parks & Treasured Sites	46	3	Books	48.87	48.87	0.00	0
+86cbddb61ea78bb7         	salt.	32	4	Books	46.78	46.78	0.00	0
+85b2176b3b194030         	Robin War	40	3	Books	47.82	47.82	0.00	0
+31e2e2d9cca3778f         	Red Hood/Arsenal, Vol. 1: Open for Business (Red Hood/Arsenal #1)	40	2	Books	25.48	25.48	0.00	0
+a6454e329f872b78         	Rain Fish	7	3	Books	23.57	23.57	0.00	0
+aa35446aab16017f         	Quarter Life Poetry: Poems for the Young, Broke and Hangry	32	5	Books	50.89	50.89	0.00	0
+af58a74e4b2a23a0         	Pet Sematary	22	3	Books	10.56	10.56	0.00	0
+8ecf0356a3878811         	Overload: How to Unplug, Unwind, and Unleash Yourself from the Pressure of Stress	39	3	Books	52.15	52.15	0.00	0
+e34efcc824685332         	Once Was a Time	7	2	Books	18.28	18.28	0.00	0
+02b74068fa98d8a4         	Old School (Diary of a Wimpy Kid #10)	23	5	Books	11.83	11.83	0.00	0
+132ec5e8c984adef         	No Dream Is Too High: Life Lessons From a Man Who Walked on the Moon	27	2	Books	21.95	21.95	0.00	0
+71e36f33981ddb74         	Naruto (3-in-1 Edition), Vol. 14: Includes Vols. 40, 41 & 42 (Naruto: Omnibus #14)	40	2	Books	38.39	38.39	0.00	0
+727bf2b86b19ad88         	My Name Is Lucy Barton	16	1	Books	41.56	41.56	0.00	0
+cc82685d9f49bc2c         	My Mrs. Brown	16	3	Books	24.48	24.48	0.00	0
+137b0b2775701e11         	My Kind of Crazy	49	1	Books	40.36	40.36	0.00	0
+caa2e5b3fb1b2d4c         	Mr. Mercedes (Bill Hodges Trilogy #1)	16	1	Books	28.90	28.90	0.00	0
+47d47155e89c8be7         	More Than Music (Chasing the Dream #1)	47	2	Books	37.61	37.61	0.00	0
+b96fc7a0ea7d4b45         	Made to Stick: Why Some Ideas Survive and Others Die	6	5	Books	38.85	38.85	0.00	0
+5b43cae640f2338a         	Luis Paints the World	7	3	Books	53.95	53.95	0.00	0
+d512871626a5e588         	Luckiest Girl Alive	47	3	Books	49.83	49.83	0.00	0
+a10c7515834240f3         	Lowriders to the Center of the Earth (Lowriders in Space #2)	40	2	Books	51.51	51.51	0.00	0
+adb5f51c2e2ab13f         	Love Is a Mix Tape (Music #1)	24	1	Books	18.03	18.03	0.00	0
+24af96df0bafb925         	Looking for Lovely: Collecting the Moments that Matter	27	5	Books	29.14	29.14	0.00	0
+17fb5a88180f9904         	Living Leadership by Insight: A Good Leader Achieves, a Great Leader Builds Monuments	47	4	Books	46.91	46.91	0.00	0
+1174156c4a0eccaa         	Let It Out: A Journey Through Journaling	27	5	Books	26.79	26.79	0.00	0
+708345c9897fd7c5         	Lady Midnight (The Dark Artifices #1)	47	5	Books	16.28	16.28	0.00	0
+245e6bf08b8d2955         	It's All Easy: Healthy, Delicious Weeknight Meals in under 30 Minutes	17	1	Books	19.55	19.55	0.00	0
+2b52334fab158861         	Island of Dragons (Unwanteds #7)	15	1	Books	29.65	29.65	0.00	0
+b8a8ff84233f0570         	I Know What I'm Doing -- and Other Lies I Tell Myself: Dispatches from a Life Under Construction	23	4	Books	25.98	25.98	0.00	0
+aeff7b87a8e83ebb         	I Am Pilgrim (Pilgrim #1)	16	4	Books	10.60	10.60	0.00	0
+fbb21a2f71f4d981         	Hyperbole and a Half: Unfortunate Situations, Flawed Coping Mechanisms, Mayhem, and Other Things That Happened	23	5	Books	14.75	14.75	0.00	0
+6b6cd77fbc91b7a6         	Hush, Hush (Hush, Hush #1)	47	3	Books	47.02	47.02	0.00	0
+0b165bd4b9f42fd5         	Hold Your Breath (Search and Rescue #1)	36	1	Books	28.82	28.82	0.00	0
+afa829857f82f99e         	Hamilton: The Revolution	27	3	Books	58.79	58.79	0.00	0
+f201f263d8c23f97         	Greek Mythic History	47	5	Books	10.23	10.23	0.00	0
+eec424a84c9e4c68         	God: The Most Unpleasant Character in All Fiction	35	5	Books	30.03	30.03	0.00	0
+de4b403cb629a29f         	Glory over Everything: Beyond The Kitchen House	20	3	Books	45.84	45.84	0.00	0
+9194ae88379dbf1a         	Feathers: Displays of Brilliant Plumage	3	3	Books	49.05	49.05	0.00	0
+ac4dde0d1be05de0         	Far & Away: Places on the Brink of Change: Seven Continents, Twenty-Five Years	27	4	Books	15.06	15.06	0.00	0
+a2bd4ca82d908442         	Every Last Word	47	3	Books	46.47	46.47	0.00	0
+9eaf58b03a2779cc         	Eligible (The Austen Project #4)	16	3	Books	27.09	27.09	0.00	0
+27c5968fe43cc06e         	El Deafo	40	5	Books	57.62	57.62	0.00	0
+1d6dd0c87d90fe92         	Eight Hundred Grapes	16	4	Books	14.39	14.39	0.00	0
+a01f6d368ef64dc5         	Eaternity: More than 150 Deliciously Easy Vegan Recipes for a Long, Healthy, Satisfied, Joyful Life	27	5	Books	51.75	51.75	0.00	0
+047dfa57ba0bf638         	Eat Fat, Get Thin	18	2	Books	54.07	54.07	0.00	0
+ad2887ce04583910         	Don't Get Caught	49	1	Books	55.35	55.35	0.00	0
+bf5de316a5e9a4ab         	Doctor Sleep (The Shining #2)	22	2	Books	40.12	40.12	0.00	0
+3c6fe637a0180b01         	Demigods & Magicians: Percy and Annabeth Meet the Kanes (Percy Jackson & Kane Chronicles Crossover #1-3)	15	5	Books	37.51	37.51	0.00	0
+94a958ea126cdcd5         	Dear Mr. Knightley	16	5	Books	11.21	11.21	0.00	0
+0e94a089328be4bc         	Daily Fantasy Sports	47	1	Books	36.58	36.58	0.00	0
+4b9d9cfe0f435788         	Crazy Love: Overwhelmed by a Relentless God	8	2	Books	47.72	47.72	0.00	0
+28cf0d1c51b491e5         	Cometh the Hour (The Clifton Chronicles #6)	16	3	Books	25.01	25.01	0.00	0
+33a3e0e3ffde0dcd         	Code Name Verity (Code Name Verity #1)	47	4	Books	22.13	22.13	0.00	0
+42b0c50fc44140ec         	Clockwork Angel (The Infernal Devices #1)	47	1	Books	44.14	44.14	0.00	0
+966ebb738e0f9d9b         	City of Glass (The Mortal Instruments #3)	15	4	Books	56.02	56.02	0.00	0
+1e264c677d4ee4ae         	City of Fallen Angels (The Mortal Instruments #4)	47	4	Books	11.23	11.23	0.00	0
+5b987e54ee72525c         	City of Bones (The Mortal Instruments #1)	47	1	Books	43.28	43.28	0.00	0
+8a6ec2761f91dad2         	City of Ashes (The Mortal Instruments #2)	47	1	Books	47.27	47.27	0.00	0
+bfbb54bc8cdeed2b         	Cell	47	4	Books	20.29	20.29	0.00	0
+e2e7b683b4c15b7d         	Catching Jordan (Hundred Oaks)	49	3	Books	50.83	50.83	0.00	0
+1b0fc9f777cad045         	Carry On, Warrior: Thoughts on Life Unarmed	47	3	Books	31.85	31.85	0.00	0
+5f22418922fa728b         	Carrie	47	2	Books	46.23	46.23	0.00	0
+16ef91b9d827859c         	Buying In: The Secret Dialogue Between What We Buy and Who We Are	27	4	Books	37.80	37.80	0.00	0
+a80f66b254fe9eb3         	Brain on Fire: My Month of Madness	27	5	Books	49.32	49.32	0.00	0
+bf68dcb5fad3cc8c         	Batman: Europa	40	2	Books	32.01	32.01	0.00	0
+999912e63a3262ae         	Barefoot Contessa Back to Basics	17	1	Books	28.01	28.01	0.00	0
+0e0da9192a025efc         	Barefoot Contessa at Home: Everyday Recipes You'll Make Over and Over Again	17	5	Books	50.62	50.62	0.00	0
+9b65f676984c9f0c         	Balloon Animals	16	3	Books	17.03	17.03	0.00	0
+ffdc825785c0ede8         	Art Ops Vol. 1	40	3	Books	48.80	48.80	0.00	0
+41164b8ac02a2c42         	Aristotle and Dante Discover the Secrets of the Universe (Aristotle and Dante Discover the Secrets of the Universe #1)	49	4	Books	58.14	58.14	0.00	0
+1fbb5f786e53a0ce         	Angels Walking (Angels Walking #1)	47	2	Books	34.20	34.20	0.00	0
+ad41c24ccac0c7ce         	Angels & Demons (Robert Langdon #1)	47	3	Books	51.48	51.48	0.00	0
+39861fc1c0845d15         	All the Light We Cannot See	19	5	Books	29.87	29.87	0.00	0
+5319169a72714c62         	Adulthood Is a Myth: A "Sarah's Scribbles" Collection	40	2	Books	10.90	10.90	0.00	0
+cf1aa2fc02a7d1e0         	Abstract City	27	5	Books	56.37	56.37	0.00	0
+4416c474713ec1f5         	A Time of Torment (Charlie Parker #14)	25	5	Books	48.35	48.35	0.00	0
+63ee5bc46066a8a8         	A Study in Scarlet (Sherlock Holmes #1)	25	2	Books	16.73	16.73	0.00	0
+c1379d3744f1dd2c         	A Series of Catastrophes and Miracles: A True Story of Love, Science, and Cancer	47	2	Books	56.48	56.48	0.00	0
+1ad06aed9349af46         	A People's History of the United States	47	2	Books	40.79	40.79	0.00	0
+8682c03de6a844ff         	A Man Called Ove	16	1	Books	39.72	39.72	0.00	0
+d5e0526e1ab682a3         	A Distant Mirror: The Calamitous 14th Century	21	3	Books	14.58	14.58	0.00	0
+01a177623cce9596         	A Brush of Wings (Angels Walking #3)	47	1	Books	55.51	55.51	0.00	0
+6e8e5626ac4d279e         	1491: New Revelations of the Americas Before Columbus	21	3	Books	21.80	21.80	0.00	0
+ac5e0d3938caf686         	The Three Searches, Meaning, and the Story	47	3	Books	13.33	13.33	0.00	0
+2f0213137a80d485         	Searching for Meaning in Gailana	15	1	Books	38.73	38.73	0.00	0
+44d97b6707dae3f0         	Rook	47	4	Books	37.86	37.86	0.00	0
+8bbd7df8a324f31d         	My Kitchen Year: 136 Recipes That Saved My Life	17	2	Books	11.53	11.53	0.00	0
+4be9d1910f8a4e80         	13 Hours: The Inside Account of What Really Happened In Benghazi	27	1	Books	27.06	27.06	0.00	0
+077b635ff2afc578         	Will You Won't You Want Me?	48	3	Books	13.86	13.86	0.00	0
+148715df5a02ea5e         	Tipping Point for Planet Earth: How Close Are We to the Edge?	37	1	Books	37.55	37.55	0.00	0
+4a7a25be293ad678         	The Star-Touched Queen	15	5	Books	32.30	32.30	0.00	0
+ce1ae197ada2aec4         	The Silent Sister (Riley MacPherson #1)	16	5	Books	46.29	46.29	0.00	0
+14e44163678e24dc         	The Midnight Watch: A Novel of the Titanic and the Californian	47	1	Books	26.20	26.20	0.00	0
+582a21a1dbbef3cf         	The Lonely City: Adventures in the Art of Being Alone	27	2	Books	33.26	33.26	0.00	0
+3063c7e95d0bf76f         	The Gray Rhino: How to Recognize and Act on the Obvious Dangers We Ignore	47	4	Books	59.15	59.15	0.00	0
+235fa48eeed11d82         	The Golden Condom: And Other Essays on Love Lost and Found	34	1	Books	39.43	39.43	0.00	0
+f732d7d18a91d2ba         	The Epidemic (The Program 0.6)	49	5	Books	14.44	14.44	0.00	0
+c6ca293d4810e0d5         	The Dinner Party	16	2	Books	56.54	56.54	0.00	0
+54fc03f1e1d355db         	The Diary of a Young Girl	27	3	Books	59.90	59.90	0.00	0
+64fd010bf8d15096         	The Children	47	3	Books	11.88	11.88	0.00	0
+b63ea3f7a57ae099         	Stars Above (The Lunar Chronicles #4.5)	49	2	Books	48.05	48.05	0.00	0
+f40fea200e0c644f         	Snatched: How A Drug Queen Went Undercover for the DEA and Was Kidnapped By Colombian Guerillas	27	3	Books	21.21	21.21	0.00	0
+ebf81a62e4798fd1         	Raspberry Pi Electronics Projects for the Evil Genius	47	4	Books	49.67	49.67	0.00	0
+8976d9161c027142         	Quench Your Own Thirst: Business Lessons Learned Over a Beer or Two	6	1	Books	43.14	43.14	0.00	0
+b8d7b3f5c7a95d65         	Psycho: Sanitarium (Psycho #1.5)	22	5	Books	36.97	36.97	0.00	0
+abdd91e96515a617         	Poisonous (Max Revere Novels #3)	25	3	Books	26.80	26.80	0.00	0
+81ef44fcc5f454df         	One with You (Crossfire #5)	47	4	Books	15.71	15.71	0.00	0
+db84624b151cbe06         	No Love Allowed (Dodge Cove #1)	49	4	Books	54.65	54.65	0.00	0
+e7fe3bf2768602cf         	Murder at the 42nd Street Library (Raymond Ambler #1)	25	4	Books	54.36	54.36	0.00	0
+c039f5aceb093537         	Most Wanted	25	3	Books	35.28	35.28	0.00	0
+9546d537fbf99eb6         	Love, Lies and Spies	20	2	Books	20.55	20.55	0.00	0
+b978c9852cde91bd         	How to Speak Golf: An Illustrated Guide to Links Lingo	47	5	Books	58.32	58.32	0.00	0
+bddc6fd036eb6279         	Hide Away (Eve Duncan #20)	25	1	Books	11.84	11.84	0.00	0
+c6a29d6df8de968c         	Furiously Happy: A Funny Book About Horrible Things	27	4	Books	41.46	41.46	0.00	0
+76319fe9d8b465a3         	Everyday Italian: 125 Simple and Delicious Recipes	17	5	Books	20.10	20.10	0.00	0
+3968e3fbf4695d7c         	Equal Is Unfair: America's Misguided Fight Against Income Inequality	33	1	Books	56.86	56.86	0.00	0
+6983328f15506cb9         	Eleanor & Park	47	5	Books	56.51	56.51	0.00	0
+df7e628bad5782b4         	Dirty (Dive Bar #1)	36	4	Books	40.83	40.83	0.00	0
+d069086944f2e330         	Can You Keep a Secret? (Fear Street Relaunch #4)	22	1	Books	48.64	48.64	0.00	0
+49b24c6a41b82bd2         	Boar Island (Anna Pigeon #19)	25	3	Books	59.48	59.48	0.00	0
+63343e287971bb0c         	A Paris Apartment	20	4	Books	39.01	39.01	0.00	0
+a4eef523118805ef         	A la Mode: 120 Recipes in 60 Pairings: Pies, Tarts, Cakes, Crisps, and More Topped with Ice Cream, Gelato, Frozen Custard, and More	17	1	Books	38.77	38.77	0.00	0
+515cb8fcafb1ad98         	Troublemaker: Surviving Hollywood and Scientology	47	2	Books	48.39	48.39	0.00	0
+6159d8b187831770         	The Widow	25	2	Books	27.26	27.26	0.00	0
+985991708c47003e         	The Sleep Revolution: Transforming Your Life, One Night at a Time	27	4	Books	11.68	11.68	0.00	0
+437d8dea9272d0a9         	The Improbability of Love	16	1	Books	59.45	59.45	0.00	0
+1c584f82a7a1c4f0         	The Art of Startup Fundraising	6	3	Books	21.00	21.00	0.00	0
+cf62fa272b5f0fa3         	Take Me Home Tonight (Rock Star Romance #3)	36	3	Books	53.98	53.98	0.00	0
+f435aa99d864077d         	Sleeping Giants (Themis Files #1)	38	1	Books	48.74	48.74	0.00	0
+b06599b108e83f98         	Setting the World on Fire: The Brief, Astonishing Life of St. Catherine of Siena	5	2	Books	21.15	21.15	0.00	0
+05a61a3bd8ca4149         	Playing with Fire	25	3	Books	13.71	13.71	0.00	0
+b783ce08802cd1d1         	Off the Hook (Fishing for Trouble #1)	36	3	Books	47.67	47.67	0.00	0
+47e1b2d43f709995         	Mothering Sunday	16	2	Books	13.34	13.34	0.00	0
+28b2df9fadc9f07e         	Mother, Can You Not?	27	5	Books	16.89	16.89	0.00	0
+5569c3fea112718e         	M Train	4	1	Books	27.18	27.18	0.00	0
+bade9943ee01b63f         	Lilac Girls	20	2	Books	17.28	17.28	0.00	0
+469508882dfc1991         	Lies and Other Acts of Love	16	1	Books	45.14	45.14	0.00	0
+825d6c44da3ca5a6         	Lab Girl	4	1	Books	40.85	40.85	0.00	0
+20dc4f1ac5d4fd9c         	Keep Me Posted	48	4	Books	20.46	20.46	0.00	0
+ce8666d9b42fc9a0         	It Didn't Start with You: How Inherited Family Trauma Shapes Who We Are and How to End the Cycle	34	3	Books	56.27	56.27	0.00	0
+b5953ca1f8a0b8d7         	Grey (Fifty Shades #4)	48	4	Books	48.49	48.49	0.00	0
+c65c25d990fc7025         	Exit, Pursued by a Bear	49	4	Books	51.34	51.34	0.00	0
+f608c903c451f387         	Daredevils	16	3	Books	16.34	16.34	0.00	0
+2587c54f5530dafc         	Cravings: Recipes for What You Want to Eat	17	3	Books	20.50	20.50	0.00	0
+816180220e8cb419         	Born for This: How to Find the Work You Were Meant to Do	6	5	Books	21.59	21.59	0.00	0
+2c34f9432069b52b         	Arena	38	4	Books	21.36	21.36	0.00	0
+bb967277222e689c         	Adultery	47	5	Books	20.88	20.88	0.00	0
+2b69dec0193511d9         	A Mother's Reckoning: Living in the Aftermath of Tragedy	27	3	Books	19.53	19.53	0.00	0
+40c4bf520c17de54         	A Gentleman's Position (Society of Gentlemen #3)	36	5	Books	14.75	14.75	0.00	0
+a9d7b75461084a26         	11/22/63	16	3	Books	48.48	48.48	0.00	0
+34669b2e9d407d3a         	10% Happier: How I Tamed the Voice in My Head, Reduced Stress Without Losing My Edge, and Found Self-Help That Actually Works	27	2	Books	24.57	24.57	0.00	0
+96aa539bfd4c07e2         	10-Day Green Smoothie Cleanse: Lose Up to 15 Pounds in 10 Days!	18	5	Books	49.71	49.71	0.00	0
+ab60e6f5a63e1cfb         	Without Shame	47	5	Books	48.27	48.27	0.00	0
+d1848064c54e01c7         	Watchmen	47	4	Books	58.05	58.05	0.00	0
+4fd0a2a350f016e6         	Unlimited Intuition Now	47	4	Books	58.87	58.87	0.00	0
+0967effecd292a86         	Underlying Notes	47	2	Books	11.82	11.82	0.00	0
+903a9f8090104c2c         	The Shack	16	1	Books	28.03	28.03	0.00	0
+4b50fb1359ebf35d         	The New Brand You: Your New Image Makes the Sale for You	47	5	Books	44.05	44.05	0.00	0
+65cfc9f242c2984a         	The Moosewood Cookbook: Recipes from Moosewood Restaurant, Ithaca, New York	17	4	Books	12.34	12.34	0.00	0
+33396269bcce166f         	The Flowers Lied	47	2	Books	16.68	16.68	0.00	0
+ca74f2e3c35a3e77         	The Fabric of the Cosmos: Space, Time, and the Texture of Reality	37	1	Books	55.91	55.91	0.00	0
+3f25a2fedae191cc         	The Book of Mormon	35	3	Books	24.57	24.57	0.00	0
+54aeeb4610d3ae08         	Naked	23	3	Books	31.69	31.69	0.00	0
+f9c87ccb2bc4853b         	The Art and Science of Low Carbohydrate Living	18	5	Books	52.98	52.98	0.00	0
+e77594ece9b9d1fe         	The Alien Club	49	1	Books	54.40	54.40	0.00	0
+0e095ed785af7e43         	Suzie Snowflake: One beautiful flake (a self-esteem story)	28	5	Books	54.81	54.81	0.00	0
+913e7109cec0cb4c         	Nap-a-Roo	7	1	Books	25.08	25.08	0.00	0
+ee6c67859d70186b         	NaNo What Now? Finding your editing process, revising your NaNoWriMo book and building a writing career through publishing and beyond	47	4	Books	10.41	10.41	0.00	0
+6baac632f7711e26         	Modern Day Fables	47	2	Books	47.44	47.44	0.00	0
+8fab4c4f6f82a4ce         	If I Gave You God's Phone Number....: Searching for Spirituality in America	42	1	Books	20.91	20.91	0.00	0
+97187f5cf0385da3         	Fruits Basket, Vol. 9 (Fruits Basket #9)	40	4	Books	33.95	33.95	0.00	0
+7e9068872228c474         	Dress Your Family in Corduroy and Denim	23	3	Books	43.68	43.68	0.00	0
+e845d305f64154f1         	Don't Forget Steven	49	1	Books	33.23	33.23	0.00	0
+7186241e043de5dc         	Chernobyl 01:23:40: The Incredible True Story of the World's Worst Nuclear Disaster	27	2	Books	35.92	35.92	0.00	0
+d6d9ffea95f2f8bf         	Art and Fear: Observations on the Perils (and Rewards) of Artmaking	3	4	Books	48.63	48.63	0.00	0
+63d5f1651880dcea         	A Shard of Ice (The Black Symphony Saga #1)	15	3	Books	56.63	56.63	0.00	0
+c181ca8eabe7d18c         	A Hero's Curse (The Unseen Chronicles #1)	47	3	Books	50.49	50.49	0.00	0
+61cf7eb9d2cd8bb0         	23 Degrees South: A Tropical Tale of Changing Whether...	47	2	Books	35.79	35.79	0.00	0
+e77033ce559947f7         	Zero to One: Notes on Startups, or How to Build the Future	27	3	Books	34.06	34.06	0.00	0
+04f6c929888f4f11         	Why Not Me?	27	1	Books	17.76	17.76	0.00	0
+b69c852e7e3956af         	When Breath Becomes Air	27	2	Books	39.36	39.36	0.00	0
+1809259a5a5f1d8d         	Vagabonding: An Uncommon Guide to the Art of Long-Term World Travel	46	2	Books	36.94	36.94	0.00	0
+e0bdd79c7304ee8d         	The Unlikely Pilgrimage of Harold Fry (Harold Fry #1)	47	5	Books	43.62	43.62	0.00	0
+3eec766dda26fa64         	The New Drawing on the Right Side of the Brain	3	3	Books	43.02	43.02	0.00	0
+5a0d2e9284004266         	The Midnight Assassin: Panic, Scandal, and the Hunt for America's First Serial Killer	27	4	Books	28.45	28.45	0.00	0
+9afd00e81d6208e6         	The Martian (The Martian #1)	47	2	Books	41.39	41.39	0.00	0
+4f283dfcbeccc0d4         	The High Mountains of Portugal	16	1	Books	51.15	51.15	0.00	0
+1bba4b1ba23ed2d6         	The Grownup	41	1	Books	35.88	35.88	0.00	0
+a2308a936e898d48         	The E-Myth Revisited: Why Most Small Businesses Don't Work and What to Do About It	6	1	Books	36.91	36.91	0.00	0
+331c26103d885cae         	South of Sunshine	49	1	Books	28.93	28.93	0.00	0
+a2475a245c9907c4         	Smarter Faster Better: The Secrets of Being Productive in Life and Business	27	5	Books	38.89	38.89	0.00	0
+e46a164cf310fd7d         	Silence in the Dark (Logan Point #4)	44	3	Books	58.33	58.33	0.00	0
+bee6e93e9976f4fa         	Shadows of the Past (Logan Point #1)	9	5	Books	39.67	39.67	0.00	0
+aeb51dfbe8aeec59         	Roller Girl	40	5	Books	14.10	14.10	0.00	0
+52fc458ffc756faf         	Rising Strong	27	3	Books	21.82	21.82	0.00	0
+d56d0710668bb39c         	Proofs of God: Classical Arguments from Tertullian to Barth	31	1	Books	54.21	54.21	0.00	0
+4a823d80aa30dbb0         	Please Kill Me: The Uncensored Oral History of Punk	24	4	Books	31.19	31.19	0.00	0
+c0fc0cd215ee1724         	Out of Print: City Lights Spotlight No. 14	32	5	Books	53.64	53.64	0.00	0
+9a7291b89bd5445c         	My Life Next Door (My Life Next Door )	49	5	Books	36.39	36.39	0.00	0
+bff270fe9c86a5a9         	Miller's Valley	16	2	Books	58.54	58.54	0.00	0
+4729afff3bea0f0a         	Man's Search for Meaning	27	3	Books	29.48	29.48	0.00	0
+4d3a4c7b442a9a4e         	Love That Boy: What Two Presidents, Eight Road Trips, and My Son Taught Me About a Parent's Expectations	27	2	Books	25.06	25.06	0.00	0
+044534b0b28b4e87         	Living Forward: A Proven Plan to Stop Drifting and Get the Life You Want	27	3	Books	12.55	12.55	0.00	0
+c44c5e1425475206         	Les Fleurs du Mal	32	5	Books	29.04	29.04	0.00	0
+29af1a2566c4e36e         	Left Behind (Left Behind #1)	47	2	Books	40.72	40.72	0.00	0
+39eefec3a8498dde         	Kill 'Em and Leave: Searching for James Brown and the American Soul	24	5	Books	45.05	45.05	0.00	0
+0cf57cb49272fd37         	Kierkegaard: A Christian Missionary to Christians	31	1	Books	47.13	47.13	0.00	0
+bd26e8a79a856c31         	John Vassos: Industrial Design for Modern Life	47	4	Books	20.22	20.22	0.00	0
+0ab4b35dcffcffd1         	I'll Give You the Sun	47	1	Books	56.48	56.48	0.00	0
+bbf1ea50be8008ab         	I Will Find You	27	1	Books	44.21	44.21	0.00	0
+0bfdef63285d3019         	Hystopia: A Novel	16	4	Books	21.96	21.96	0.00	0
+b7870fa6dc088fbb         	Howl and Other Poems	32	2	Books	40.45	40.45	0.00	0
+8a150fd8ff5d7686         	History of Beauty	3	4	Books	10.29	10.29	0.00	0
+d48c1369927ebef1         	Heaven is for Real: A Little Boy's Astounding Story of His Trip to Heaven and Back	47	2	Books	52.86	52.86	0.00	0
+df6a7c43faa6732b         	Future Shock (Future Shock #1)	49	5	Books	55.65	55.65	0.00	0
+e049d44c4f1cf1b2         	Ender's Game (The Ender Quintet #1)	47	1	Books	43.64	43.64	0.00	0
+0c11e2d068768dbb         	Diary of a Citizen Scientist: Chasing Tiger Beetles and Other New Ways of Engaging the World	37	1	Books	28.41	28.41	0.00	0
+4dbd54d9e36c9566         	Death by Leisure: A Cautionary Tale	47	4	Books	37.51	37.51	0.00	0
+7f5157bf53065d36         	Brilliant Beacons: A History of the American Lighthouse	21	3	Books	11.45	11.45	0.00	0
+77e9ea355bd8ae57         	Brazen: The Courage to Find the You That's Been Hiding	27	2	Books	19.22	19.22	0.00	0
+04e3de7ac35ec5cd         	Between the World and Me	27	4	Books	56.91	56.91	0.00	0
+15ebd83e53d0391b         	Being Mortal: Medicine and What Matters in the End	27	4	Books	55.06	55.06	0.00	0
+fef91502cbacf23a         	A Murder Over a Girl: Justice, Gender, Junior High	27	3	Books	13.20	13.20	0.00	0
+b1a227b7609ff263         	32 Yolks	17	2	Books	53.63	53.63	0.00	0
+f16c2edb2a603f92         	"Most Blessed of the Patriarchs": Thomas Jefferson and the Empire of the Imagination	21	5	Books	44.48	44.48	0.00	0
+88ec621893e595d0         	You Are a Badass: How to Stop Doubting Your Greatness and Start Living an Awesome Life	39	3	Books	12.08	12.08	0.00	0
+b46d022080543144         	Wildlife of New York: A Five-Borough Coloring Book	47	2	Books	22.14	22.14	0.00	0
+9735c969c652dd89         	What Happened on Beale Street (Secrets of the South Mysteries #2)	25	5	Books	25.37	25.37	0.00	0
+48cb52d78c992487         	Unreasonable Hope: Finding Faith in the God Who Brings Purpose to Your Pain	42	2	Books	46.33	46.33	0.00	0
+a94350ee74deaa07         	Under the Tuscan Sun	46	3	Books	37.33	37.33	0.00	0
+4242cc3d0437db12         	Toddlers Are A**holes: It's Not Your Fault	23	1	Books	25.55	25.55	0.00	0
+4a0b78598b42897a         	The Year of Living Biblically: One Man's Humble Quest to Follow the Bible as Literally as Possible	47	1	Books	34.72	34.72	0.00	0
+0ff9d10864db8364         	The Whale	7	4	Books	35.96	35.96	0.00	0
+9147c5251cc99eb1         	The Story of Art	3	4	Books	41.14	41.14	0.00	0
+0345872b14f9e774         	The Origin of Species	37	4	Books	10.01	10.01	0.00	0
+a8dbf1c6b41b885a         	The Great Gatsby	47	4	Books	36.05	36.05	0.00	0
+f935412970c9f58f         	The Good Girl	47	3	Books	49.03	49.03	0.00	0
+47f4fd3e8e1dac05         	The Glass Castle	47	1	Books	16.24	16.24	0.00	0
+57f85720e54d6442         	The Faith of Christopher Hitchens: The Restless Soul of the World's Most Notorious Atheist	5	1	Books	39.55	39.55	0.00	0
+7a10353c9c54cf7c         	The Drowning Girls	47	3	Books	35.67	35.67	0.00	0
+24933c712f0bca2f         	The Constant Princess (The Tudor Court #1)	20	3	Books	16.62	16.62	0.00	0
+d250657f0ebc5d73         	The Bourne Identity (Jason Bourne #1)	16	4	Books	42.78	42.78	0.00	0
+20789fb17b423c4c         	The Bachelor Girl's Guide to Murder (Herringford and Watts Mysteries #1)	25	5	Books	52.30	52.30	0.00	0
+4b8fa561a1e52d1c         	The Art Book	3	2	Books	32.34	32.34	0.00	0
+5fbd03b1ac0a0e69         	The 7 Habits of Highly Effective People: Powerful Lessons in Personal Change	47	4	Books	33.17	33.17	0.00	0
+ba047a636b7d3793         	Team of Rivals: The Political Genius of Abraham Lincoln	47	5	Books	20.12	20.12	0.00	0
+8776181be110838a         	Steal Like an Artist: 10 Things Nobody Told You About Being Creative	47	2	Books	20.90	20.90	0.00	0
+bd087cf6a846db75         	Sit, Stay, Love	36	3	Books	20.90	20.90	0.00	0
+7ffebdd1d5148aef         	Sister Dear	16	4	Books	40.20	40.20	0.00	0
+9639e89d20228e6e         	Shrunken Treasures: Literary Classics, Short, Sweet, and Silly	7	3	Books	52.87	52.87	0.00	0
+8486f61aa81a3daa         	Rich Dad, Poor Dad	6	1	Books	51.74	51.74	0.00	0
+31c56c4d0fe19340         	Raymie Nightingale	7	2	Books	34.41	34.41	0.00	0
+68008abf6409dfde         	Playing from the Heart	7	1	Books	32.38	32.38	0.00	0
+746029796363aa51         	Nightstruck: A Novel	49	4	Books	50.35	50.35	0.00	0
+924438fc6cbec836         	Naturally Lean: 125 Nourishing Gluten-Free, Plant-Based Recipes--All Under 300 Calories	17	5	Books	11.38	11.38	0.00	0
+725cd8d23d78cdca         	Meternity	48	3	Books	43.58	43.58	0.00	0
+dac4b5847454fd9b         	Memoirs of a Geisha	16	3	Books	49.67	49.67	0.00	0
+b6670507e85b30e6         	Like Never Before (Walker Family #2)	9	2	Books	28.77	28.77	0.00	0
+40cdcbb7692fd408         	Life of Pi	47	4	Books	13.22	13.22	0.00	0
+b74ee891e2a6dd69         	Leave This Song Behind: Teen Poetry at Its Best	32	5	Books	51.17	51.17	0.00	0
+4c82371b8cd02d4d         	King's Folly (The Kinsman Chronicles #1)	15	5	Books	39.61	39.61	0.00	0
+68407606544d6f22         	John Adams	47	4	Books	57.43	57.43	0.00	0
+2a9fcb3382d351c8         	How to Cook Everything Vegetarian: Simple Meatless Recipes for Great Food (How to Cook Everything)	17	4	Books	46.01	46.01	0.00	0
+eff5710404e2ff78         	How to Be a Domestic Goddess: Baking and the Art of Comfort Cooking	17	2	Books	28.25	28.25	0.00	0
+c00bc29a678a6efb         	Good in Bed (Cannie Shapiro #1)	47	5	Books	37.05	37.05	0.00	0
+de6d7645f192d517         	Fruits Basket, Vol. 7 (Fruits Basket #7)	40	1	Books	19.57	19.57	0.00	0
+2e40333991f56f45         	For the Love: Fighting for Grace in a World of Impossible Standards	27	3	Books	45.13	45.13	0.00	0
+4e78f06160b717ac         	Finding God in the Ruins: How God Redeems Pain	27	2	Books	46.64	46.64	0.00	0
+4fa75fc6829431ca         	Every Heart a Doorway (Every Heart A Doorway #1)	15	5	Books	12.16	12.16	0.00	0
+4e980425468708da         	Delivering the Truth (Quaker Midwife Mystery #1)	25	4	Books	20.89	20.89	0.00	0
+4807043b8218e9ce         	Counted With the Stars (Out from Egypt #1)	9	5	Books	17.97	17.97	0.00	0
+4781b6bfd6f7a2c5         	Chronicles, Vol. 1	24	2	Books	52.60	52.60	0.00	0
+a322361a37a78d3d         	Blue Like Jazz: Nonreligious Thoughts on Christian Spirituality	8	1	Books	25.77	25.77	0.00	0
+5b546a46a86a9d8c         	Benjamin Franklin: An American Life	5	3	Books	48.19	48.19	0.00	0
+6b52904b2ab91bf6         	At The Existentialist CafÃ©: Freedom, Being, and apricot cocktails with: Jean-Paul Sartre, Simone de Beauvoir, Albert Camus, Martin Heidegger, Edmund Husserl, Karl Jaspers, Maurice Merleau-Ponty and others	31	5	Books	29.93	29.93	0.00	0
+cc1936a9f4e93477         	A Summer In Europe	46	2	Books	44.34	44.34	0.00	0
+6c7fa6844380f50a         	A Short History of Nearly Everything	21	5	Books	52.40	52.40	0.00	0
+d1378a0ad06ff979         	A Gathering of Shadows (Shades of Magic #2)	15	4	Books	44.81	44.81	0.00	0
+5ba3d703d1ae0c1d         	The Sound Of Love	47	5	Books	57.84	57.84	0.00	0
+774fa432bd7d9c47         	The Rise and Fall of the Third Reich: A History of Nazi Germany	21	2	Books	39.67	39.67	0.00	0
+fd364afd082f5446         	The Perks of Being a Wallflower	47	3	Books	55.02	55.02	0.00	0
+2da5edf8b5776c9a         	The Mysterious Affair at Styles (Hercule Poirot #1)	25	4	Books	24.80	24.80	0.00	0
+60376aa71be66083         	The Man Who Mistook His Wife for a Hat and Other Clinical Tales	27	4	Books	59.45	59.45	0.00	0
+2efa5a839e62b1bd         	The Makings of a Fatherless Child	47	2	Books	31.58	31.58	0.00	0
+d326e189b1210916         	The Joy of Cooking	47	4	Books	43.27	43.27	0.00	0
+e6635f5b0a2c78db         	The Invention of Wings	20	1	Books	37.34	37.34	0.00	0
+72b5355dda190b6a         	The Hobbit (Middle-Earth Universe)	47	5	Books	17.80	17.80	0.00	0
+48736df57e7bec9f         	The Great Railway Bazaar	46	1	Books	30.54	30.54	0.00	0
+d33824cb93ecab6f         	The Golden Compass (His Dark Materials #1)	47	1	Books	18.77	18.77	0.00	0
+2bc80eba94950873         	The God Delusion	47	3	Books	46.85	46.85	0.00	0
+eb7459e0c570251d         	The Girl You Left Behind (The Girl You Left Behind #1)	19	1	Books	15.79	15.79	0.00	0
+cb17945cb90b7837         	The Fellowship of the Ring (The Lord of the Rings #1)	47	2	Books	10.27	10.27	0.00	0
+3d250ab0f12be445         	The Collected Poems of W.B. Yeats (The Collected Works of W.B. Yeats #1)	32	5	Books	15.42	15.42	0.00	0
+6478ccb4416e6a5d         	The Barefoot Contessa Cookbook	17	5	Books	59.92	59.92	0.00	0
+2a1b3d967cda1da2         	Tell the Wolves I'm Home	49	2	Books	50.96	50.96	0.00	0
+8d8e9f9b8730eb25         	Ship Leaves Harbor: Essays on Travel by a Recovering Journeyman	47	3	Books	30.60	30.60	0.00	0
+720c36b2bee4692e         	Pride and Prejudice	47	4	Books	19.27	19.27	0.00	0
+6d235933670503d9         	Musicophilia: Tales of Music and the Brain	47	1	Books	46.58	46.58	0.00	0
+f38f37ed934d84b2         	Mere Christianity	47	3	Books	48.51	48.51	0.00	0
+7a2b51f69e81c722         	Me Before You (Me Before You #1)	16	1	Books	19.02	19.02	0.00	0
+6958de044cb28a84         	In the Woods (Dublin Murder Squad #1)	25	2	Books	38.38	38.38	0.00	0
+fe0f34ebed689381         	In Cold Blood	27	4	Books	49.98	49.98	0.00	0
+e792c0969cefe1b8         	How to Stop Worrying and Start Living	39	5	Books	46.49	46.49	0.00	0
+012170e4fc87ace0         	Give It Back	45	2	Books	18.32	18.32	0.00	0
+384c7d41d5ffe9d1         	Girl, Interrupted	27	3	Books	42.14	42.14	0.00	0
+56a34d0cec11d6b0         	Fun Home: A Family Tragicomic	47	4	Books	56.59	56.59	0.00	0
+97258f576d4bb672         	Fruits Basket, Vol. 6 (Fruits Basket #6)	40	4	Books	20.96	20.96	0.00	0
+4e3b183180e2a992         	Deception Point	16	4	Books	40.32	40.32	0.00	0
+6e06d0f00f6da20f         	Death Note, Vol. 6: Give-and-Take (Death Note #6)	40	3	Books	36.39	36.39	0.00	0
+f3c70d296ec796c4         	Catherine the Great: Portrait of a Woman	21	4	Books	58.55	58.55	0.00	0
+faf841f81c52638b         	Better Homes and Gardens New Cook Book	17	3	Books	39.61	39.61	0.00	0
+46cb43c2ab133ccc         	An Unquiet Mind: A Memoir of Moods and Madness	34	3	Books	21.30	21.30	0.00	0
+9e60929f521fa280         	A Year in Provence (Provence #1)	46	4	Books	56.88	56.88	0.00	0
+2e5b4ff08a75fd02         	World Without End (The Pillars of the Earth #2)	20	4	Books	32.97	32.97	0.00	0
+e75f3ae1da1cc652         	Will Grayson, Will Grayson (Will Grayson, Will Grayson)	49	4	Books	47.31	47.31	0.00	0
+759ee7d059b1beb8         	Why Save the Bankers?: And Other Essays on Our Economic and Political Crisis	27	2	Books	48.67	48.67	0.00	0
+60369d96b7b80869         	Where She Went (If I Stay #2)	49	4	Books	41.73	41.73	0.00	0
+163d89116179c33f         	What If?: Serious Scientific Answers to Absurd Hypothetical Questions	47	4	Books	53.68	53.68	0.00	0
+3a7d54a264d9f33e         	Two Summers	49	1	Books	14.64	14.64	0.00	0
+bc209a900101f28d         	This Is Your Brain on Music: The Science of a Human Obsession	24	1	Books	38.40	38.40	0.00	0
+abbb492978ff656d         	The Secret Garden	10	4	Books	15.08	15.08	0.00	0
+2e4fc5eacceec12c         	The Raven King (The Raven Cycle #4)	47	2	Books	30.57	30.57	0.00	0
+e0b3a679b83caccc         	The Raven Boys (The Raven Cycle #1)	15	4	Books	57.74	57.74	0.00	0
+f701fae56b645ef7         	The Power Greens Cookbook: 140 Delicious Superfood Recipes	17	5	Books	11.05	11.05	0.00	0
+93379e3a2072a01b         	The Metamorphosis	10	1	Books	28.58	28.58	0.00	0
+0d210d2448c3018f         	The Mathews Men: Seven Brothers and the War Against Hitler's U-boats	21	5	Books	42.91	42.91	0.00	0
+dfd9ff1f343cdaff         	The Little Paris Bookshop	16	3	Books	24.73	24.73	0.00	0
+c4589ee5977a47be         	The Hiding Place	21	4	Books	55.91	55.91	0.00	0
+3213b1f13f5f0f7c         	The Grand Design	37	3	Books	13.76	13.76	0.00	0
+ad84f18659e6bfe2         	The Firm	16	3	Books	45.56	45.56	0.00	0
+3661360c99719414         	The Fault in Our Stars	47	1	Books	47.22	47.22	0.00	0
+a2a9f76339d21ab1         	The False Prince (The Ascendance Trilogy #1)	15	5	Books	56.00	56.00	0.00	0
+fe7210553d56c097         	The Expatriates	16	2	Books	44.58	44.58	0.00	0
+fec06f52054ea900         	The Dream Thieves (The Raven Cycle #2)	47	1	Books	34.50	34.50	0.00	0
+c4182bdb53e2459a         	The Darkest Corners	49	5	Books	11.33	11.33	0.00	0
+b228042c088b1913         	The Crossover	32	4	Books	38.77	38.77	0.00	0
+b716233fcb6877e6         	The 5th Wave (The 5th Wave #1)	47	2	Books	11.83	11.83	0.00	0
+84126312e2431a09         	Tell the Wind and Fire	15	3	Books	45.51	45.51	0.00	0
+50d5a7b861ed1c54         	Tell Me Three Things	49	1	Books	41.81	41.81	0.00	0
+1dba84766a5e87b8         	Talking to Girls About Duran Duran: One Young Man's Quest for True Love and a Cooler Haircut	27	4	Books	25.15	25.15	0.00	0
+84bb29c53592ac40         	Siddhartha	16	5	Books	34.22	34.22	0.00	0
+59a8ae019b64f2a7         	Shiver (The Wolves of Mercy Falls #1)	47	5	Books	16.23	16.23	0.00	0
+2973d38c2fbd7a5c         	Remember Me?	47	3	Books	11.48	11.48	0.00	0
+e958ae92f328c181         	Red Dragon (Hannibal Lecter #1)	22	3	Books	23.37	23.37	0.00	0
+6036239d2ab349b7         	Peak: Secrets from the New Science of Expertise	37	2	Books	16.28	16.28	0.00	0
+a4ce39a3720cd679         	My Mother Was Nuts	27	4	Books	31.63	31.63	0.00	0
+12a90b90283b2e6d         	Mexican Today: New and Rediscovered Recipes for Contemporary Kitchens	17	5	Books	24.91	24.91	0.00	0
+81c68492ccd72941         	Maybe Something Beautiful: How Art Transformed a Neighborhood	7	1	Books	22.54	22.54	0.00	0
+5e1a88d248599768         	Lola and the Boy Next Door (Anna and the French Kiss #2)	49	4	Books	23.63	23.63	0.00	0
+7093cf549cd2e7de         	Logan Kade (Fallen Crest High #5.5)	1	2	Books	13.12	13.12	0.00	0
+07e6810fd3236bda         	Last One Home (New Beginnings #1)	16	3	Books	59.98	59.98	0.00	0
+8dde2ff3f6fcc0a3         	Killing Floor (Jack Reacher #1)	45	4	Books	31.49	31.49	0.00	0
+44f545727e704187         	Kill the Boy Band	49	5	Books	15.52	15.52	0.00	0
+45045146dbf7b009         	Isla and the Happily Ever After (Anna and the French Kiss #3)	49	5	Books	48.13	48.13	0.00	0
+7284d85428305f5a         	If I Stay (If I Stay #1)	47	5	Books	38.13	38.13	0.00	0
+d219d4e325e6f204         	I Know Why the Caged Bird Sings (Maya Angelou's Autobiography #1)	47	2	Books	36.55	36.55	0.00	0
+6c49258724f11770         	Harry Potter and the Deathly Hallows (Harry Potter #7)	47	1	Books	23.32	23.32	0.00	0
+3fd83dcf37bf1bc0         	Fruits Basket, Vol. 5 (Fruits Basket #5)	40	1	Books	16.33	16.33	0.00	0
+3fc124f59f3068e4         	Foundation (Foundation (Publication Order) #1)	38	1	Books	32.42	32.42	0.00	0
+630e766f0a1987dd         	Fool Me Once	47	1	Books	16.96	16.96	0.00	0
+b28c7d07afa7063b         	Find Her (Detective D.D. Warren #8)	47	1	Books	22.37	22.37	0.00	0
+75cc85cdbe9ad46b         	Evicted: Poverty and Profit in the American City	47	1	Books	42.27	42.27	0.00	0
+d5ad4c92d8bf26c9         	Drama	47	2	Books	38.70	38.70	0.00	0
+e46b1074b99ac4b6         	Dracula the Un-Dead	22	5	Books	35.63	35.63	0.00	0
+94bb629a3f6dd00b         	Digital Fortress	16	5	Books	58.00	58.00	0.00	0
+1c0a38899c82b60a         	Death Note, Vol. 5: Whiteout (Death Note #5)	40	1	Books	52.41	52.41	0.00	0
+bcf567421c581f0a         	Data, A Love Story: How I Gamed Online Dating to Meet My Match	27	3	Books	32.35	32.35	0.00	0
+429b4a811bef386c         	Critique of Pure Reason	31	1	Books	20.75	20.75	0.00	0
+b54d7416bb445989         	Booked	32	5	Books	17.49	17.49	0.00	0
+ad5e078beceaeb4a         	Blue Lily, Lily Blue (The Raven Cycle #3)	47	5	Books	34.13	34.13	0.00	0
+612369a5947a012e         	Approval Junkie: Adventures in Caring Too Much	4	5	Books	58.81	58.81	0.00	0
+f36d24c309e87e5b         	An Abundance of Katherines	49	5	Books	10.00	10.00	0.00	0
+add33db6ff80db24         	America's War for the Greater Middle East: A Military History	21	2	Books	51.22	51.22	0.00	0
+d9290e99f189ce84         	Alight (The Generations Trilogy #2)	47	4	Books	58.59	58.59	0.00	0
+cf3b86489890b9f2         	A Girl's Guide to Moving On (New Beginnings #2)	36	1	Books	31.30	31.30	0.00	0
+03cbb67c0f990d87         	A Game of Thrones (A Song of Ice and Fire #1)	47	2	Books	46.42	46.42	0.00	0
+f2c8f4b4c94d5c5c         	A Feast for Crows (A Song of Ice and Fire #4)	15	4	Books	17.21	17.21	0.00	0
+89a89e76f3516357         	A Clash of Kings (A Song of Ice and Fire #2)	47	3	Books	10.79	10.79	0.00	0
+a8f4577a48023344         	Vogue Colors A to Z: A Fashion Coloring Book	47	4	Books	52.35	52.35	0.00	0
+d4de23aa98acc65b         	The Shining (The Shining #1)	47	3	Books	27.88	27.88	0.00	0
+6053ddf69c967d5f         	The Pilgrim's Progress	10	2	Books	50.26	50.26	0.00	0
+9cc207168a03470d         	The Perfect Play (Play by Play #1)	36	3	Books	59.99	59.99	0.00	0
+011674f4a3834b8d         	The Passion of Dolssa	20	5	Books	28.32	28.32	0.00	0
+6a57286a8890d8c5         	The Jazz of Physics: The Secret Link Between Music and the Structure of the Universe	27	3	Books	38.71	38.71	0.00	0
+6d2f70d9424f41a1         	The Hunger Games (The Hunger Games #1)	47	5	Books	29.85	29.85	0.00	0
+6587f46697fc4443         	The Hound of the Baskervilles (Sherlock Holmes #5)	10	2	Books	14.82	14.82	0.00	0
+45033bdf3d9ed158         	The Gunning of America: Business and the Making of American Gun Culture	27	4	Books	16.81	16.81	0.00	0
+c65ee14957c0fa5c         	The Geography of Bliss: One Grump's Search for the Happiest Places in the World	27	2	Books	28.23	28.23	0.00	0
+ff2dffba388d9922         	The Demonists (Demonist #1)	15	2	Books	52.11	52.11	0.00	0
+df53c2948b32bde3         	The Demon Prince of Momochi House, Vol. 4 (The Demon Prince of Momochi House #4)	40	2	Books	27.88	27.88	0.00	0
+9c4d061c1e2fe6bf         	The Bone Hunters (Lexy Vaughan & Steven Macaulay #2)	45	3	Books	59.71	59.71	0.00	0
+8930013d06942df1         	The Beast (Black Dagger Brotherhood #14)	15	5	Books	46.08	46.08	0.00	0
+31f5bbf4974d29c9         	Some Women	48	5	Books	13.73	13.73	0.00	0
+38199c5d7da0c0ef         	Shopaholic Ties the Knot (Shopaholic #3)	48	5	Books	48.39	48.39	0.00	0
+ae884ac655d6ee3e         	Paper and Fire (The Great Library #2)	15	5	Books	49.45	49.45	0.00	0
+5de4baa88061a77a         	Outlander (Outlander #1)	47	5	Books	19.67	19.67	0.00	0
+2ba5ccc84d35006c         	Orchestra of Exiles: The Story of Bronislaw Huberman, the Israel Philharmonic, and the One Thousand Jews He Saved from Nazi Horrors	24	3	Books	12.36	12.36	0.00	0
+3a95f5a2df4ff921         	No One Here Gets Out Alive	24	5	Books	20.02	20.02	0.00	0
+869d20b3b8128230         	Night Shift (Night Shift #1-20)	22	4	Books	12.75	12.75	0.00	0
+70b585c9d0f15725         	Needful Things	22	4	Books	47.51	47.51	0.00	0
+5212c6acea3359e5         	Mockingjay (The Hunger Games #3)	47	4	Books	20.44	20.44	0.00	0
+81d4191030b9704b         	Misery	22	2	Books	34.79	34.79	0.00	0
+deda806b68b0aa11         	Little Women (Little Women #1)	10	4	Books	28.07	28.07	0.00	0
+670a2773607d785d         	It	22	3	Books	25.01	25.01	0.00	0
+ac337893a9fe0085         	Harry Potter and the Sorcerer's Stone (Harry Potter #1)	47	3	Books	13.90	13.90	0.00	0
+eff24325e0ede639         	Harry Potter and the Prisoner of Azkaban (Harry Potter #3)	49	4	Books	24.17	24.17	0.00	0
+5a6b7155f2797537         	Harry Potter and the Order of the Phoenix (Harry Potter #5)	15	4	Books	31.63	31.63	0.00	0
+73f4f87dd936ee5c         	Harry Potter and the Half-Blood Prince (Harry Potter #6)	15	5	Books	48.75	48.75	0.00	0
+c7c4f55b7321cba7         	Harry Potter and the Chamber of Secrets (Harry Potter #2)	15	1	Books	14.74	14.74	0.00	0
+23310ce84d3c9f85         	Gone with the Wind	10	3	Books	32.49	32.49	0.00	0
+ddbc5530d2939d49         	God Is Not Great: How Religion Poisons Everything	27	1	Books	27.80	27.80	0.00	0
+5eff05e59f905a49         	Girl With a Pearl Earring	20	1	Books	26.77	26.77	0.00	0
+8fff1084aa085a13         	Fruits Basket, Vol. 4 (Fruits Basket #4)	40	4	Books	50.44	50.44	0.00	0
+ad15a9a139919918         	Far From True (Promise Falls Trilogy #2)	45	2	Books	34.93	34.93	0.00	0
+2b69d289279aabfd         	Dark Lover (Black Dagger Brotherhood #1)	36	1	Books	12.87	12.87	0.00	0
+a2dc754afb69bb32         	Confessions of a Shopaholic (Shopaholic #1)	47	2	Books	48.94	48.94	0.00	0
+aaebac5fda798b1b         	Changing the Game (Play by Play #2)	36	3	Books	13.38	13.38	0.00	0
+2798974abc8a58a8         	Candide	10	3	Books	58.63	58.63	0.00	0
+0812f54c93d726ce         	Can You Keep a Secret?	48	1	Books	21.94	21.94	0.00	0
+78a4ac98191ac675         	Atlas Shrugged	16	5	Books	26.58	26.58	0.00	0
+1451b55e5e56bb89         	Animal Farm	10	3	Books	57.22	57.22	0.00	0
+aead11697d14ea36         	A Walk to Remember	36	1	Books	56.43	56.43	0.00	0
+f6ae39568db1130e         	A New Earth: Awakening to Your Life's Purpose	42	5	Books	55.65	55.65	0.00	0
+d12ca4020c2f602e         	A History of God: The 4,000-Year Quest of Judaism, Christianity, and Islam	35	1	Books	27.62	27.62	0.00	0
+6e9403f00acd6752         	'Salem's Lot	22	4	Books	49.56	49.56	0.00	0
+634b7165c96ebb9f         	Zero History (Blue Ant #3)	47	1	Books	34.77	34.77	0.00	0
+5a7ff9aaa3168878         	Wuthering Heights	10	3	Books	17.73	17.73	0.00	0
+5d55202da0252627         	World War Z: An Oral History of the Zombie War	47	1	Books	21.80	21.80	0.00	0
+d30b9215c72cca87         	Wild: From Lost to Found on the Pacific Crest Trail	47	3	Books	46.02	46.02	0.00	0
+07bb35158d9dd3d2         	Where'd You Go, Bernadette	47	1	Books	18.13	18.13	0.00	0
+dab0196cd5fc8e5e         	When You Are Engulfed in Flames	23	5	Books	30.89	30.89	0.00	0
+06bab964fd536971         	We the People: The Modern-Day Figures Who Have Reshaped and Affirmed the Founding Fathers' Vision of America	27	3	Books	31.95	31.95	0.00	0
+be3db344a845580b         	We Are All Completely Beside Ourselves	11	1	Books	24.04	24.04	0.00	0
+0e4e2d31c2fb3aad         	Walk the Edge (Thunder Road #2)	49	3	Books	32.36	32.36	0.00	0
+7feac4000cbc5859         	Voyager (Outlander #3)	20	5	Books	21.07	21.07	0.00	0
+52aa3d79b1cee455         	Very Good Lives: The Fringe Benefits of Failure and the Importance of Imagination	27	3	Books	50.66	50.66	0.00	0
+4672d10b9b1e7a05         	Vegan Vegetarian Omnivore: Dinner for Everyone at the Table	17	2	Books	13.66	13.66	0.00	0
+b830685072fa871f         	Unstuffed: Decluttering Your Home, Mind, and Soul	27	1	Books	58.09	58.09	0.00	0
+599a4f98bb193368         	Under the Banner of Heaven: A Story of Violent Faith	27	1	Books	30.00	30.00	0.00	0
+61bc8167c9680283         	Two Boys Kissing	49	2	Books	32.74	32.74	0.00	0
+b53078de0147f6bf         	Twilight (Twilight #1)	47	2	Books	41.93	41.93	0.00	0
+8ebad30219b8679c         	Twenties Girl	48	2	Books	42.80	42.80	0.00	0
+2173a2ce35f6ace1         	Trespassing Across America: One Man's Epic, Never-Done-Before (and Sort of Illegal) Hike Across the Heartland	27	1	Books	53.51	53.51	0.00	0
+57f755143ee96fd4         	Three-Martini Lunch	16	3	Books	23.21	23.21	0.00	0
+719d72f3ee512dc6         	Thinking, Fast and Slow	34	1	Books	21.14	21.14	0.00	0
+75fed6a47f69859d         	The Wild Robot	7	3	Books	56.07	56.07	0.00	0
+a33ed2e6068df53e         	The Wicked + The Divine, Vol. 3: Commercial Suicide (The Wicked + The Divine)	40	3	Books	14.41	14.41	0.00	0
+813cff2aefa5d1f0         	The Undomestic Goddess	48	4	Books	45.75	45.75	0.00	0
+2b685187f55c5d31         	The Travelers	45	1	Books	15.77	15.77	0.00	0
+224fa77d4b248046         	The Tipping Point: How Little Things Can Make a Big Difference	47	2	Books	10.02	10.02	0.00	0
+3d15714d4d3d15dd         	The Thing About Jellyfish	7	1	Books	48.77	48.77	0.00	0
+49f24193f0b961e6         	The Stand	22	2	Books	57.86	57.86	0.00	0
+742702d662a71410         	The Smitten Kitchen Cookbook	17	1	Books	23.59	23.59	0.00	0
+f06039c29b5891fa         	The Silkworm (Cormoran Strike #2)	25	5	Books	23.05	23.05	0.00	0
+91eb9605998a7c03         	The Sandman, Vol. 3: Dream Country (The Sandman (volumes) #3)	40	5	Books	55.55	55.55	0.00	0
+322a9e34d87f54b1         	The Rose & the Dagger (The Wrath and the Dawn #2)	15	4	Books	58.64	58.64	0.00	0
+366a236aa1ea6f07         	The Road to Little Dribbling: Adventures of an American in Britain (Notes From a Small Island #2)	46	1	Books	23.21	23.21	0.00	0
+1a5044d233936b1a         	The Rise of Theodore Roosevelt (Theodore Roosevelt #1)	5	3	Books	42.57	42.57	0.00	0
+0e92ccf1bd39e68f         	The Restaurant at the End of the Universe (Hitchhiker's Guide to the Galaxy #2)	38	1	Books	10.92	10.92	0.00	0
+e2d47e82c50d41d9         	The Rest Is Noise: Listening to the Twentieth Century	47	1	Books	34.77	34.77	0.00	0
+3c456328b04a8ee8         	The Red Tent	20	5	Books	35.66	35.66	0.00	0
+0e7beedf0ee9380c         	The Purpose Driven Life: What on Earth Am I Here for?	47	3	Books	37.19	37.19	0.00	0
+969f6c7e86554814         	The Purest Hook (Second Circle Tattoos #3)	36	1	Books	12.25	12.25	0.00	0
+b9f6305a3d650e2c         	The Picture of Dorian Gray	10	2	Books	29.70	29.70	0.00	0
+fa26798728f5208f         	The Paris Wife	47	3	Books	36.80	36.80	0.00	0
+ee441c8e027caa66         	The Obsession	36	1	Books	45.43	45.43	0.00	0
+29d6d87f3418638b         	The Nightingale	16	4	Books	26.26	26.26	0.00	0
+3e42ac0f4d43320f         	The New Guy (and Other Senior Year Distractions)	49	3	Books	44.92	44.92	0.00	0
+6263c1d2997b8ce0         	The Nanny Diaries (Nanny #1)	48	5	Books	52.53	52.53	0.00	0
+0baf71623648413a         	The Name of God is Mercy	27	2	Books	37.25	37.25	0.00	0
+4266f48a0aa1c37d         	The Maze Runner (The Maze Runner #1)	47	1	Books	20.93	20.93	0.00	0
+36c15687f5ab0f7c         	The Lover's Dictionary	47	2	Books	58.09	58.09	0.00	0
+cf2f27fdf94ba20e         	The Lonely Ones	7	5	Books	43.59	43.59	0.00	0
+70c7c3ca7f9b2728         	The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses	6	3	Books	33.92	33.92	0.00	0
+476c7972e9b41891         	The Last Painting of Sara de Vos	20	2	Books	55.55	55.55	0.00	0
+35e69a79d2b1e804         	The Land of 10,000 Madonnas	49	4	Books	29.64	29.64	0.00	0
+554e9e2d532b3a87         	The Infinities	16	1	Books	27.41	27.41	0.00	0
+ff6bb30dd0c482a6         	The Husband's Secret	16	5	Books	52.51	52.51	0.00	0
+a8b0ea6490bc818f         	The Hitchhiker's Guide to the Galaxy (Hitchhiker's Guide to the Galaxy #1)	47	3	Books	47.80	47.80	0.00	0
+b5da59dd177eb36b         	The Guns of August	21	2	Books	14.54	14.54	0.00	0
+4a0a276409968a73         	The Guernsey Literary and Potato Peel Pie Society	20	1	Books	49.53	49.53	0.00	0
+c88422d8959260ab         	The Goldfinch	47	3	Books	43.58	43.58	0.00	0
+e2dac1f4739e0bd5         	The Giver (The Giver Quartet #1)	47	1	Books	12.30	12.30	0.00	0
+92dcc54a27107a37         	The Girl with All the Gifts	22	3	Books	49.47	49.47	0.00	0
+bfa9cb304075d3e8         	The Girl Who Played with Fire (Millennium Trilogy #2)	47	2	Books	22.14	22.14	0.00	0
+8f5d16a5a9bd58b2         	The Girl Who Kicked the Hornet's Nest (Millennium Trilogy #3)	47	1	Books	57.48	57.48	0.00	0
+dd003e904727281a         	The Exiled	25	3	Books	43.45	43.45	0.00	0
+b3f2bc2cefb35f05         	The End of Faith: Religion, Terror, and the Future of Reason	47	4	Books	22.13	22.13	0.00	0
+c6bf14cb901c63ac         	The Elegant Universe: Superstrings, Hidden Dimensions, and the Quest for the Ultimate Theory	37	4	Books	13.03	13.03	0.00	0
+63c0826ef59eae66         	The Disappearing Spoon: And Other True Tales of Madness, Love, and the History of the World from the Periodic Table of the Elements	37	5	Books	57.35	57.35	0.00	0
+a6ab0cb7106a67f2         	The Devil Wears Prada (The Devil Wears Prada #1)	48	1	Books	44.29	44.29	0.00	0
+f51062bf579507d9         	The Demon-Haunted World: Science as a Candle in the Dark	47	4	Books	52.25	52.25	0.00	0
+b22362b434e8ee62         	The Day the Crayons Came Home (Crayons)	7	5	Books	26.33	26.33	0.00	0
+dabf11918b48b40c         	The Da Vinci Code (Robert Langdon #2)	16	2	Books	22.96	22.96	0.00	0
+1be6d3b121865edb         	The Cuckoo's Calling (Cormoran Strike #1)	25	1	Books	19.21	19.21	0.00	0
+cad70d6ffd53912f         	The Complete Stories and Poems (The Works of Edgar Allan Poe [Cameo Edition])	10	4	Books	26.78	26.78	0.00	0
+23707d3ddf14a999         	The Complete Poems	47	5	Books	41.32	41.32	0.00	0
+487449f4f6322f0f         	The Catcher in the Rye	47	1	Books	24.55	24.55	0.00	0
+b7f475238ed50429         	The Cat in the Hat (Beginner Books B-1)	7	2	Books	16.26	16.26	0.00	0
+970bd3316219e7dc         	The Case for Christ (Cases for Christianity)	47	1	Books	47.84	47.84	0.00	0
+a75e274c8814b539         	The Book Thief	47	2	Books	53.49	53.49	0.00	0
+08decd9664e5d56e         	The Book of Basketball: The NBA According to The Sports Guy	43	5	Books	44.84	44.84	0.00	0
+cd3dcd83bb002e78         	The Blind Side: Evolution of a Game	47	5	Books	53.71	53.71	0.00	0
+b04a6a0db525857d         	The Autobiography of Malcolm X	47	2	Books	23.43	23.43	0.00	0
+311634df10651e05         	The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution	17	3	Books	34.32	34.32	0.00	0
+2858ac90c4758e1f         	The Art of Fielding	16	1	Books	22.10	22.10	0.00	0
+61002f3b7ba5d780         	Surely You're Joking, Mr. Feynman!: Adventures of a Curious Character	37	2	Books	25.83	25.83	0.00	0
+a11ae5f07572ef49         	Stiff: The Curious Lives of Human Cadavers	27	3	Books	36.74	36.74	0.00	0
+f08667e4c0458f37         	Spilled Milk: Based on a True Story	27	1	Books	49.51	49.51	0.00	0
+ac27ab4bcd9c492e         	Something Borrowed (Darcy & Rachel #1)	48	5	Books	48.96	48.96	0.00	0
+3fc9d51d1c4d6ba7         	Something Blue (Darcy & Rachel #2)	48	1	Books	54.62	54.62	0.00	0
+feaaae90514eb2ac         	Soldier (Talon #3)	15	2	Books	24.72	24.72	0.00	0
+c57d3c96af23c297         	Shopaholic & Baby (Shopaholic #5)	47	2	Books	46.45	46.45	0.00	0
+07806456878931bc         	Seven Days in the Art World	47	2	Books	52.33	52.33	0.00	0
+281a244ce1954711         	Seven Brief Lessons on Physics	37	4	Books	30.60	30.60	0.00	0
+510832818edb6fbc         	Scarlet (The Lunar Chronicles #2)	49	4	Books	14.57	14.57	0.00	0
+5b2cd5b31a510848         	Sarah's Key	47	1	Books	46.29	46.29	0.00	0
+7b870bf85d01c2dc         	Saga, Volume 3 (Saga (Collected Editions) #3)	40	5	Books	21.57	21.57	0.00	0
+28921443f052bea6         	Running with Scissors	4	4	Books	12.91	12.91	0.00	0
+b4f5672f68ec3a83         	Rogue Lawyer (Rogue Lawyer #1)	47	3	Books	50.11	50.11	0.00	0
+89cad3f37c9ce226         	Rise of the Rocket Girls: The Women Who Propelled Us, from Missiles to the Moon to Mars	27	4	Books	41.67	41.67	0.00	0
+8e9dd8431170c09e         	Rework	6	2	Books	44.88	44.88	0.00	0
+ecdf73ee66c33b17         	Reservations for Two	36	3	Books	11.10	11.10	0.00	0
+4c8ece50736f9e88         	Red: The True Story of Red Riding Hood	7	3	Books	28.54	28.54	0.00	0
+2ef5dc7e278e562a         	Ready Player One	38	4	Books	19.07	19.07	0.00	0
+3c565df219ba3274         	Quiet: The Power of Introverts in a World That Can't Stop Talking	47	1	Books	43.55	43.55	0.00	0
+9707989a439757b4         	Prodigy: The Graphic Novel (Legend: The Graphic Novel #2)	40	3	Books	43.63	43.63	0.00	0
+cb62418129b864a3         	Persepolis: The Story of a Childhood (Persepolis #1-2)	40	1	Books	39.13	39.13	0.00	0
+8e2dfd6bcf48e1e6         	Packing for Mars: The Curious Science of Life in the Void	47	2	Books	56.68	56.68	0.00	0
+09a7b0b566ad6225         	Outliers: The Story of Success	27	1	Books	14.16	14.16	0.00	0
+c59283b05905c853         	Original Fake	40	3	Books	31.45	31.45	0.00	0
+8378c899988905ee         	Orange Is the New Black	47	2	Books	24.61	24.61	0.00	0
+3250650a5c4e6f07         	One for the Money (Stephanie Plum #1)	47	2	Books	32.87	32.87	0.00	0
+cb65e49993db9a93         	Notes from a Small Island (Notes From a Small Island #1)	27	1	Books	40.17	40.17	0.00	0
+c4d9fce9eff3b8ba         	Night (The Night Trilogy #1)	27	1	Books	13.51	13.51	0.00	0
+747cf7fca2ccdbd4         	Neither Here nor There: Travels in Europe	46	3	Books	38.95	38.95	0.00	0
+7ce5a92baabb6bc0         	Morning Star (Red Rising #3)	47	1	Books	29.40	29.40	0.00	0
+7980fa06f2b704d8         	Miracles from Heaven: A Little Girl, Her Journey to Heaven, and Her Amazing Story of Healing	27	1	Books	57.83	57.83	0.00	0
+e9056f9b5a40a301         	Midnight Riot (Peter Grant/ Rivers of London - books #1)	15	2	Books	55.46	55.46	0.00	0
+abc4a7ee16c21088         	Me Talk Pretty One Day	4	2	Books	57.60	57.60	0.00	0
+546da23278482b0a         	Manuscript Found in Accra	47	2	Books	34.98	34.98	0.00	0
+0dcadb06206abd3c         	Lust & Wonder	4	2	Books	11.87	11.87	0.00	0
+4ef75307fb64e2ad         	Lila (Gilead #3)	16	3	Books	12.47	12.47	0.00	0
+4b3f4f151c99f472         	Life, the Universe and Everything (Hitchhiker's Guide to the Galaxy #3)	38	2	Books	33.26	33.26	0.00	0
+c53d9fefcda371e9         	Life Without a Recipe	4	5	Books	59.04	59.04	0.00	0
+4ec53ff7e2263f32         	Life After Life	47	2	Books	26.13	26.13	0.00	0
+1de75f05d57bfc10         	Letter to a Christian Nation	27	1	Books	22.20	22.20	0.00	0
+1246e4ffeb5ac4ea         	Let's Pretend This Never Happened: A Mostly True Memoir	27	1	Books	45.11	45.11	0.00	0
+0ce8075fab4a2b5b         	Legend (Legend #1)	49	4	Books	43.69	43.69	0.00	0
+d5e1a9bfe22bbf9f         	Lean In: Women, Work, and the Will to Lead	47	1	Books	25.02	25.02	0.00	0
+190fbebbf798c31a         	Lamb: The Gospel According to Biff, Christ's Childhood Pal	23	5	Books	55.50	55.50	0.00	0
+16e843e6b853cc2f         	Lady Renegades (Rebel Belle #3)	49	5	Books	53.04	53.04	0.00	0
+a0dd11f6abc421ec         	Jurassic Park (Jurassic Park #1)	16	1	Books	44.97	44.97	0.00	0
+d4a29356fc992879         	It's Never Too Late to Begin Again: Discovering Creativity and Meaning at Midlife and Beyond	27	1	Books	42.38	42.38	0.00	0
+034829ffdd0a0aea         	Is Everyone Hanging Out Without Me? (And Other Concerns)	47	3	Books	20.11	20.11	0.00	0
+a7c3f1010d64799a         	Into the Wild	27	5	Books	56.70	56.70	0.00	0
+6c4646d90b60a56c         	Inferno (Robert Langdon #4)	16	5	Books	41.00	41.00	0.00	0
+d8292cd5f1aca291         	In the Garden of Beasts: Love, Terror, and an American Family in Hitler's Berlin	27	3	Books	28.85	28.85	0.00	0
+61569d12d4ae7161         	If I Run (If I Run #1)	9	4	Books	49.97	49.97	0.00	0
+6b32b561dab8036c         	I've Got Your Number	48	1	Books	19.69	19.69	0.00	0
+8010c7c148057fd3         	I Am Malala: The Girl Who Stood Up for Education and Was Shot by the Taliban	27	2	Books	28.88	28.88	0.00	0
+6c4d17a46cac8787         	Hungry Girl Clean & Hungry: Easy All-Natural Recipes for Healthy Eating in the Real World	17	3	Books	33.14	33.14	0.00	0
+1812b8f5641287e3         	House of Lost Worlds: Dinosaurs, Dynasties, and the Story of Life on Earth	21	2	Books	43.70	43.70	0.00	0
+557c03c284be1bf2         	House of Leaves	22	1	Books	54.89	54.89	0.00	0
+cc1ac978a6835ef6         	Horrible Bear!	7	2	Books	37.52	37.52	0.00	0
+0cb4856be3694a57         	Holidays on Ice	23	2	Books	51.07	51.07	0.00	0
+b003f8bb02f76dc5         	Heir to the Sky	15	4	Books	44.07	44.07	0.00	0
+621e2c310cec8d32         	Green Eggs and Ham (Beginner Books B-16)	7	4	Books	10.79	10.79	0.00	0
+4f6985aca357ae09         	Grayson, Vol 3: Nemesis (Grayson #3)	40	1	Books	42.72	42.72	0.00	0
+c300cc9326592b65         	Gratitude	27	5	Books	26.66	26.66	0.00	0
+d5c588b6f9c015e4         	Gone Girl	47	5	Books	37.60	37.60	0.00	0
+984b3b6e7479b571         	Golden (Heart of Dread #3)	49	4	Books	42.21	42.21	0.00	0
+41fc5dce044f16f5         	Girl in the Blue Coat	20	2	Books	46.83	46.83	0.00	0
+d5f5a122a593b580         	Fruits Basket, Vol. 3 (Fruits Basket #3)	40	2	Books	45.17	45.17	0.00	0
+a9aa3ed5b316470b         	Friday Night Lights: A Town, a Team, and a Dream	43	3	Books	51.22	51.22	0.00	0
+2ed3a794a70aa85f         	Fire Bound (Sea Haven/Sisters of the Heart #5)	47	4	Books	21.28	21.28	0.00	0
+ed813a848580ba50         	Fifty Shades Freed (Fifty Shades #3)	2	5	Books	15.36	15.36	0.00	0
+147019cae600694e         	Fellside	47	1	Books	38.62	38.62	0.00	0
+588ba85ff11a3263         	Extreme Prey (Lucas Davenport #26)	25	3	Books	25.40	25.40	0.00	0
+b843f52a986a2914         	Eragon (The Inheritance Cycle #1)	15	3	Books	43.87	43.87	0.00	0
+73f71f9556442117         	Eclipse (Twilight #3)	47	1	Books	18.74	18.74	0.00	0
+36d5884d44484277         	Dune (Dune #1)	38	1	Books	54.86	54.86	0.00	0
+a7ec599c1a547746         	Dracula	47	3	Books	52.62	52.62	0.00	0
+98330e431e56a9ea         	Do Androids Dream of Electric Sheep? (Blade Runner #1)	38	1	Books	51.48	51.48	0.00	0
+81372abc86f65c79         	Disrupted: My Misadventure in the Start-Up Bubble	27	5	Books	15.28	15.28	0.00	0
+04d858cdeeee0da4         	Dead Wake: The Last Crossing of the Lusitania	47	5	Books	39.24	39.24	0.00	0
+d234ddecef49ef4e         	David and Goliath: Underdogs, Misfits, and the Art of Battling Giants	47	1	Books	17.81	17.81	0.00	0
+468bd274ac084bb9         	Darkfever (Fever #1)	15	1	Books	56.02	56.02	0.00	0
+66937c669c4da072         	Dark Places	47	5	Books	23.90	23.90	0.00	0
+c9782ad2a0ed9331         	Crazy Rich Asians (Crazy Rich Asians #1)	16	5	Books	49.13	49.13	0.00	0
+157f693d9e600ccc         	Counting Thyme	7	1	Books	10.62	10.62	0.00	0
+dbe33cf29ef1623d         	Cosmos	47	2	Books	36.17	36.17	0.00	0
+396385e3de5d18c3         	Civilization and Its Discontents	34	2	Books	59.95	59.95	0.00	0
+7e9579921e5407cb         	Cinder (The Lunar Chronicles #1)	49	1	Books	26.09	26.09	0.00	0
+ef49db2aaa9bb547         	Catastrophic Happiness: Finding Joy in Childhood's Messy Years	30	2	Books	37.35	37.35	0.00	0
+b461cf238506c5b8         	Career of Evil (Cormoran Strike #3)	25	2	Books	24.72	24.72	0.00	0
+bbfc4a3b7b6c94a0         	Breaking Dawn (Twilight #4)	47	5	Books	35.28	35.28	0.00	0
+fd2337c1b73b686e         	Brave Enough	27	5	Books	51.32	51.32	0.00	0
+8e0bc2fe4e7d35b5         	Boy Meets Boy	49	3	Books	21.12	21.12	0.00	0
+e256de8aa0c2115f         	Born to Run: A Hidden Tribe, Superathletes, and the Greatest Race the World Has Never Seen	27	2	Books	27.35	27.35	0.00	0
+0bbc48294707ba96         	Blink: The Power of Thinking Without Thinking	27	5	Books	21.74	21.74	0.00	0
+860318b8e244f39c         	Black Flags: The Rise of ISIS	27	1	Books	40.87	40.87	0.00	0
+15f415d436888b2d         	Black Butler, Vol. 1 (Black Butler #1)	40	1	Books	49.31	49.31	0.00	0
+d3f9c4539c0caa64         	Big Little Lies	16	1	Books	22.11	22.11	0.00	0
+155e42df837ee5ff         	Between Shades of Gray	20	5	Books	20.79	20.79	0.00	0
+67dea6c75d6a1075         	Best of My Love (Fool's Gold #20)	36	2	Books	27.41	27.41	0.00	0
+3fb69f34e178d494         	Beowulf	10	2	Books	38.35	38.35	0.00	0
+5439bae708bca198         	Beautiful Creatures (Caster Chronicles #1)	47	5	Books	21.55	21.55	0.00	0
+1d89a2aa9f6ce50f         	Awkward	40	2	Books	38.02	38.02	0.00	0
+5d22e2a46604b6e7         	Ash	15	4	Books	22.06	22.06	0.00	0
+ef9c4f2465513956         	Are We There Yet?	7	3	Books	10.66	10.66	0.00	0
+da0349a87c8caa2f         	Are We Smart Enough to Know How Smart Animals Are?	27	1	Books	56.58	56.58	0.00	0
+7bf87402413c27ff         	Annie on My Mind	49	5	Books	36.83	36.83	0.00	0
+cfe350b20d23b02b         	And Then There Were None	10	2	Books	35.01	35.01	0.00	0
+bcee4f289ff6699c         	A Walk in the Woods: Rediscovering America on the Appalachian Trail	27	4	Books	30.48	30.48	0.00	0
+5dbd6ec4e154ad2f         	A Visit from the Goon Squad	47	5	Books	14.08	14.08	0.00	0
+87beabf664115d79         	A Storm of Swords (A Song of Ice and Fire #3)	15	2	Books	31.22	31.22	0.00	0
+c9770bb1d5a492a0         	A Heartbreaking Work of Staggering Genius	4	5	Books	54.29	54.29	0.00	0
+f5873c8fc7760000         	8 Keys to Mental Health Through Exercise	34	1	Books	31.04	31.04	0.00	0
+165affa7adb5eded         	#GIRLBOSS	47	1	Books	50.96	50.96	0.00	0
+d2185b65af52d68c         	The Suffragettes (Little Black Classics, #96)	27	2	Books	11.89	11.89	0.00	0
+4130678275eb7c8c         	The Sense of an Ending	47	3	Books	31.38	31.38	0.00	0
+276dc716b1da8899         	The Sandman, Vol. 2: The Doll's House (The Sandman (volumes) #2)	40	1	Books	54.81	54.81	0.00	0
+f3c76b53b239f511         	The Course of Love	16	3	Books	16.78	16.78	0.00	0
+ce42e3de94226b2b         	Sugar Rush (Offensive Line #2)	43	1	Books	24.42	24.42	0.00	0
+9189fd009df41d0e         	Saga, Volume 2 (Saga (Collected Editions) #2)	40	3	Books	11.75	11.75	0.00	0
+b0e479be03911916         	Run, Spot, Run: The Ethics of Keeping Pets	31	1	Books	20.02	20.02	0.00	0
+6fa3ea52c8e31e06         	New Moon (Twilight #2)	49	4	Books	12.86	12.86	0.00	0
+637e5a45062aa548         	Life	24	5	Books	31.58	31.58	0.00	0
+fb495f9f9015a772         	Kindle Paperwhite User's Guide	27	3	Books	34.00	34.00	0.00	0
+b6d3f4f4ee1f6069         	H is for Hawk	27	5	Books	57.42	57.42	0.00	0
+97b8f130d32e9f4e         	Girl Online On Tour (Girl Online #2)	49	1	Books	53.47	53.47	0.00	0
+c0db71f6bb14db11         	Fruits Basket, Vol. 2 (Fruits Basket #2)	40	5	Books	11.64	11.64	0.00	0
+d7b463918d3b8c39         	Diary of a Minecraft Zombie Book 1: A Scare of a Dare (An Unofficial Minecraft Book)	7	4	Books	52.88	52.88	0.00	0
+09d26b5f819c6a36         	Y: The Last Man, Vol. 1: Unmanned (Y: The Last Man #1)	40	4	Books	18.51	18.51	0.00	0
+8ceb5c6aed2c5f8b         	While You Were Mine	20	5	Books	41.32	41.32	0.00	0
+def389ddfda6991b         	Where Lightning Strikes (Bleeding Stars #3)	36	3	Books	39.77	39.77	0.00	0
+c5f91eb481427dc5         	When I'm Gone	16	3	Books	51.96	51.96	0.00	0
+66a4e422b212726a         	Ways of Seeing	3	5	Books	39.51	39.51	0.00	0
+e7e87087b1a44711         	Vampire Knight, Vol. 1 (Vampire Knight #1)	29	1	Books	15.40	15.40	0.00	0
+dab5e75d1339706a         	Vampire Girl (Vampire Girl #1)	15	2	Books	53.82	53.82	0.00	0
+e63c3f25338baf9a         	Twenty Love Poems and a Song of Despair	32	4	Books	30.95	30.95	0.00	0
+0268f149d014b389         	Travels with Charley: In Search of America	27	5	Books	57.82	57.82	0.00	0
+460f97a346b44bac         	Three Wishes (River of Time: California #1)	38	2	Books	44.18	44.18	0.00	0
+d6d98d3508c30f57         	This One Moment (Pushing Limits #1)	36	1	Books	48.71	48.71	0.00	0
+9c96cd1329fbd82d         	The Zombie Room	47	5	Books	19.69	19.69	0.00	0
+dac9d1e654fac737         	The Wicked + The Divine, Vol. 1: The Faust Act (The Wicked + The Divine)	40	2	Books	36.52	36.52	0.00	0
+6514add13c82b115         	The Tumor	27	5	Books	41.56	41.56	0.00	0
+32d035df92ab9080         	The Story of Hong Gildong	10	4	Books	43.19	43.19	0.00	0
+b78deb463531d078         	The Silent Wife	16	5	Books	12.34	12.34	0.00	0
+9e9932ae1a7d0943         	The Silent Twin (Detective Jennifer Knight #3)	15	3	Books	36.25	36.25	0.00	0
+6f2c0a9adbb2bca9         	The Selfish Gene	37	1	Books	29.45	29.45	0.00	0
+38f776ab9118aed7         	The Secret Healer	20	3	Books	34.56	34.56	0.00	0
+5faefdc861684eb1         	The Sandman, Vol. 1: Preludes and Nocturnes (The Sandman (volumes) #1)	40	3	Books	54.12	54.12	0.00	0
+0ec9d2b018fb10d8         	The Republic	47	3	Books	33.78	33.78	0.00	0
+f0512adadffd2480         	The Odyssey	47	3	Books	29.64	29.64	0.00	0
+b0913e67d38d5ed5         	The No. 1 Ladies' Detective Agency (No. 1 Ladies' Detective Agency #1)	25	4	Books	57.70	57.70	0.00	0
+5c10b64db3e4f228         	The Nicomachean Ethics	31	1	Books	36.34	36.34	0.00	0
+c8614adb1a90b027         	The Name of the Wind (The Kingkiller Chronicle #1)	47	3	Books	50.59	50.59	0.00	0
+c40b70e0f6d80189         	The Mirror & the Maze (The Wrath and the Dawn #1.5)	15	1	Books	29.38	29.38	0.00	0
+1aeca7d078d57deb         	The Little Prince	10	2	Books	45.42	45.42	0.00	0
+04e43893e32f9d29         	The Light of the Fireflies	47	1	Books	54.43	54.43	0.00	0
+16c71736dae78764         	The Last Girl (The Dominion Trilogy #1)	38	2	Books	36.26	36.26	0.00	0
+86d8bd7afa5b51b3         	The Iliad	47	1	Books	16.16	16.16	0.00	0
+6e473eff459e809f         	The Hook Up (Game On #1)	26	5	Books	36.29	36.29	0.00	0
+fff8a057a40c4a60         	The Haters	49	5	Books	27.89	27.89	0.00	0
+4280ac3eab57aa5d         	The Girl You Lost	25	5	Books	12.29	12.29	0.00	0
+ee61197edb882599         	The Girl In The Ice (DCI Erika Foster #1)	25	3	Books	15.85	15.85	0.00	0
+09659d1639a1f978         	The End of the Jesus Era (An Investigation #1)	27	1	Books	14.40	14.40	0.00	0
+29fc016c459aeb14         	The Edge of Reason (Bridget Jones #2)	48	4	Books	19.18	19.18	0.00	0
+3301af038a720587         	The Complete Maus (Maus #1-2)	40	3	Books	10.64	10.64	0.00	0
+18b4545a5ed15581         	The Communist Manifesto	47	3	Books	14.76	14.76	0.00	0
+f3a0b8c835129558         	The Bhagavad Gita	35	3	Books	57.49	57.49	0.00	0
+dfb0849016bc122c         	The Bette Davis Club	16	3	Books	30.66	30.66	0.00	0
+5bc1fbccfbf2355c         	The Art of Not Breathing	49	4	Books	40.83	40.83	0.00	0
+a7eef9d6795422c1         	Taking Shots (Assassins #1)	47	2	Books	18.88	18.88	0.00	0
+e25164e5b3fe208b         	Starlark	20	3	Books	25.83	25.83	0.00	0
+2ac720f76384c57e         	Skip Beat!, Vol. 01 (Skip Beat! #1)	40	3	Books	42.12	42.12	0.00	0
+3a9a7c5895e82646         	Sister Sable (The Mad Queen #1)	15	3	Books	13.33	13.33	0.00	0
+9ed7090d8fa690b0         	Shatter Me (Shatter Me #1)	47	1	Books	42.40	42.40	0.00	0
+c068c013d6921fea         	Shameless	26	3	Books	58.35	58.35	0.00	0
+229cd6564bf0dce4         	Shadow Rites (Jane Yellowrock #10)	15	4	Books	21.72	21.72	0.00	0
+132adf7335bb384a         	Settling the Score (The Summer Games #1)	43	2	Books	44.91	44.91	0.00	0
+35e44170702139a4         	Sense and Sensibility	10	1	Books	37.46	37.46	0.00	0
+4f64568dfefa3ce7         	Saga, Volume 1 (Saga (Collected Editions) #1)	40	1	Books	28.48	28.48	0.00	0
+9efb397067eb7e8a         	Rhythm, Chord & Malykhin	36	2	Books	28.34	28.34	0.00	0
+3cdca3b4a93980f5         	Rat Queens, Vol. 1: Sass & Sorcery (Rat Queens (Collected Editions) #1-5)	40	5	Books	46.96	46.96	0.00	0
+849db7ab7f4a640c         	Paradise Lost (Paradise #1)	47	1	Books	24.96	24.96	0.00	0
+bcbcbcf0f6ed196f         	Paper Girls, Vol. 1 (Paper Girls #1-5)	40	4	Books	21.71	21.71	0.00	0
+326825e02a198cf6         	Ouran High School Host Club, Vol. 1 (Ouran High School Host Club #1)	40	3	Books	29.87	29.87	0.00	0
+8932e5c12f12ffed         	Origins (Alphas 0.5)	15	1	Books	28.99	28.99	0.00	0
+7ea31f38675b91c1         	One Second (Seven #7)	15	2	Books	52.94	52.94	0.00	0
+9ff997ab15713e53         	On the Road (Duluoz Legend)	47	3	Books	32.36	32.36	0.00	0
+a1985630339f4b3d         	Old Records Never Die: One Man's Quest for His Vinyl and His Past	24	2	Books	55.66	55.66	0.00	0
+b6f1cfadc4dd79d4         	Off Sides (Off #1)	26	5	Books	39.45	39.45	0.00	0
+39592d9d72e717c4         	Of Mice and Men	10	2	Books	47.11	47.11	0.00	0
+63e20a0f98218a87         	Myriad (Prentor #1)	15	4	Books	58.75	58.75	0.00	0
+fd78f89878479f56         	My Perfect Mistake (Over the Top #1)	36	2	Books	38.92	38.92	0.00	0
+35a60467893aa168         	Ms. Marvel, Vol. 1: No Normal (Ms. Marvel (2014-2015) #1)	40	4	Books	39.39	39.39	0.00	0
+4f19709e47883df5         	Meditations	31	2	Books	25.89	25.89	0.00	0
+1053fb7ee17a1f33         	Matilda	7	1	Books	28.34	28.34	0.00	0
+d510567580c8be52         	Lost Among the Living	20	4	Books	27.70	27.70	0.00	0
+71a6471bbdac21d9         	Lord of the Flies	47	3	Books	24.89	24.89	0.00	0
+6e712ea24e77bd96         	Listen to Me (Fusion #1)	36	3	Books	58.99	58.99	0.00	0
+06f6a57a6d532844         	Kitchens of the Great Midwest	16	5	Books	57.20	57.20	0.00	0
+8d390a1fc3133d06         	Jane Eyre	47	5	Books	38.43	38.43	0.00	0
+f28f7299d38c0932         	Imperfect Harmony	36	4	Books	34.74	34.74	0.00	0
+3455b45888fb5053         	Icing (Aces Hockey #2)	43	4	Books	40.44	40.44	0.00	0
+6fe02600f322a0a9         	Hawkeye, Vol. 1: My Life as a Weapon (Hawkeye #1)	40	3	Books	45.24	45.24	0.00	0
+6717a70913b3db79         	Having the Barbarian's Baby (Ice Planet Barbarians #7.5)	38	4	Books	34.96	34.96	0.00	0
+eb0fe24bbc845ecc         	Giant Days, Vol. 1 (Giant Days #1-4)	40	4	Books	56.76	56.76	0.00	0
+72e6fbf4f6382557         	Fruits Basket, Vol. 1 (Fruits Basket #1)	40	5	Books	40.28	40.28	0.00	0
+a492f49a3e2b6a71         	Frankenstein	47	2	Books	38.00	38.00	0.00	0
+e564c3f1a93ccf2e         	Forever Rockers (The Rocker #12)	24	3	Books	28.80	28.80	0.00	0
+6390772a3094939d         	Fighting Fate (Fighting #6)	36	3	Books	39.24	39.24	0.00	0
+2e69730561ed70ad         	Emma	10	2	Books	32.93	32.93	0.00	0
+df56868afd166557         	Eat, Pray, Love	27	3	Books	51.32	51.32	0.00	0
+0072b94dfa30608e         	Deep Under (Walker Security #1)	36	5	Books	47.09	47.09	0.00	0
+a812f6969ddf3e39         	Choosing Our Religion: The Spiritual Lives of America's Nones	35	4	Books	28.42	28.42	0.00	0
+1774749f2cee292f         	Charlie and the Chocolate Factory (Charlie Bucket #1)	7	3	Books	22.85	22.85	0.00	0
+a96404cb928895f3         	Charity's Cross (Charles Towne Belles #4)	36	1	Books	41.24	41.24	0.00	0
+230ac636ea0ea415         	Bright Lines	16	5	Books	39.07	39.07	0.00	0
+a2b4b685dfa94733         	Bridget Jones's Diary (Bridget Jones #1)	48	1	Books	29.82	29.82	0.00	0
+abc0b15f2c907ff0         	Bounty (Colorado Mountain #7)	36	4	Books	37.26	37.26	0.00	0
+95cdfd514098c38b         	Blood Defense (Samantha Brinkman #1)	25	3	Books	20.30	20.30	0.00	0
+099fae4a0705d63b         	Bleach, Vol. 1: Strawberry and the Soul Reapers (Bleach #1)	40	5	Books	34.65	34.65	0.00	0
+08672cd59171d5e4         	Beyond Good and Evil	31	1	Books	43.38	43.38	0.00	0
+cd2a2a70dd5d176d         	Alice in Wonderland (Alice's Adventures in Wonderland #1)	10	1	Books	55.53	55.53	0.00	0
+bfd5e1701c862ac3         	Ajin: Demi-Human, Volume 1 (Ajin: Demi-Human #1)	40	4	Books	57.06	57.06	0.00	0
+19fec36a1dfb4c16         	A Spy's Devotion (The Regency Spies of London #1)	20	5	Books	16.97	16.97	0.00	0
+f684a82adc49f011         	1st to Die (Women's Murder Club #1)	25	1	Books	53.98	53.98	0.00	0
+228ba5e7577e1d49         	1,000 Places to See Before You Die	46	5	Books	26.08	26.08	0.00	0
+\.
+
+
+--
+-- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.genres (genre_id, genre) FROM stdin;
+1	Academic
+2	Adult Fiction
+3	Art
+4	Autobiography
+5	Biography
+6	Business
+7	Childrens
+8	Christian
+9	Christian Fiction
+10	Classics
+11	Contemporary
+12	Crime
+13	Cultural
+14	Erotica
+15	Fantasy
+16	Fiction
+17	Food and Drink
+18	Health
+19	Historical
+20	Historical Fiction
+21	History
+22	Horror
+23	Humor
+24	Music
+25	Mystery
+26	New Adult
+27	Nonfiction
+28	Novels
+29	Paranormal
+30	Parenting
+31	Philosophy
+32	Poetry
+33	Politics
+34	Psychology
+35	Religion
+36	Romance
+37	Science
+38	Science Fiction
+39	Self Help
+40	Sequential Art
+41	Short Stories
+42	Spirituality
+43	Sports and Games
+44	Suspense
+45	Thriller
+46	Travel
+47	Uncategorized
+48	Womens Fiction
+49	Young Adult
+\.
+
+
+--
+-- Data for Name: in_stock; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.in_stock (upc, in_stock) FROM stdin;
+a897fe39b1053632         	22
+90fa61229261140a         	20
+6957f44c3847a760         	20
+e00eb4fd7b871a48         	20
+4165285e1663650f         	20
+f77dbf2323deb740         	19
+2597b5a345f45e1b         	19
+e72a5dfc7e9267b2         	19
+e10e1e165dc8be4a         	19
+1dfe412b8ac00530         	19
+0312262ecafa5a40         	19
+30a7f60cd76ca58c         	19
+ce6396b0f23f6ecc         	19
+3b1c02bac2a429e6         	19
+a34ba96d4081e6a4         	19
+deda3e61b9514b83         	19
+feb7cc7701ecf901         	19
+e30f54cea9b38190         	19
+a18a4f574854aced         	19
+a22124811bfa8350         	19
+23356462d1320d61         	19
+327f68a59745c102         	19
+5674a18a29a43ced         	19
+c2e46a2ee3b4a322         	19
+00bfed9e18bb36f3         	19
+9528d0948525bf5f         	19
+c7d160c2c0de586f         	19
+904208d6aa64b655         	19
+4c28def39d850cdf         	18
+ccd9ffa25efabdea         	18
+6258a1f6a6dcfe50         	18
+3c039985229453bf         	18
+5dada2b7be26bd03         	18
+9f6568e9c95f60b0         	18
+6be3beb0793a53e7         	18
+668fe56b17cfcd4f         	18
+094b269567e1c300         	18
+19ed25f4641d5efd         	18
+be5cc846f45496fb         	18
+55f9da0c5eea2e10         	17
+b4fd5943413e089a         	17
+c8f7f0cb1abb9cac         	17
+b12b89017878a60d         	17
+c27f6e1f185b0383         	17
+acddfeab2a407640         	16
+3ecb690d1542c568         	16
+8d455c7539795d2a         	16
+657fe5ead67a7767         	16
+d170b5a0da46380e         	16
+7ae099f3898e0209         	16
+9a9d6e9bc555731e         	16
+09555be379ad9253         	16
+7858914fad68493c         	16
+51653ef291ab7ddc         	16
+709822d0b5bcb7f4         	16
+4eed62cf5f8d8edf         	16
+b5ea0b5dabed25a8         	16
+142d767a56a9254d         	16
+5ee94540d0749ea0         	16
+cedf82b5086e4691         	16
+7d385d34d12e60ff         	16
+d01ac97e2b8947c2         	16
+aadee1c326d286e3         	16
+31075275518532d7         	16
+0da9aa9d24677fc0         	16
+8c9e6bf2467d740d         	16
+acd86a5426e21ca0         	16
+a30b270e25489e5c         	16
+bd261725b99f5983         	16
+43c6a960757cf559         	16
+80cfab6bcff3a244         	16
+a3d2a4250807f1e9         	16
+7d6d2a6c0276f81b         	16
+87b0615b6e1f4d7b         	16
+e6af5bf1163c1151         	16
+6f78a0d744c35456         	16
+c849f0b2f5d6a742         	16
+53a3d11bb568cc8b         	16
+d7310206583a54b6         	16
+c82a3e358c773c73         	16
+0fa6dceead7ce47a         	16
+0e691eda369f4e09         	16
+e80f8e518b300dfe         	16
+7392c0032f92d816         	16
+9429b4d59c537af5         	16
+889139b8e9c4cb36         	16
+11809b1d323b3057         	16
+9ffa38d3b832433a         	16
+b757c0c361e689ce         	16
+3c346ab1e76ae1f6         	16
+784bc2279baa878d         	16
+fa9610a50a1bf149         	16
+72f9d5be3472d34e         	16
+460089f796fb3f82         	16
+b6ee99bcf06fc91f         	16
+57e5a4d515c8ce44         	16
+7b75cc7f223791f4         	16
+228f74b74f3a08ae         	16
+18ad3ed896c7ce05         	16
+b136b1b180ca753a         	16
+e4f74c16de34d440         	16
+8d4eefad7a2b3915         	16
+1c89ae5bb804e4de         	16
+a6f99b9e687f9d46         	16
+2a97cffe61c3c4c7         	16
+f2df3bb043a8abb0         	16
+9beb96a2300109d7         	16
+9e28048cea8d41f7         	16
+7add3f8e49ec0826         	16
+311c0dd0e354a33e         	16
+fce19f9b4a943f22         	16
+09b6cc87e62c2c58         	16
+7267864328ae8b9d         	16
+8754c83ab2a7ae71         	16
+7b599c8bfcdd8d30         	16
+bee3672891cca906         	16
+5ceb951f629700a2         	16
+74baabfc8fd84b38         	16
+bdf415fd484ea8a7         	16
+6d5300b2d8f37e07         	16
+38d45839cb1c83c1         	16
+70ed59f194b3c556         	16
+8a380641491d43ed         	16
+f733e8c19d40ec2e         	16
+3a6fb983e2554023         	16
+842790dfaa937484         	16
+01d2001ac1e6f8a3         	16
+e4ac92d89b946781         	16
+796c87ddbbaaf8c5         	15
+9270575728a13a61         	15
+b8736690cf263a3c         	15
+d7d6d50c1e3d0b81         	15
+590a9cccf7db9f7d         	15
+de3f25248ba0789f         	15
+bc2a85fd35fdc7bd         	15
+37c0cb19713d8dda         	15
+623e1a180426039b         	15
+fd3a622648667296         	15
+3bebf34ee9330cbd         	15
+f5a92cff83897d48         	15
+d6361d16212664ed         	15
+961f18db4f138211         	15
+0651062381f0636a         	15
+e98a4efa85070c2f         	15
+790ef197c8f236f5         	15
+8ec14b1576cb7cb5         	15
+209adad1015af86f         	15
+e4c7f3487d17fd42         	15
+c7b5183f4d1d4efe         	15
+99ff4cc6491e8f5c         	15
+08db62f24627e71f         	15
+e28e330cbdf01126         	15
+abeafe151a587d3b         	15
+eac1a180047ad54e         	15
+9287e238d7c3b06e         	15
+2dbb7ec08cdd7f3c         	15
+e956d67c9bcc5809         	15
+42d0d7c92b75fc1c         	15
+d6670dfe3e7b42bd         	15
+96a38e7c813d8f1d         	15
+efc3768127714ec3         	15
+dd047728de72ad62         	15
+e7469e22b5bfb3e7         	15
+c99761a700ade23f         	15
+56e4f9eab2e8e674         	15
+203b7f94b7d6115f         	15
+ca71e72655bece85         	15
+2a70769cdc6eb8b8         	15
+1b33663ad7b95fd8         	15
+0e0dcc3339602b28         	15
+0c27e6c3744fc14b         	15
+ad04ad9fc179fc5d         	15
+1c929cfd16b71907         	15
+e656e280bc8edd56         	15
+b53db2271c9624f7         	15
+d9c643fa1fc57bdb         	15
+31001a1210623bd4         	15
+50b8f80311b31ede         	15
+cfeb1e1e0e695b58         	15
+a40723994f715420         	15
+caf4fe9311f1dc59         	15
+af96613fdd793a3c         	15
+d69dd8dac66f9f84         	15
+4aa03792b50f0b22         	15
+ba54932df84e8cea         	15
+c1afd71fc86bf682         	15
+fd8585283fc7d2d7         	15
+4ce91d31c1e57c33         	15
+d163dd6c352fbcd2         	15
+ce60436f52c5ee68         	15
+116a2fdc9a45bab0         	15
+8585760646e3aa2a         	15
+2f88b08bf0a0e367         	15
+edb3097e71330040         	15
+65d034adf80834b7         	15
+29c0025455f8c585         	15
+6ffb36aaeff1c81e         	15
+f6d967cdadc6fbd9         	15
+3a11bb962ff45b78         	15
+46c1530d7546ea6d         	15
+88c21fcd38e2486e         	15
+3b9a3b4624b7fd6d         	15
+a57b1dcbd6849222         	15
+513271dadc1322ae         	15
+1f329c2e7d7de8bd         	15
+919e7cb2269a25d2         	15
+3f69e667a67e54d9         	15
+7edc0527cf782e19         	15
+47271d8e08b5d31c         	15
+05f7c6d9a4e582d3         	15
+d24b829be2ca81c4         	15
+7ebfa6c1bee69e1e         	15
+bb8245f52c7cce8f         	15
+ffd54178acc9a6a5         	15
+d195e7f4ed697350         	15
+dd5bfa6cc2c0ecc3         	14
+024387ca4cafd5cc         	14
+047097293bb4d1c0         	14
+3fb15ace50d6142b         	14
+2b5054a4192e9b06         	14
+44a10f1ac8ce822e         	14
+6fd646a334e6e133         	14
+92275cedf6d8ee15         	14
+6a31307a81e8f3a8         	14
+4a1debca3135ff37         	14
+aba2db9afb1469c7         	14
+76c84daa539426e2         	14
+1d6443ffba9dfd80         	14
+6e44bcbeac7f4360         	14
+f0f38174a7e689a3         	14
+34c0d7c4ee5650af         	14
+08b2f71d93836313         	14
+6875c5657661b2fb         	14
+c5cb9f885d8b3621         	14
+e9906e2f0d189745         	14
+081305e6df719dff         	14
+1528279aec1f3dce         	14
+00c4543ec6bd25b4         	14
+e88fb1c9397cfb27         	14
+012094e90a4b908d         	14
+6bdd909329435e80         	14
+52cf2a5933ec5d8f         	14
+4e812d32d64e2431         	14
+f21effc079a2b38a         	14
+2d88a31f325dfd3b         	14
+4881cc53f6c8892f         	14
+3bc89353f7e3a3cc         	14
+f72f61ad6a5f12ed         	14
+992974ba6a0536ea         	14
+ddc8340dabc8641b         	14
+847935fc68707426         	14
+a86972014275e072         	14
+3d76bc83c6b644c9         	14
+6edacfd1f8ebb9eb         	14
+dc6f688b82e42a5b         	14
+923831a05c9f91f7         	14
+1b8187fa4bf6ab05         	14
+0c7b9cf2b7662b65         	14
+2d1e337aaf341858         	14
+2c04320e110a14a3         	14
+4c8b7540409da4ac         	14
+ac8e3949d284e9a9         	14
+fe44cc816576c652         	14
+95019eac1c0a052f         	14
+3edcccc4f341fb1a         	14
+a278db6b2b09cf9f         	14
+394f6d30cafc3edb         	14
+830fb3967c74866d         	14
+f9705c362f070608         	14
+86cbddb61ea78bb7         	14
+85b2176b3b194030         	14
+31e2e2d9cca3778f         	14
+a6454e329f872b78         	14
+aa35446aab16017f         	14
+af58a74e4b2a23a0         	14
+8ecf0356a3878811         	14
+e34efcc824685332         	14
+02b74068fa98d8a4         	14
+132ec5e8c984adef         	14
+71e36f33981ddb74         	14
+727bf2b86b19ad88         	14
+cc82685d9f49bc2c         	14
+137b0b2775701e11         	14
+caa2e5b3fb1b2d4c         	14
+47d47155e89c8be7         	14
+b96fc7a0ea7d4b45         	14
+5b43cae640f2338a         	14
+d512871626a5e588         	14
+a10c7515834240f3         	14
+adb5f51c2e2ab13f         	14
+24af96df0bafb925         	14
+17fb5a88180f9904         	14
+1174156c4a0eccaa         	14
+708345c9897fd7c5         	14
+245e6bf08b8d2955         	14
+2b52334fab158861         	14
+b8a8ff84233f0570         	14
+aeff7b87a8e83ebb         	14
+fbb21a2f71f4d981         	14
+6b6cd77fbc91b7a6         	14
+0b165bd4b9f42fd5         	14
+afa829857f82f99e         	14
+f201f263d8c23f97         	14
+eec424a84c9e4c68         	14
+de4b403cb629a29f         	14
+9194ae88379dbf1a         	14
+ac4dde0d1be05de0         	14
+a2bd4ca82d908442         	14
+9eaf58b03a2779cc         	14
+27c5968fe43cc06e         	14
+1d6dd0c87d90fe92         	14
+a01f6d368ef64dc5         	14
+047dfa57ba0bf638         	14
+ad2887ce04583910         	14
+bf5de316a5e9a4ab         	14
+3c6fe637a0180b01         	14
+94a958ea126cdcd5         	14
+0e94a089328be4bc         	14
+4b9d9cfe0f435788         	14
+28cf0d1c51b491e5         	14
+33a3e0e3ffde0dcd         	14
+42b0c50fc44140ec         	14
+966ebb738e0f9d9b         	14
+1e264c677d4ee4ae         	14
+5b987e54ee72525c         	14
+8a6ec2761f91dad2         	14
+bfbb54bc8cdeed2b         	14
+e2e7b683b4c15b7d         	14
+1b0fc9f777cad045         	14
+5f22418922fa728b         	14
+16ef91b9d827859c         	14
+a80f66b254fe9eb3         	14
+bf68dcb5fad3cc8c         	14
+999912e63a3262ae         	14
+0e0da9192a025efc         	14
+9b65f676984c9f0c         	14
+ffdc825785c0ede8         	14
+41164b8ac02a2c42         	14
+1fbb5f786e53a0ce         	14
+ad41c24ccac0c7ce         	14
+39861fc1c0845d15         	14
+5319169a72714c62         	14
+cf1aa2fc02a7d1e0         	14
+4416c474713ec1f5         	14
+63ee5bc46066a8a8         	14
+c1379d3744f1dd2c         	14
+1ad06aed9349af46         	14
+8682c03de6a844ff         	14
+d5e0526e1ab682a3         	14
+01a177623cce9596         	14
+6e8e5626ac4d279e         	14
+ac5e0d3938caf686         	13
+2f0213137a80d485         	13
+44d97b6707dae3f0         	13
+8bbd7df8a324f31d         	13
+4be9d1910f8a4e80         	13
+077b635ff2afc578         	12
+148715df5a02ea5e         	12
+4a7a25be293ad678         	12
+ce1ae197ada2aec4         	12
+14e44163678e24dc         	12
+582a21a1dbbef3cf         	12
+3063c7e95d0bf76f         	12
+235fa48eeed11d82         	12
+f732d7d18a91d2ba         	12
+c6ca293d4810e0d5         	12
+54fc03f1e1d355db         	12
+64fd010bf8d15096         	12
+b63ea3f7a57ae099         	12
+f40fea200e0c644f         	12
+ebf81a62e4798fd1         	12
+8976d9161c027142         	12
+b8d7b3f5c7a95d65         	12
+abdd91e96515a617         	12
+81ef44fcc5f454df         	12
+db84624b151cbe06         	12
+e7fe3bf2768602cf         	12
+c039f5aceb093537         	12
+9546d537fbf99eb6         	12
+b978c9852cde91bd         	12
+bddc6fd036eb6279         	12
+c6a29d6df8de968c         	12
+76319fe9d8b465a3         	12
+3968e3fbf4695d7c         	12
+6983328f15506cb9         	12
+df7e628bad5782b4         	12
+d069086944f2e330         	12
+49b24c6a41b82bd2         	12
+63343e287971bb0c         	12
+a4eef523118805ef         	12
+515cb8fcafb1ad98         	11
+6159d8b187831770         	11
+985991708c47003e         	11
+437d8dea9272d0a9         	11
+1c584f82a7a1c4f0         	11
+cf62fa272b5f0fa3         	11
+f435aa99d864077d         	11
+b06599b108e83f98         	11
+05a61a3bd8ca4149         	11
+b783ce08802cd1d1         	11
+47e1b2d43f709995         	11
+28b2df9fadc9f07e         	11
+5569c3fea112718e         	11
+bade9943ee01b63f         	11
+469508882dfc1991         	11
+825d6c44da3ca5a6         	11
+20dc4f1ac5d4fd9c         	11
+ce8666d9b42fc9a0         	11
+b5953ca1f8a0b8d7         	11
+c65c25d990fc7025         	11
+f608c903c451f387         	11
+2587c54f5530dafc         	11
+816180220e8cb419         	11
+2c34f9432069b52b         	11
+bb967277222e689c         	11
+2b69dec0193511d9         	11
+40c4bf520c17de54         	11
+a9d7b75461084a26         	11
+34669b2e9d407d3a         	10
+96aa539bfd4c07e2         	10
+ab60e6f5a63e1cfb         	9
+d1848064c54e01c7         	9
+4fd0a2a350f016e6         	9
+0967effecd292a86         	9
+903a9f8090104c2c         	9
+4b50fb1359ebf35d         	9
+65cfc9f242c2984a         	9
+33396269bcce166f         	9
+ca74f2e3c35a3e77         	9
+3f25a2fedae191cc         	9
+f9c87ccb2bc4853b         	9
+e77594ece9b9d1fe         	9
+0e095ed785af7e43         	9
+913e7109cec0cb4c         	9
+ee6c67859d70186b         	9
+6baac632f7711e26         	9
+8fab4c4f6f82a4ce         	9
+97187f5cf0385da3         	9
+7e9068872228c474         	9
+e845d305f64154f1         	9
+7186241e043de5dc         	9
+d6d9ffea95f2f8bf         	9
+63d5f1651880dcea         	9
+c181ca8eabe7d18c         	9
+61cf7eb9d2cd8bb0         	9
+e77033ce559947f7         	8
+04f6c929888f4f11         	8
+b69c852e7e3956af         	8
+1809259a5a5f1d8d         	8
+e0bdd79c7304ee8d         	8
+3eec766dda26fa64         	8
+5a0d2e9284004266         	8
+9afd00e81d6208e6         	8
+4f283dfcbeccc0d4         	8
+1bba4b1ba23ed2d6         	8
+a2308a936e898d48         	8
+331c26103d885cae         	8
+a2475a245c9907c4         	8
+e46a164cf310fd7d         	8
+bee6e93e9976f4fa         	8
+aeb51dfbe8aeec59         	8
+52fc458ffc756faf         	8
+d56d0710668bb39c         	8
+4a823d80aa30dbb0         	8
+c0fc0cd215ee1724         	8
+9a7291b89bd5445c         	8
+bff270fe9c86a5a9         	8
+4729afff3bea0f0a         	8
+4d3a4c7b442a9a4e         	8
+044534b0b28b4e87         	8
+c44c5e1425475206         	8
+29af1a2566c4e36e         	8
+39eefec3a8498dde         	8
+0cf57cb49272fd37         	8
+bd26e8a79a856c31         	8
+0ab4b35dcffcffd1         	8
+bbf1ea50be8008ab         	8
+0bfdef63285d3019         	8
+b7870fa6dc088fbb         	8
+8a150fd8ff5d7686         	8
+d48c1369927ebef1         	8
+df6a7c43faa6732b         	8
+e049d44c4f1cf1b2         	8
+0c11e2d068768dbb         	8
+4dbd54d9e36c9566         	8
+7f5157bf53065d36         	8
+77e9ea355bd8ae57         	8
+04e3de7ac35ec5cd         	8
+15ebd83e53d0391b         	8
+fef91502cbacf23a         	8
+b1a227b7609ff263         	8
+f16c2edb2a603f92         	8
+88ec621893e595d0         	7
+b46d022080543144         	7
+9735c969c652dd89         	7
+48cb52d78c992487         	7
+a94350ee74deaa07         	7
+4242cc3d0437db12         	7
+4a0b78598b42897a         	7
+0ff9d10864db8364         	7
+9147c5251cc99eb1         	7
+0345872b14f9e774         	7
+a8dbf1c6b41b885a         	7
+f935412970c9f58f         	7
+47f4fd3e8e1dac05         	7
+57f85720e54d6442         	7
+7a10353c9c54cf7c         	7
+24933c712f0bca2f         	7
+d250657f0ebc5d73         	7
+20789fb17b423c4c         	7
+4b8fa561a1e52d1c         	7
+5fbd03b1ac0a0e69         	7
+ba047a636b7d3793         	7
+8776181be110838a         	7
+bd087cf6a846db75         	7
+7ffebdd1d5148aef         	7
+9639e89d20228e6e         	7
+8486f61aa81a3daa         	7
+31c56c4d0fe19340         	7
+68008abf6409dfde         	7
+746029796363aa51         	7
+924438fc6cbec836         	7
+725cd8d23d78cdca         	7
+dac4b5847454fd9b         	7
+b6670507e85b30e6         	7
+40cdcbb7692fd408         	7
+b74ee891e2a6dd69         	7
+4c82371b8cd02d4d         	7
+68407606544d6f22         	7
+2a9fcb3382d351c8         	7
+eff5710404e2ff78         	7
+c00bc29a678a6efb         	7
+de6d7645f192d517         	7
+2e40333991f56f45         	7
+4e78f06160b717ac         	7
+4fa75fc6829431ca         	7
+4e980425468708da         	7
+4807043b8218e9ce         	7
+4781b6bfd6f7a2c5         	7
+a322361a37a78d3d         	7
+5b546a46a86a9d8c         	7
+6b52904b2ab91bf6         	7
+cc1936a9f4e93477         	7
+6c7fa6844380f50a         	7
+d1378a0ad06ff979         	7
+5ba3d703d1ae0c1d         	6
+774fa432bd7d9c47         	6
+fd364afd082f5446         	6
+2da5edf8b5776c9a         	6
+60376aa71be66083         	6
+2efa5a839e62b1bd         	6
+d326e189b1210916         	6
+e6635f5b0a2c78db         	6
+72b5355dda190b6a         	6
+48736df57e7bec9f         	6
+d33824cb93ecab6f         	6
+2bc80eba94950873         	6
+eb7459e0c570251d         	6
+cb17945cb90b7837         	6
+3d250ab0f12be445         	6
+6478ccb4416e6a5d         	6
+2a1b3d967cda1da2         	6
+8d8e9f9b8730eb25         	6
+720c36b2bee4692e         	6
+6d235933670503d9         	6
+f38f37ed934d84b2         	6
+7a2b51f69e81c722         	6
+6958de044cb28a84         	6
+fe0f34ebed689381         	6
+e792c0969cefe1b8         	6
+012170e4fc87ace0         	6
+384c7d41d5ffe9d1         	6
+56a34d0cec11d6b0         	6
+97258f576d4bb672         	6
+4e3b183180e2a992         	6
+6e06d0f00f6da20f         	6
+f3c70d296ec796c4         	6
+faf841f81c52638b         	6
+46cb43c2ab133ccc         	6
+9e60929f521fa280         	6
+2e5b4ff08a75fd02         	5
+e75f3ae1da1cc652         	5
+759ee7d059b1beb8         	5
+60369d96b7b80869         	5
+163d89116179c33f         	5
+3a7d54a264d9f33e         	5
+bc209a900101f28d         	5
+abbb492978ff656d         	5
+2e4fc5eacceec12c         	5
+e0b3a679b83caccc         	5
+f701fae56b645ef7         	5
+93379e3a2072a01b         	5
+0d210d2448c3018f         	5
+dfd9ff1f343cdaff         	5
+c4589ee5977a47be         	5
+3213b1f13f5f0f7c         	5
+ad84f18659e6bfe2         	5
+3661360c99719414         	5
+a2a9f76339d21ab1         	5
+fe7210553d56c097         	5
+fec06f52054ea900         	5
+c4182bdb53e2459a         	5
+b228042c088b1913         	5
+b716233fcb6877e6         	5
+84126312e2431a09         	5
+50d5a7b861ed1c54         	5
+1dba84766a5e87b8         	5
+84bb29c53592ac40         	5
+59a8ae019b64f2a7         	5
+2973d38c2fbd7a5c         	5
+e958ae92f328c181         	5
+6036239d2ab349b7         	5
+a4ce39a3720cd679         	5
+12a90b90283b2e6d         	5
+81c68492ccd72941         	5
+5e1a88d248599768         	5
+7093cf549cd2e7de         	5
+07e6810fd3236bda         	5
+8dde2ff3f6fcc0a3         	5
+44f545727e704187         	5
+45045146dbf7b009         	5
+7284d85428305f5a         	5
+d219d4e325e6f204         	5
+6c49258724f11770         	5
+3fd83dcf37bf1bc0         	5
+3fc124f59f3068e4         	5
+630e766f0a1987dd         	5
+b28c7d07afa7063b         	5
+75cc85cdbe9ad46b         	5
+d5ad4c92d8bf26c9         	5
+e46b1074b99ac4b6         	5
+94bb629a3f6dd00b         	5
+1c0a38899c82b60a         	5
+bcf567421c581f0a         	5
+429b4a811bef386c         	5
+b54d7416bb445989         	5
+ad5e078beceaeb4a         	5
+612369a5947a012e         	5
+f36d24c309e87e5b         	5
+add33db6ff80db24         	5
+d9290e99f189ce84         	5
+cf3b86489890b9f2         	5
+03cbb67c0f990d87         	5
+f2c8f4b4c94d5c5c         	5
+89a89e76f3516357         	5
+a8f4577a48023344         	4
+d4de23aa98acc65b         	4
+6053ddf69c967d5f         	4
+9cc207168a03470d         	4
+011674f4a3834b8d         	4
+6a57286a8890d8c5         	4
+6d2f70d9424f41a1         	4
+6587f46697fc4443         	4
+45033bdf3d9ed158         	4
+c65ee14957c0fa5c         	4
+ff2dffba388d9922         	4
+df53c2948b32bde3         	4
+9c4d061c1e2fe6bf         	4
+8930013d06942df1         	4
+31f5bbf4974d29c9         	4
+38199c5d7da0c0ef         	4
+ae884ac655d6ee3e         	4
+5de4baa88061a77a         	4
+2ba5ccc84d35006c         	4
+3a95f5a2df4ff921         	4
+869d20b3b8128230         	4
+70b585c9d0f15725         	4
+5212c6acea3359e5         	4
+81d4191030b9704b         	4
+deda806b68b0aa11         	4
+670a2773607d785d         	4
+ac337893a9fe0085         	4
+eff24325e0ede639         	4
+5a6b7155f2797537         	4
+73f4f87dd936ee5c         	4
+c7c4f55b7321cba7         	4
+23310ce84d3c9f85         	4
+ddbc5530d2939d49         	4
+5eff05e59f905a49         	4
+8fff1084aa085a13         	4
+ad15a9a139919918         	4
+2b69d289279aabfd         	4
+a2dc754afb69bb32         	4
+aaebac5fda798b1b         	4
+2798974abc8a58a8         	4
+0812f54c93d726ce         	4
+78a4ac98191ac675         	4
+1451b55e5e56bb89         	4
+aead11697d14ea36         	4
+f6ae39568db1130e         	4
+d12ca4020c2f602e         	4
+6e9403f00acd6752         	4
+634b7165c96ebb9f         	3
+5a7ff9aaa3168878         	3
+5d55202da0252627         	3
+d30b9215c72cca87         	3
+07bb35158d9dd3d2         	3
+dab0196cd5fc8e5e         	3
+06bab964fd536971         	3
+be3db344a845580b         	3
+0e4e2d31c2fb3aad         	3
+7feac4000cbc5859         	3
+52aa3d79b1cee455         	3
+4672d10b9b1e7a05         	3
+b830685072fa871f         	3
+599a4f98bb193368         	3
+61bc8167c9680283         	3
+b53078de0147f6bf         	3
+8ebad30219b8679c         	3
+2173a2ce35f6ace1         	3
+57f755143ee96fd4         	3
+719d72f3ee512dc6         	3
+75fed6a47f69859d         	3
+a33ed2e6068df53e         	3
+813cff2aefa5d1f0         	3
+2b685187f55c5d31         	3
+224fa77d4b248046         	3
+3d15714d4d3d15dd         	3
+49f24193f0b961e6         	3
+742702d662a71410         	3
+f06039c29b5891fa         	3
+91eb9605998a7c03         	3
+322a9e34d87f54b1         	3
+366a236aa1ea6f07         	3
+1a5044d233936b1a         	3
+0e92ccf1bd39e68f         	3
+e2d47e82c50d41d9         	3
+3c456328b04a8ee8         	3
+0e7beedf0ee9380c         	3
+969f6c7e86554814         	3
+b9f6305a3d650e2c         	3
+fa26798728f5208f         	3
+ee441c8e027caa66         	3
+29d6d87f3418638b         	3
+3e42ac0f4d43320f         	3
+6263c1d2997b8ce0         	3
+0baf71623648413a         	3
+4266f48a0aa1c37d         	3
+36c15687f5ab0f7c         	3
+cf2f27fdf94ba20e         	3
+70c7c3ca7f9b2728         	3
+476c7972e9b41891         	3
+35e69a79d2b1e804         	3
+554e9e2d532b3a87         	3
+ff6bb30dd0c482a6         	3
+a8b0ea6490bc818f         	3
+b5da59dd177eb36b         	3
+4a0a276409968a73         	3
+c88422d8959260ab         	3
+e2dac1f4739e0bd5         	3
+92dcc54a27107a37         	3
+bfa9cb304075d3e8         	3
+8f5d16a5a9bd58b2         	3
+dd003e904727281a         	3
+b3f2bc2cefb35f05         	3
+c6bf14cb901c63ac         	3
+63c0826ef59eae66         	3
+a6ab0cb7106a67f2         	3
+f51062bf579507d9         	3
+b22362b434e8ee62         	3
+dabf11918b48b40c         	3
+1be6d3b121865edb         	3
+cad70d6ffd53912f         	3
+23707d3ddf14a999         	3
+487449f4f6322f0f         	3
+b7f475238ed50429         	3
+970bd3316219e7dc         	3
+a75e274c8814b539         	3
+08decd9664e5d56e         	3
+cd3dcd83bb002e78         	3
+b04a6a0db525857d         	3
+311634df10651e05         	3
+2858ac90c4758e1f         	3
+61002f3b7ba5d780         	3
+a11ae5f07572ef49         	3
+f08667e4c0458f37         	3
+ac27ab4bcd9c492e         	3
+3fc9d51d1c4d6ba7         	3
+feaaae90514eb2ac         	3
+c57d3c96af23c297         	3
+07806456878931bc         	3
+281a244ce1954711         	3
+510832818edb6fbc         	3
+5b2cd5b31a510848         	3
+7b870bf85d01c2dc         	3
+28921443f052bea6         	3
+b4f5672f68ec3a83         	3
+89cad3f37c9ce226         	3
+8e9dd8431170c09e         	3
+ecdf73ee66c33b17         	3
+4c8ece50736f9e88         	3
+2ef5dc7e278e562a         	3
+3c565df219ba3274         	3
+9707989a439757b4         	3
+cb62418129b864a3         	3
+8e2dfd6bcf48e1e6         	3
+09a7b0b566ad6225         	3
+c59283b05905c853         	3
+8378c899988905ee         	3
+3250650a5c4e6f07         	3
+cb65e49993db9a93         	3
+c4d9fce9eff3b8ba         	3
+747cf7fca2ccdbd4         	3
+54aeeb4610d3ae08         	3
+7ce5a92baabb6bc0         	3
+7980fa06f2b704d8         	3
+e9056f9b5a40a301         	3
+abc4a7ee16c21088         	3
+546da23278482b0a         	3
+0dcadb06206abd3c         	3
+4ef75307fb64e2ad         	3
+4b3f4f151c99f472         	3
+c53d9fefcda371e9         	3
+4ec53ff7e2263f32         	3
+1de75f05d57bfc10         	3
+1246e4ffeb5ac4ea         	3
+0ce8075fab4a2b5b         	3
+d5e1a9bfe22bbf9f         	3
+190fbebbf798c31a         	3
+16e843e6b853cc2f         	3
+a0dd11f6abc421ec         	3
+d4a29356fc992879         	3
+034829ffdd0a0aea         	3
+a7c3f1010d64799a         	3
+6c4646d90b60a56c         	3
+d8292cd5f1aca291         	3
+61569d12d4ae7161         	3
+6b32b561dab8036c         	3
+8010c7c148057fd3         	3
+6c4d17a46cac8787         	3
+1812b8f5641287e3         	3
+557c03c284be1bf2         	3
+cc1ac978a6835ef6         	3
+0cb4856be3694a57         	3
+b003f8bb02f76dc5         	3
+621e2c310cec8d32         	3
+4f6985aca357ae09         	3
+c300cc9326592b65         	3
+d5c588b6f9c015e4         	3
+984b3b6e7479b571         	3
+41fc5dce044f16f5         	3
+d5f5a122a593b580         	3
+a9aa3ed5b316470b         	3
+2ed3a794a70aa85f         	3
+ed813a848580ba50         	3
+147019cae600694e         	3
+588ba85ff11a3263         	3
+b843f52a986a2914         	3
+73f71f9556442117         	3
+36d5884d44484277         	3
+a7ec599c1a547746         	3
+98330e431e56a9ea         	3
+81372abc86f65c79         	3
+04d858cdeeee0da4         	3
+d234ddecef49ef4e         	3
+468bd274ac084bb9         	3
+66937c669c4da072         	3
+c9782ad2a0ed9331         	3
+157f693d9e600ccc         	3
+dbe33cf29ef1623d         	3
+396385e3de5d18c3         	3
+7e9579921e5407cb         	3
+ef49db2aaa9bb547         	3
+b461cf238506c5b8         	3
+bbfc4a3b7b6c94a0         	3
+fd2337c1b73b686e         	3
+8e0bc2fe4e7d35b5         	3
+e256de8aa0c2115f         	3
+0bbc48294707ba96         	3
+860318b8e244f39c         	3
+15f415d436888b2d         	3
+d3f9c4539c0caa64         	3
+155e42df837ee5ff         	3
+67dea6c75d6a1075         	3
+3fb69f34e178d494         	3
+5439bae708bca198         	3
+1d89a2aa9f6ce50f         	3
+5d22e2a46604b6e7         	3
+ef9c4f2465513956         	3
+da0349a87c8caa2f         	3
+7bf87402413c27ff         	3
+cfe350b20d23b02b         	3
+bcee4f289ff6699c         	3
+5dbd6ec4e154ad2f         	3
+87beabf664115d79         	3
+c9770bb1d5a492a0         	3
+f5873c8fc7760000         	3
+165affa7adb5eded         	3
+d2185b65af52d68c         	2
+4130678275eb7c8c         	2
+276dc716b1da8899         	2
+f3c76b53b239f511         	2
+ce42e3de94226b2b         	2
+9189fd009df41d0e         	2
+b0e479be03911916         	2
+6fa3ea52c8e31e06         	2
+637e5a45062aa548         	2
+fb495f9f9015a772         	2
+b6d3f4f4ee1f6069         	2
+97b8f130d32e9f4e         	2
+c0db71f6bb14db11         	2
+d7b463918d3b8c39         	2
+09d26b5f819c6a36         	1
+8ceb5c6aed2c5f8b         	1
+def389ddfda6991b         	1
+c5f91eb481427dc5         	1
+66a4e422b212726a         	1
+e7e87087b1a44711         	1
+dab5e75d1339706a         	1
+e63c3f25338baf9a         	1
+0268f149d014b389         	1
+460f97a346b44bac         	1
+d6d98d3508c30f57         	1
+9c96cd1329fbd82d         	1
+dac9d1e654fac737         	1
+6514add13c82b115         	1
+32d035df92ab9080         	1
+b78deb463531d078         	1
+9e9932ae1a7d0943         	1
+6f2c0a9adbb2bca9         	1
+38f776ab9118aed7         	1
+5faefdc861684eb1         	1
+0ec9d2b018fb10d8         	1
+f0512adadffd2480         	1
+b0913e67d38d5ed5         	1
+5c10b64db3e4f228         	1
+c8614adb1a90b027         	1
+c40b70e0f6d80189         	1
+1aeca7d078d57deb         	1
+04e43893e32f9d29         	1
+16c71736dae78764         	1
+86d8bd7afa5b51b3         	1
+6e473eff459e809f         	1
+fff8a057a40c4a60         	1
+4280ac3eab57aa5d         	1
+ee61197edb882599         	1
+09659d1639a1f978         	1
+29fc016c459aeb14         	1
+3301af038a720587         	1
+18b4545a5ed15581         	1
+f3a0b8c835129558         	1
+dfb0849016bc122c         	1
+5bc1fbccfbf2355c         	1
+a7eef9d6795422c1         	1
+e25164e5b3fe208b         	1
+2ac720f76384c57e         	1
+3a9a7c5895e82646         	1
+9ed7090d8fa690b0         	1
+c068c013d6921fea         	1
+229cd6564bf0dce4         	1
+132adf7335bb384a         	1
+35e44170702139a4         	1
+4f64568dfefa3ce7         	1
+9efb397067eb7e8a         	1
+3cdca3b4a93980f5         	1
+849db7ab7f4a640c         	1
+bcbcbcf0f6ed196f         	1
+326825e02a198cf6         	1
+8932e5c12f12ffed         	1
+7ea31f38675b91c1         	1
+9ff997ab15713e53         	1
+a1985630339f4b3d         	1
+b6f1cfadc4dd79d4         	1
+39592d9d72e717c4         	1
+63e20a0f98218a87         	1
+fd78f89878479f56         	1
+35a60467893aa168         	1
+4f19709e47883df5         	1
+1053fb7ee17a1f33         	1
+d510567580c8be52         	1
+71a6471bbdac21d9         	1
+6e712ea24e77bd96         	1
+06f6a57a6d532844         	1
+8d390a1fc3133d06         	1
+f28f7299d38c0932         	1
+3455b45888fb5053         	1
+6fe02600f322a0a9         	1
+6717a70913b3db79         	1
+eb0fe24bbc845ecc         	1
+72e6fbf4f6382557         	1
+a492f49a3e2b6a71         	1
+e564c3f1a93ccf2e         	1
+6390772a3094939d         	1
+2e69730561ed70ad         	1
+df56868afd166557         	1
+0072b94dfa30608e         	1
+a812f6969ddf3e39         	1
+1774749f2cee292f         	1
+a96404cb928895f3         	1
+230ac636ea0ea415         	1
+a2b4b685dfa94733         	1
+abc0b15f2c907ff0         	1
+95cdfd514098c38b         	1
+099fae4a0705d63b         	1
+08672cd59171d5e4         	1
+cd2a2a70dd5d176d         	1
+bfd5e1701c862ac3         	1
+19fec36a1dfb4c16         	1
+f684a82adc49f011         	1
+228ba5e7577e1d49         	1
+\.
+
+
+--
+-- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT books_pkey PRIMARY KEY (upc);
+
+
+--
+-- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.genres
+    ADD CONSTRAINT genres_pkey PRIMARY KEY (genre_id);
+
+
+--
+-- Name: in_stock in_stock_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.in_stock
+    ADD CONSTRAINT in_stock_pkey PRIMARY KEY (upc);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

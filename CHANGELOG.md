@@ -1,5 +1,12 @@
 ## Changelog
 
+- **v2.0 – Python, PostgreSQL  & Docker Compose Integration**
+   - Changed backend database to PostgreSQL instead of SQLite
+   - Added Docker Compose file for multi-container development and deployment of the ETL image and PostgreSQL containers
+   - Implemented persistent data volumes for PostgreSQL container
+   - Configured environmental variables in the Docker Compose file and the ETL pipeline
+   - Importing data by using PostgreSQL’s COPY command for bulk CSV imports
+
 - **v1.5 – Python, SQLite and Docker**
    - Pytest added 
    - Dockerbuild image added
