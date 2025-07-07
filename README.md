@@ -41,15 +41,22 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
     Python ETL container
 
     Build and start containers:
-
+    ```bash
     docker compose up --build
-
+     ```
     PostgreSQL connection is configured via environment variables in docker-compose.yml
     PostgreSQL data is stored in the pgdata named perstistent volume.
 
 
+Data inside the PostgreSQL container:
 
+![DB](docs/books_db.jpg)
 
+![tables](docs/tables.jpg)
+
+![books_table](docs/books_table.jpg)
+
+![count](docs/item_count.jpg)
 
 - **v1.5 – Python, SQLite and Docker**
   
@@ -60,10 +67,11 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
     ```bash
     docker build -t  v1.5_sqlite
     ```
-
     Run the Docker container with volumes to map folders inside the container to folders on the host machine:
 
+    ```bash
     docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlite
+     ```
 
   [Changelog](CHANGELOG.md)
 
