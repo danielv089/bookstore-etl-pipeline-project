@@ -48,15 +48,15 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
     PostgreSQL data is stored in the pgdata named perstistent volume.
 
 
-Data inside the PostgreSQL container:
+    Data inside the PostgreSQL container:
 
-![DB](docs/books_db.png)
+    ![DB](docs/books_db.png)
 
-![tables](docs/tables.png)
+    ![tables](docs/tables.png)
 
-![books_table](docs/books_table.png)
+    ![books_table](docs/books_table.png)
 
-![count](docs/item_count.png)
+    ![count](docs/item_count.png)
 
   [Exported pg_dump file after the the pipeline run with Docker Compose](v2.0_postgres_docker_compose/data/postgres_dump_data_sql/books.sql)
 
