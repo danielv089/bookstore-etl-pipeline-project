@@ -59,6 +59,7 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
     ```bash
     docker build -t  v1.5_sqlite
+    ```
 
     Run the Docker container with volumes to map folders inside the container to folders on the host machine:
 
