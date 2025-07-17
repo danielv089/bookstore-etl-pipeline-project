@@ -1,9 +1,12 @@
 import os
-import sqlite3
 import pandas as pd
 import pytest
+import psycopg
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+
 
 def test_extract():
     extract_csv_path = os.path.join(PROJECT_ROOT, "data/1_extract_raw_data/books_raw_data.csv")
@@ -40,14 +43,15 @@ def test_normalize():
 
 
 def test_load():
-    db_path = os.path.join(PROJECT_ROOT, "data/4_database/books.db")
-    assert os.path.isfile(db_path), "Database file does not exist"
+    user = os.getenv("POSTGRES_USER", "postgres")
+    password = os.getenv("POSTGRES_PASSWORD", "postgres")
+    host = os.getenv("POSTGRES_HOST", "localhost")
+    port = os.getenv("POSTGRES_PORT", "5432")
 
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
 
-    cursor.execute("SELECT COUNT(*) FROM books;")
-    count = cursor.fetchone()[0]
-    assert count > 0, "Table 'books' is empty"
+    with psycopg.connect(dbname="books_website", user=user, password=password, host=host, port=port ) as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM books;")
 
-    conn.close()
+            count = cur.fetchone()[0]
+            assert count > 0, "Table 'books' is empty"
