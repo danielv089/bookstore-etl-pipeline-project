@@ -36,6 +36,7 @@ def load():
 
     with psycopg.connect(dbname="books_website", user=user, password=password, host=host, port=port ) as conn:
         with conn.cursor() as cur:
+
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS books (
                 upc CHAR(25) PRIMARY KEY,
@@ -63,6 +64,10 @@ def load():
 	           in_stock INTEGER
                );
             ''')
+
+            cur.execute('TRUNCATE TABLE books;')
+            cur.execute('TRUNCATE TABLE genres;')
+            cur.execute('TRUNCATE TABLE in_stock;')
 
     with psycopg.connect(dbname="books_website", user=user, password=password, host=host, port=port) as conn:
         with conn.cursor() as cur:
