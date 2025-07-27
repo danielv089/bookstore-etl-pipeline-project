@@ -95,6 +95,37 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 - **PostgreSQL**
 - **Psycopg**
 
+## 📁 V2.0 Folder Structure
+``` 
+── v2.0_postgres_docker_compose
+    ├── data
+    │   ├── 1_extract_raw_data
+    │   │   └── books_raw_data.csv
+    │   ├── 2_transform_data
+    │   │   └── books_cleaned_data.csv
+    │   ├── 3_normalized_data
+    │   │   ├── books.csv
+    │   │   ├── genres.csv
+    │   │   └── in_stock.csv
+    │   └── postgres_dump_data_sql
+    │       └── books.sql
+    ├── docker-compose.yml
+    ├── Dockerfile
+    ├── etl
+    │   ├── extract.py
+    │   ├── __init__.py
+    │   ├── load.py
+    │   ├── logger.py
+    │   ├── normalize.py
+    │   └── transform.py
+    ├── logs
+    │   └── pipeline_logs.txt
+    ├── main.py
+    ├── requirements.txt
+    └── tests
+        └── test_etl.py
+``` 
+
 ## 🔗 References
 
 - Books to Scrape
