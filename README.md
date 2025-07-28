@@ -53,13 +53,42 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
     Data inside the PostgreSQL container:
 
-    ![DB](docs/books_db.png)
+    ```sql
+    postgres=# \l
+                                                      List of databases
+        Name      |  Owner   | Encoding |  Collate   |   Ctype    | ICU Locale | Locale Provider |   Access privileges   
+    ---------------+----------+----------+------------+------------+------------+-----------------+-----------------------
+    books_website | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | 
+    postgres      | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | 
+    template0     | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | =c/postgres          +
+                  |          |          |            |            |            |                 | postgres=CTc/postgres
+    template1     | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | =c/postgres          +
+                  |          |          |            |            |            |                 | postgres=CTc/postgres
+    (4 rows)
 
-    ![tables](docs/tables.png)
+    books_website=# \dt
+    public | books    | table | postgres
+    public | genres   | table | postgres
+    public | in_stock | table | postgres
 
-    ![books_table](docs/books_table.png)
+    books_website=# SELECT COUNT(*) FROM books;
+    count 
+    -------
+      1000
+    (1 row)
 
-    ![count](docs/item_count.png)
+
+    books_website=# SELECT * FROM books LIMIT 5;
+                upc            |                titles                 | genre_id | ratings | product_type | price_excl_tax_gbp | price_incl_tax_gbp | tax  | num_reviews 
+    ---------------------------+---------------------------------------+----------+---------+--------------+--------------------+--------------------+------+-------------
+    a897fe39b1053632          | A Light in the Attic                  |       32 |       3 | Books        |              51.77 |              51.77 | 0.00 |           0
+    90fa61229261140a          | Tipping the Velvet                    |       20 |       1 | Books        |              53.74 |              53.74 | 0.00 |           0
+    6957f44c3847a760          | Soumission                            |       16 |       1 | Books        |              50.10 |              50.10 | 0.00 |           0
+    e00eb4fd7b871a48          | Sharp Objects                         |       25 |       4 | Books        |              47.82 |              47.82 | 0.00 |           0
+    4165285e1663650f          | Sapiens: A Brief History of Humankind |       21 |       5 | Books        |              54.23 |              54.23 | 0.00 |           0
+    (5 rows)
+
+    ```
 
   [Exported pg_dump file after the the pipeline run with Docker Compose](v2.0_postgres_docker_compose/data/postgres_dump_data_sql/books.sql)
 
