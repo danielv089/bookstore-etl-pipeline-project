@@ -29,6 +29,8 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
 ### 4️⃣ Load
 - Loads normalized tables into a SQL database
+- Creates database and tables if they don't exist 
+- Truncates tables and applies full load
 
   ![ETL Pipeline Diagram](docs/etl_project.jpg)
 
