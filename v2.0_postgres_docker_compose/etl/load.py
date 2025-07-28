@@ -37,19 +37,6 @@ def load():
     with psycopg.connect(dbname="books_website", user=user, password=password, host=host, port=port ) as conn:
         with conn.cursor() as cur:
 
-            cur.execute('''
-                CREATE TABLE IF NOT EXISTS books (
-                upc CHAR(25) PRIMARY KEY,
-	            titles VARCHAR(300),
-	            genre_id SMALLINT,
-	            ratings SMALLINT,
-	            product_type VARCHAR(15),
-	            price_excl_tax_gbp NUMERIC(5,2),
-	            price_incl_tax_gbp NUMERIC(5,2),
-	            tax NUMERIC(5,2),
-	            num_reviews INTEGER
-            )
-            ''')
 
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS genres (
@@ -65,26 +52,40 @@ def load():
                );
             ''')
 
-            cur.execute('TRUNCATE TABLE books;')
-            cur.execute('TRUNCATE TABLE genres;')
-            cur.execute('TRUNCATE TABLE in_stock;')
+            cur.execute('''
+            CREATE TABLE IF NOT EXISTS books (
+            upc CHAR(25) REFERENCES in_stock(upc),
+	        titles VARCHAR(300),
+	        genre_id SMALLINT REFERENCES genres(genre_id),
+	        ratings SMALLINT,
+	        product_type VARCHAR(15),
+	        price_excl_tax_gbp NUMERIC(5,2),
+	        price_incl_tax_gbp NUMERIC(5,2),
+	        tax NUMERIC(5,2),
+	        num_reviews INTEGER
+            )
+            ''')
 
+            cur.execute('TRUNCATE TABLE books, genres, in_stock;')
+         
     with psycopg.connect(dbname="books_website", user=user, password=password, host=host, port=port) as conn:
         with conn.cursor() as cur:
-            with cur.copy("COPY books (upc, titles, genre_id, ratings, product_type, price_excl_tax_gbp, price_incl_tax_gbp, tax, num_reviews) FROM STDIN CSV HEADER") as copy:
-                with open('data/3_normalized_data/books.csv', 'r', encoding='utf-8') as f:
+            with cur.copy("COPY in_stock (upc, in_stock) FROM STDIN CSV HEADER") as copy:
+                with open('data/3_normalized_data/in_stock.csv', 'r', encoding='utf-8') as f:
                     for line in f:
                         copy.write(line)
-            
+
             with cur.copy("COPY genres (genre_id, genre) FROM STDIN CSV HEADER") as copy:
                 with open('data/3_normalized_data/genres.csv', 'r', encoding='utf-8') as f:
                     for line in f:
                         copy.write(line)
 
-            with cur.copy("COPY in_stock (upc, in_stock) FROM STDIN CSV HEADER") as copy:
-                with open('data/3_normalized_data/in_stock.csv', 'r', encoding='utf-8') as f:
+            with cur.copy("COPY books (upc, titles, genre_id, ratings, product_type, price_excl_tax_gbp, price_incl_tax_gbp, tax, num_reviews) FROM STDIN CSV HEADER") as copy:
+                with open('data/3_normalized_data/books.csv', 'r', encoding='utf-8') as f:
                     for line in f:
                         copy.write(line)
+            
+  
 
 
 
