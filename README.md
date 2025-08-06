@@ -108,11 +108,17 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
     ```bash
     docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlite
+
+
      ```
 
 
 [![changelog](https://img.shields.io/badge/changelog-blue?style=for-the-badge)
 ](CHANGELOG.md)
+
+## 🗃️ ERD Diagram
+
+![db_erd_figure](/docs/books_erd.jpg)
 
 ## 🧰 Tech Stack
 - **Python**
