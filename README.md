@@ -105,8 +105,7 @@ Key Features:
 
     ```
 
-  [Exported pg_dump file after the the pipeline run with Docker Compose](v2.0_postgres_docker_compose/data/postgres_dump_data_sql/books.sql)
-
+  [This is the pg_dump file of the Postgres database, exported after ETL run.](v2.0_postgres_docker_compose/data/books.sql)
 
 
 
