@@ -1,36 +1,42 @@
 # Python ETL Project: Scraping, Transforming, and Loading Book Data
 
 ## 📌 Overview
-This project is a complete **ETL (Extract, Transform, Load) pipeline** built in Python.  
-It scrapes book data from the web, cleans and normalizes it, and loads it into a SQL database.  
-The goal is to demonstrate a practical, end-to-end data engineering workflow using Python and containerization with Docker.
+This project is a complete **ETL (Extract, Transform, Load) pipeline** built in Python, which prepares a structured dataset from an unstructured source.  
+It scrapes book data from the web, cleans and normalizes it, and loads it into a SQL database, producing an analytics ready dataset.
+The goal of this project is to demonstrate a practical, end-to-end data engineering ETL workflow using Python and containerization with Docker.
+
+Key Features:
+- Automated Data Extraction 
+- Data Cleaning and Quality Control
+- Relational Database Schema Desing
+- Containerized Deployment
+- Analytics Ready
 
 ## ⚙️ ETL Pipeline Steps
 
 ### 1️⃣ Extract
 - Scrapes all catalog pages from [Books to Scrape](https://books.toscrape.com/).
 - Retrieves metadata: title, genre, rating, price, stock availability, UPC, and number of reviews.
-- Saves raw data to 1_extract_raw_data
-
+- Saves raw data to 1_extract_raw_data.
 
 ### 2️⃣ Transform
-- Removes duplicates and null values
-- Standardizes data types and formats
-- Reclassifies Default and Add a comment genrew into Uncategorized
-- Maps rating strings to numerical values
-- Cleans currency symbols and parses stock quantities
-- Saves cleaned data to 2_transform_data/books_cleaned_data.csv/books_raw_data.csv
+- Removes duplicates and null values.
+- Standardizes data types and formats.
+- Reclassifies Default and Add a comment genre into Uncategorized.
+- Maps rating strings to numerical values.
+- Cleans currency symbols and parses stock quantities.
+- Saves cleaned data to 2_transform_data/books_cleaned_data.csv/books_raw_data.csv.
 
 ### 3️⃣ Normalize
-- Extracts a genre lookup table
-- Replaces genre strings with foreign key IDs
-- Splits in_stock data into its own table
-- Saves normalized CSV files to 3_normalized_data/
+- Extracts a genre lookup table.
+- Replaces genre strings with foreign key IDs.
+- Splits in_stock data into its own table.
+- Saves normalized CSV files to 3_normalized_data/.
 
 ### 4️⃣ Load
-- Loads normalized tables into a SQL database
-- Creates database and tables if they don't exist 
-- Truncates tables and applies full load
+- Loads normalized tables into a SQL database.
+- Creates database and tables if they don't exist .
+- Truncates tables and applies full load.
 
   ![ETL Pipeline Diagram](docs/etl_project.jpg)
 
@@ -39,19 +45,27 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
 - **v2.0 – Python, PostgreSQL  & Docker Compose Integration**
    
-    The ETL pipeline is containerized with     Docker Compose for multi-container deployment, including:
+    The ETL pipeline is containerized with Docker Compose for multi-container deployment, including:
 
-    PostgreSQL database as backend
+    PostgreSQL database as backend.
 
-    Python ETL container
+    Python ETL container.
+    
+    Clone the repository and navigate to the project directory:
+    ```bash
+    git clone https://github.com/danielv089/bookstore-etl-pipeline-project.git
 
+    cd bookstore-etl-pipeline-project/v2.0_postgres_docker_compose
+    ```
     Build and start the containers:
     ```bash
     docker compose up --build
     ```
-    PostgreSQL connection is configured via environment variables in docker-compose.yml
-    PostgreSQL data is stored in the pgdata named perstistent volume.
+    This will start a PostgreSQL container and then run the ETL container to extract data.
 
+    PostgreSQL connection is configured via environment variables in docker-compose.yml
+
+    PostgreSQL data is stored in the pgdata named perstistent volume.
 
     Data inside the PostgreSQL container:
 
@@ -79,7 +93,6 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
       1000
     (1 row)
 
-
     books_website=# SELECT * FROM books LIMIT 5;
                 upc            |                titles                 | genre_id | ratings | product_type | price_excl_tax_gbp | price_incl_tax_gbp | tax  | num_reviews 
     ---------------------------+---------------------------------------+----------+---------+--------------+--------------------+--------------------+------+-------------
@@ -95,6 +108,8 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
   [Exported pg_dump file after the the pipeline run with Docker Compose](v2.0_postgres_docker_compose/data/postgres_dump_data_sql/books.sql)
 
 
+
+
 - **v1.5 – Python, SQLite and Docker**
   
     This ETL pipeline is containerized for easier deployment.
@@ -108,10 +123,7 @@ The goal is to demonstrate a practical, end-to-end data engineering workflow usi
 
     ```bash
     docker run -it --rm -v "$PWD/data":/app/data -v "$PWD/logs":/app/logs v1.5_sqlite
-
-
      ```
-
 
 [![changelog](https://img.shields.io/badge/changelog-blue?style=for-the-badge)
 ](CHANGELOG.md)
