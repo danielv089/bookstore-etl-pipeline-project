@@ -1,6 +1,8 @@
 import os
+
 import pandas as pd 
 import psycopg
+
 from etl.logger import get_logger
 from psycopg.errors import DuplicateDatabase
 

@@ -1,7 +1,9 @@
 import os
-import pandas as pd
 import requests
 import time
+
+import pandas as pd
+
 from etl.logger import get_logger
 from bs4 import BeautifulSoup
 

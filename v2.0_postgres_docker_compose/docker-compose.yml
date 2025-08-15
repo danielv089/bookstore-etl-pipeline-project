@@ -1,4 +1,16 @@
-version: "3.9"
+# --------------------
+# Docker-Compose for ETL Pipeline with Postgres
+# Author:             Dániel Varga
+# Created:            2025-08-15
+# Last Modified:      2025-08-15
+#
+# Description:
+# This docker-compose defines a simple ETL environment with:
+# - Postgres 15 as the relational database for storing processed data
+# - ETL container for running Python scripts that extract, transform, normalize, and load data
+# - Automated test execution after the ETL pipeline to validate CSV files and database contents
+# - Volume mounts for data, logs, and tests to allow development and inspection from the host
+# --------------------
 
 services:
   db:
@@ -25,7 +37,8 @@ services:
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
-    command: python main.py
-
+      - ./tests:/app/tests
+    command: sh -c "until pg_isready -h db -U postgres; do sleep 1; done && python main.py && pytest tests/test_etl.py"
+    
 volumes:
   pgdata:
